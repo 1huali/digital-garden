@@ -1,4 +1,6 @@
 <?php
+
+    //FILL FORM 
 //check if there has been something posted to the server to be processed
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -26,10 +28,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     //dont forget to close it cos then it will just be blank
     fclose($theFile);
     echo("WE HAVE SUCCESSFULLY read the vars AND saved to the file ... ");
-
-
 exit;
 }//POST
+    //end FILL FORM
+
+    //DATA BASE AND OPEN CONNECTIONS
+    //1. open database
+try {
+  // Create (connect to) SQLite database in file
+  $file_db = new PDO('sqlite:../../db/flower-encyclopedia.db');
+// Set errormode to exceptions
+  $file_db->setAttribute(PDO::ATTR_ERRMODE,
+                          PDO::ERRMODE_EXCEPTION);
+  echo("opened or connected to the database flower-encyclopedia <br>");
+ }
+catch(PDOException $e) {
+  // Print PDOException message
+  echo $e->getMessage();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +84,12 @@ exit;
       <fieldset>
         <p><label>Identification:</label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
         <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_about" required></p>
-        <p><label>by (optional):</label><input type = "text" size="24" maxlength = "40"  name = "a_gardener" required></p>
+        <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_gardener" required></p>
+        <p><label>Display User:</label>
+        <input type="checkbox" id="hiddenUser" name="shown_hidden" value="Yes">
+       <label for="vehicle1"> Yes</label>
+       <input type="checkbox" id="hiddenUser" name="shown_hidden" value="No">
+       <label for="vehicle2"> No</label>
        <p><label>Growth period:</label>
         <!-- <input type = "checkbox" size="24" maxlength = "40"  name = "a_lenght" required></p> -->
        <input type="checkbox" id="length1" name="a_length" value="10mins">
@@ -75,6 +98,15 @@ exit;
        <label for="vehicle2"> 1 day</label>
        <input type="checkbox" id="length3" name="a_length" value="168hrs">
        <label for="vehicle3"> 1 week</label>
+       <p><label>Activate autonomous growth:</label>
+        <input type="checkbox" id="hiddenUser" name="shown_hidden" value="Yes">
+       <label for="vehicle1"> Yes</label>
+       <input type="checkbox" id="hiddenUser" name="shown_hidden" value="No">
+       <label for="vehicle2"> No</label>
+       <p><label for="pattern">Pattern:</label>
+       <select id="pattern" name="type">
+    <option value="pattern">Axiom F</option>
+    </select></p>
        <p><label for="fruit">Fruit:</label>
   <select id="fruit" name="a_fruit">
     <option value="ascii3">☆</option>
@@ -86,14 +118,6 @@ exit;
   </select></p>
        <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ff0000"></p>
        <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"  name = "a_location" required></p>
-       <p><label>Bloom Time:
-       <input type="checkbox" id="length1" name="a_bloom" value="8am">
-       <label for="vehicle1"> Day Time</label>
-       <input type="checkbox" id="length2" name="a_bloom" value="4pm">
-       <label for="vehicle2"> Blue Hour</label>
-       <input type="checkbox" id="length3" name="a_bloom" value="10pm">
-       <label for="vehicle3"> Dark Time</label>
-      </p>
        <input id="submitButton" type="submit" value="Submit">
        <input id="cancelFlowerFormButton" type="button" value="Cancel">
       </fieldset>

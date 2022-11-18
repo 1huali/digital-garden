@@ -1,0 +1,119 @@
+ID:
+Gardener:Wawa
+Location:LatLng(47.931066, -82.353516)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(46.13417, -77.167969)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(46.649436, -75.454102)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(45.981695, -77.211914)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(48.69096, -73.608398)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(48.341646, -75.102539)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(47.368594, -77.958984)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(46.468133, -74.179688)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(51.096623, -64.072266)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:arno
+Location:LatLng(56.170023, 252.421875)
+Cycle Length:10mins
+Bloom Time:
+Color:#ab6d6d
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(55.301402, 253.767872)
+Cycle Length:10mins
+Bloom Time:
+Color:#ab6d6d
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(55.303613, 253.76416)
+Cycle Length:168hrs
+Bloom Time:8am
+Color:#ab6d6d
+About:
+ID:
+Gardener:Smormu
+Location:LatLng(49.576435, -83.433341)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#00b837
+About:
+ID:
+Gardener:Smormu
+Location:LatLng(50.007739, -82.232666)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#00b837
+About:
+ID:
+Gardener:Smormu
+Location:LatLng(56.980911, -80.859375)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#00b837
+About:
+ID:
+Gardener:Jack T
+Location:LatLng(51.289406, -73.608398)
+Cycle Length:168hrs
+Bloom Time:8am
+Color:#ff0000
+About:
+ID:
+Gardener:Jack T
+Location:LatLng(50.499452, -75.432129)
+Cycle Length:10mins
+Bloom Time:8am
+Color:#00ff91
+About:

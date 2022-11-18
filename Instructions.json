@@ -1,0 +1,16 @@
+{
+    "User_Data" : {
+    "X_location" : "x coords",
+    "Y_Location" : "y coords",
+    "Zoom" : "zoom lvl",
+    "Flower" : {
+        "Cycle" : "days in/days length",
+        "Double-Click" : "To Seed"
+    }
+    },
+    "Main_Mode": {
+        "2Click": "Plant seed",
+        "": "Explore"
+    }
+    }
+    

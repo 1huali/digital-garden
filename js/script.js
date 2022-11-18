@@ -6,6 +6,11 @@ Prototype with only placeholders
 */
 
 "use strict";
+function setup() {
+    console.log("hello stup")
+
+  }
+
 $(document).ready(function(){
     // localStorage.clear();
 
@@ -433,7 +438,7 @@ function printIcon(){
 
                     if (flowerArray[i].flowerGenerated === true){
                     flowerArray[i].displayFlower();
-                    flowerArray[i].grow();
+                   // flowerArray[i].grow();
                 }
                 
 

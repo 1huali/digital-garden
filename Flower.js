@@ -23,9 +23,14 @@ class Flower {
       this.isGrowing = false;
       this.growthCompleted = false;
 
+      //to access the map to have the flower div on top of the map
       this.mapLayerArray= Object.keys(this.map._layers);
+      //  //the flower DIV based on the leaflet librairy to create a div element
+      //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
+      //attributing an ID to those DIVs
       this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.germinationDay);
+      //the id element :
       this.flowerId= this.flowerEl.id;
       this.flowerGenerated = false;
       this.sound= sound;
@@ -49,7 +54,7 @@ class Flower {
       //console.log(sketch);
       sketch.setup = function() {
         let canvas1 = sketch.createCanvas(100, 100);
-        canvas1.parent("lSysTestZone");
+        canvas1.parent(self.flowerId);
 
       }
       }
@@ -65,8 +70,9 @@ class Flower {
       //createCanvas(400, 400);
       console.log("turtle rule applying....");
       this.p5Context.resetMatrix();
+      //this.p5Context.background(0);
        this.p5Context.translate( this.p5Context.width / 2,  this.p5Context.height);
-       this.p5Context.stroke(255, 100);
+       this.p5Context.stroke(0, 255);
       for (let i = 0; i < this.sentence.length; i++) {
         let current = this.sentence.charAt(i);
         console.log(this.sentence);
@@ -101,23 +107,22 @@ class Flower {
 //visual of the growing flower
       this.stateIndex ++;
           this.currentText= this.state[this.stateIndex];
-          // console.log(this.currentText);
-          this.flowerEl.innerHTML = this.currentText;
+          // this.flowerEl.innerHTML = this.currentText;
           this.isGrowing =false;
 
           if (this.stateIndex === this.state.length-1){
             console.log("flower growth completed")
-            growthCompleted = true;
-            growthCompleted = false;
+            this.growthCompleted = true;
+            this.growthCompleted = false;
           }
 
     }
     
     displayFlower(){
 
-         this.flowerEl.innerHTML = this.currentText;
-        this.flowerEl.style.left = `${this.posX}px`;
-        this.flowerEl.style.top = `${this.posY}px`; 
+        //  this.flowerEl.innerHTML = this.currentText;
+        this.flowerEl.style.left = `${this.posX-50}px`;
+        this.flowerEl.style.top = `${this.posY-50}px`; 
     }
 
     generate (){

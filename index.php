@@ -38,7 +38,7 @@ exit;
     <meta charset="utf-8">
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
-    <title>DIGITAL GARDEN (PROTOTYPE_01)</title>
+    <title>DIGITAL GARDEN (PROTOTYPE_02)</title>
     <audio controls hidden id="chimeSound">
       <source src="assets/sounds/dust-chime.mp3" type="audio/mpeg">
       </audio>
@@ -53,6 +53,7 @@ exit;
       <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
       integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+    <script src="js/libraries/p5.min.js"></script>   
     <script src="Flower.js"></script> 
     <script src="js/libraries/jquery-ui.js"></script> 
   </head>
@@ -109,7 +110,12 @@ exit;
 <input id="waterButton" class="optionButtons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="fertilizerButton" class="optionButtons" type="button" value="Fertilize"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="talkButton" class="optionButtons" type="button" value="Talk"><br>
+<input type="button" id="generateButton" value="Generate">
 </section>
+<section id="lSysTestZone">
+<div id="lSystem"></div>
+
+ </section>
 </section>
 
  <!-- <section id="playModeData-container">

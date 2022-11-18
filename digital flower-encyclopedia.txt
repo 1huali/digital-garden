@@ -117,3 +117,31 @@ Cycle Length:10mins
 Bloom Time:8am
 Color:#00ff91
 About:
+ID:
+Gardener:rr
+Location:LatLng(50.625073, -116.71875)
+Cycle Length:
+Bloom Time:
+Color:#ff0000
+About:
+ID:
+Gardener:rr
+Location:LatLng(50.625073, -116.71875)
+Cycle Length:
+Bloom Time:
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(54.775346, -98.261719)
+Cycle Length:
+Bloom Time:
+Color:#ff0000
+About:
+ID:
+Gardener:Wawa
+Location:LatLng(58.722599, -87.539062)
+Cycle Length:
+Bloom Time:
+Color:#ff0000
+About:

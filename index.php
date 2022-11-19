@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
  //writes the data to a file 
     //given that the file is opened for writing (w) or appending (a).
-    $theFile = fopen("digital flower-encyclopedia.txt", "a") or die("Unable to open file!");
+    $theFile = fopen("digital flower-record.txt", "a") or die("Unable to open file!");
 
     fwrite($theFile, "ID:".$identification."\n");
     fwrite($theFile, "Gardener:".$by."\n");
@@ -36,16 +36,31 @@ exit;
     //1. open database
 try {
   // Create (connect to) SQLite database in file
-  $file_db = new PDO('sqlite:../../db/flower-encyclopedia.db');
+  $file_db = new PDO('sqlite:../../db-digital garden/flower-record.db');
 // Set errormode to exceptions
   $file_db->setAttribute(PDO::ATTR_ERRMODE,
                           PDO::ERRMODE_EXCEPTION);
-  echo("opened or connected to the database flower-encyclopedia <br>");
+  echo("opened or connected to the database flower-record <br>");
  }
 catch(PDOException $e) {
   // Print PDOException message
   echo $e->getMessage();
 }
+
+  //2. create table
+//   try
+// {
+//   $theQuery = "CREATE TABLE flowerObjects (flowerID INTEGER PRIMARY KEY NOT NULL, creationDate TEXT, user TEXT, displayBoolean TEXT, growthLength TEXT, autonomousBoolean , pattern TEXT, lattitude TEXT, longitude TEXT, diaryFile TEXT, completedBoolean TEXT, energyLevels TEXT, other TEXT)";
+//   $file_db ->exec($theQuery);
+//   echo ("Table flowerObjects created successfully<br>");
+//   $file_db = null;
+// }
+ 
+// catch(PDOException $e) 
+// {
+//     // Print PDOException message
+//     echo $e->getMessage();
+// }
 
 
 ?>

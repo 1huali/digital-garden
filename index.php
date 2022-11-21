@@ -1,70 +1,3 @@
-<?php
-
-    //FILL FORM 
-//check if there has been something posted to the server to be processed
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-// need to process
- $id = $_POST['a_identification'];
- $by = $_POST['a_gardener'];
- $loc = $_POST['a_location'];
- $GrowthLength = $_POST['a_length'];
- $bloomTime = $_POST['a_bloom'];
- $color = $_POST['a_color'];
- $about = $_POST['about'];
-
- //writes the data to a file 
-    //given that the file is opened for writing (w) or appending (a).
-    $theFile = fopen("digital flower-record.txt", "a") or die("Unable to open file!");
-
-    fwrite($theFile, "ID:".$identification."\n");
-    fwrite($theFile, "Gardener:".$by."\n");
-    fwrite($theFile,  "Location:".$loc."\n");
-    fwrite($theFile,  "Cycle Length:".$GrowthLength."\n");
-    fwrite($theFile,  "Bloom Time:".$bloomTime."\n");
-    fwrite($theFile,  "Color:".$color."\n");
-    fwrite($theFile,  "About:".$about."\n");
-
-    //dont forget to close it cos then it will just be blank
-    fclose($theFile);
-    echo("WE HAVE SUCCESSFULLY read the vars AND saved to the file ... ");
-exit;
-}//POST
-    //end FILL FORM
-
-    //DATA BASE AND OPEN CONNECTIONS
-    //1. open database
-try {
-  // Create (connect to) SQLite database in file
-  $file_db = new PDO('sqlite:../../db-digital garden/flower-record.db');
-// Set errormode to exceptions
-  $file_db->setAttribute(PDO::ATTR_ERRMODE,
-                          PDO::ERRMODE_EXCEPTION);
-  echo("opened or connected to the database flower-record <br>");
- }
-catch(PDOException $e) {
-  // Print PDOException message
-  echo $e->getMessage();
-}
-
-  //2. create table
-//   try
-// {
-//   $theQuery = "CREATE TABLE flowerObjects (flowerID INTEGER PRIMARY KEY NOT NULL, creationDate TEXT, user TEXT, displayBoolean TEXT, growthLength TEXT, autonomousBoolean , pattern TEXT, lattitude TEXT, longitude TEXT, diaryFile TEXT, completedBoolean TEXT, energyLevels TEXT, other TEXT)";
-//   $file_db ->exec($theQuery);
-//   echo ("Table flowerObjects created successfully<br>");
-//   $file_db = null;
-// }
- 
-// catch(PDOException $e) 
-// {
-//     // Print PDOException message
-//     echo $e->getMessage();
-// }
-
-
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -87,7 +20,7 @@ catch(PDOException $e) {
       integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
     <script src="js/libraries/p5.min.js"></script>   
-    <script src="Flower.js"></script> 
+    <script src="js/Flower.js"></script> 
     <script src="js/libraries/jquery-ui.js"></script> 
   </head>
   <body>
@@ -98,8 +31,8 @@ catch(PDOException $e) {
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
         <p><label>Identification:</label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
-        <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_about" required></p>
-        <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_gardener" required></p>
+        <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
+        <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Display User:</label>
         <input type="checkbox" id="hiddenUser" name="shown_hidden" value="Yes">
        <label for="vehicle1"> Yes</label>
@@ -119,8 +52,8 @@ catch(PDOException $e) {
        <input type="checkbox" id="hiddenUser" name="shown_hidden" value="No">
        <label for="vehicle2"> No</label>
        <p><label for="pattern">Pattern:</label>
-       <select id="pattern" name="type">
-    <option value="pattern">Axiom F</option>
+       <select id="pattern" name="a_pattern">
+    <option value="pattern" name="a_pattern">Axiom F</option>
     </select></p>
        <p><label for="fruit">Fruit:</label>
   <select id="fruit" name="a_fruit">
@@ -192,6 +125,8 @@ user: <span id="currentUser">hello</span><br>
 
     <!-- My script(s) -->
     <script src="js/script.js"></script>
+
+
   </body>
 
 </html>

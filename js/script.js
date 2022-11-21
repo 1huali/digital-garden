@@ -209,7 +209,7 @@ console.log(localStorage.getItem("password"));
             //??double-click doesnt work anymore
         });
 
-        //submission of php flower form :
+        //submission of php flower form thru AJAX :
             $("#insertFlower").submit(function(event) {
                //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
               event.preventDefault();
@@ -218,12 +218,9 @@ console.log(localStorage.getItem("password"));
             //retrieve the infos into objet key/value pairs
              let form = $('#insertFlower')[0];
              let data = new FormData(form);
-             /*console.log to inspect the data */
-    
-             for (let pair of data.entries()) {
-    
-            // console.log(pair[0]+ ', ' + pair[1]);
-        }
+
+             data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
+             
 
         /*https://api.jquery.com/jQuery.ajax/*/
      $.ajax({

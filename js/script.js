@@ -220,13 +220,18 @@ console.log(localStorage.getItem("password"));
              let data = new FormData(form);
 
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
-             
+                          /*console.log to inspect the data */
+
+                          for (let pair of data.entries()) {
+
+                            console.log(pair[0]+ ', ' + pair[1]);
+                        }
 
         /*https://api.jquery.com/jQuery.ajax/*/
      $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "index.php",
+        url: "php/insertDB.php",
         data: data,
         processData: false,//prevents from converting into a query string
         /*contentType option to false is used for multipart/form-data forms that pass files.

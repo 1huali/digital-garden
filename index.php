@@ -34,9 +34,9 @@
         <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
         <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Display User:</label>
-        <input type="checkbox" id="hiddenUser" name="shown_hidden" value="Yes">
+        <input type="checkbox" id="hiddenUser" name="show_hide" value="Yes">
        <label for="vehicle1"> Yes</label>
-       <input type="checkbox" id="hiddenUser" name="shown_hidden" value="No">
+       <input type="checkbox" id="hiddenUser" name="show_hide" value="No">
        <label for="vehicle2"> No</label>
        <p><label>Growth period:</label>
         <!-- <input type = "checkbox" size="24" maxlength = "40"  name = "a_lenght" required></p> -->
@@ -47,9 +47,9 @@
        <input type="checkbox" id="length3" name="a_length" value="168hrs">
        <label for="vehicle3"> 1 week</label>
        <p><label>Activate autonomous growth:</label>
-        <input type="checkbox" id="hiddenUser" name="shown_hidden" value="Yes">
+        <input type="checkbox" id="hiddenUser" name="autonomous_manual" value="Yes">
        <label for="vehicle1"> Yes</label>
-       <input type="checkbox" id="hiddenUser" name="shown_hidden" value="No">
+       <input type="checkbox" id="autonomous" name="autonomous_manual" value="No">
        <label for="vehicle2"> No</label>
        <p><label for="pattern">Pattern:</label>
        <select id="pattern" name="a_pattern">

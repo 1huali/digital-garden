@@ -13,7 +13,6 @@ class Flower {
       this.map= map;
 
       this.currentText= "seed";
-      this.fruit= "❀"; //data from fill form
       this.possibleEvolutionGeneration; //json file
       // this.flower = "꧁❀꧂";
       this.growState = this.seed;
@@ -36,7 +35,6 @@ class Flower {
       this.sound= sound;
     
       //L-System
-      //l-system
 
       this.angle= radians(25);
       this.axiom = "F";
@@ -60,22 +58,28 @@ class Flower {
       }
 
     this.p5Context = new p5(this.s1);
-   this.turtle();
-      //
-    }
+    this.turtle();
+      //end L-system
+
+      //Data from fill form
+      this.growthLength;
+      this.autonomousMode=false;
+      this.hideUsername=false;
+      this.fruit= "";
+
+
+      //end Data from fill form
+    } //end Constructor
 
     turtle () {
-      //background(51);
-  console.log(this.sentence);
-      //createCanvas(400, 400);
-      console.log("turtle rule applying....");
+      // console.log("turtle rule applying....");
       this.p5Context.resetMatrix();
       //this.p5Context.background(0);
        this.p5Context.translate( this.p5Context.width / 2,  this.p5Context.height);
        this.p5Context.stroke(0, 255);
       for (let i = 0; i < this.sentence.length; i++) {
         let current = this.sentence.charAt(i);
-        console.log(this.sentence);
+        // console.log(this.sentence);
         console.log(current);
   
         if (current == "F") {
@@ -144,6 +148,35 @@ class Flower {
         }
       }
       this.sentence = nextSentence;    
+    }
+
+    assignFormValues (length){
+      console.log("assigning values")
+      console.log(length);
+      this.growthLength= length;
+
+      //length
+      // let length1= document.getElementById("length1");
+      // let length2= document.getElementById("length2");
+      // let length3= document.getElementById("length3");
+
+      // if (length1.checked) {
+      //   console.log("length1 selected");
+      // } else if (length2.checked){
+      //   console.log("length2 selected")
+      // } else if(length3.checked){
+      //   console.log("length3 selected")
+      // }
+
+    //   let displayUser;
+    //   let showUser = document.getElementById("showUserOption");
+    //   let hideUser = document.getElementById("hideUserOption");
+
+    //   if (showUser.checked){
+    //     console.log("display user");
+    //   } else if (hideUser.checked){
+    //     console.log("hide user");
+    //   }
     }
 
   } //end Flower.js

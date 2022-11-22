@@ -201,6 +201,24 @@ console.log(localStorage.getItem("password"));
             currentFlower = flowerArray[flowerArray.length-1].flowerId;
             currentFlowerContainer.innerHTML= "&#60;"+currentFlower+"&#62;";
             document.getElementById("totalFlowerIndex").innerHTML=flowerArray.length;
+
+            let length1= document.getElementById("length1");
+            let length2= document.getElementById("length2");
+            let length3= document.getElementById("length3");
+      
+            for (let i=0;i < flowerArray.length; i++){
+            if (length1.checked) {
+              console.log("length1 selected");
+            } else if (length2.checked){
+              console.log("length2 selected")
+            } else if(length3.checked){
+              console.log("length3 selected")
+            }
+            // flowerArray[i].length= checked box
+        }
+            let autonomousMode= document.getElementById('hiddenUser');
+
+
             // idForm.reset(); to implement
         });
 
@@ -218,14 +236,14 @@ console.log(localStorage.getItem("password"));
             //retrieve the infos into objet key/value pairs
              let form = $('#insertFlower')[0];
              let data = new FormData(form);
+             flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length"));
 
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
                           /*console.log to inspect the data */
 
-                          for (let pair of data.entries()) {
-
-                            console.log(pair[0]+ ', ' + pair[1]);
-                        }
+                        //   for (let pair of data.entries()) {
+                        //     console.log(pair[0]+ ', ' + pair[1]);
+                        // }
 
         /*https://api.jquery.com/jQuery.ajax/*/
      $.ajax({
@@ -440,6 +458,7 @@ function printIcon(){
 
                     if (flowerArray[i].flowerGenerated === true){
                     flowerArray[i].displayFlower();
+                    // flowerArray[i].assignFormValues();
                    // flowerArray[i].grow();
                 }
                 

@@ -33,25 +33,21 @@
         <p><label>Identification:</label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
         <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
         <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
-        <p><label>Display User:</label>
-        <input type="checkbox" id="showUserOption" name="show_hide" value="Yes">
+        <p><label>Hide User:</label>
+        <input type="checkbox" id="hideUserOption" name="show_hide" value="Yes">
        <label for="vehicle1"> Yes</label>
-       <input type="checkbox" id="hideUserOption" name="show_hide" value="No">
-       <label for="vehicle2"> No</label>
 
        <p><label>Growth period:</label>
         <!-- <input type = "checkbox" size="24" maxlength = "40"  name = "a_lenght" required></p> -->
-       <input type="checkbox" id="length1" name="a_length" value="10mins">
-       <label for="vehicle1"> 10 min</label>
-       <input type="checkbox" id="length2" name="a_length" value="24hrs">
-       <label for="vehicle2"> 1 day</label>
-       <input type="checkbox" id="length3" name="a_length" value="168hrs">
-       <label for="vehicle3"> 1 week</label>
-       <p><label>Activate autonomous growth:</label>
+       <input type="checkbox" id="length1" name="a_length" value="1">
+       <label for="vehicle1"> 1 min</label>
+       <input type="checkbox" id="length2" name="a_length" value="10">
+       <label for="vehicle2"> 10 min</label>
+       <input type="checkbox" id="length3" name="a_length" value="1440">
+       <label for="vehicle3"> 1 day</label>
+       <p><label>Autonomous growth:</label>
         <input type="checkbox" id="autonomousOption" name="autonomous_manual" value="Yes">
-       <label for="vehicle1"> Yes</label>
-       <input type="checkbox" id="manualOption" name="autonomous_manual" value="No">
-       <label for="vehicle2"> No</label>
+       <label for="vehicle1">Activate</label>
 
        <p><label for="pattern">Pattern:</label>
        <select id="pattern" name="a_pattern">

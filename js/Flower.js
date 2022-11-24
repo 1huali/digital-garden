@@ -1,7 +1,7 @@
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
-    constructor(posX, posY, marker,map,arrayNumber,sound) {
+    constructor(posX, posY, marker,map,arrayNumber,sound,length) {
       let date = new Date();
       this.germinationDay= date.toLocaleTimeString();
       this.arrayNumber= arrayNumber;
@@ -53,7 +53,6 @@ class Flower {
       sketch.setup = function() {
         let canvas1 = sketch.createCanvas(100, 100);
         canvas1.parent(self.flowerId);
-
       }
       }
 
@@ -62,7 +61,7 @@ class Flower {
       //end L-system
 
       //Data from fill form
-      this.growthLength;
+      this.growthLength; //done
       this.autonomousMode=false;
       this.hideUsername=false;
       this.fruit= "";
@@ -98,24 +97,27 @@ class Flower {
     }
 
     grow() {
-
+// console.log("flower is growing");
       let self=this;
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
         setTimeout(function(){
+          // self.changeState()}, this.growthLength);
           self.changeState()}, 1000);
+
+          console.log(this.growthLength);
     }
       }
 
     changeState (){
 //visual of the growing flower
+// console.log("gets to change state")
       this.stateIndex ++;
           this.currentText= this.state[this.stateIndex];
-          // this.flowerEl.innerHTML = this.currentText;
+          console.log(this.currentText) ;
           this.isGrowing =false;
 
           if (this.stateIndex === this.state.length-1){
-            console.log("flower growth completed")
             this.growthCompleted = true;
             this.growthCompleted = false;
           }
@@ -123,14 +125,13 @@ class Flower {
     }
     
     displayFlower(){
-
-        //  this.flowerEl.innerHTML = this.currentText;
+// console.log("gets to display flower")
+        //  console.log(this.currentText);
         this.flowerEl.style.left = `${this.posX-50}px`;
         this.flowerEl.style.top = `${this.posY-50}px`; 
     }
 
     generate (){
-      console.log("generating.....")
       this.len *= 0.5;
       let nextSentence = "";
       for (let i = 0; i < this.sentence.length; i++) {
@@ -151,32 +152,21 @@ class Flower {
     }
 
     assignFormValues (length){
-      console.log("assigning values")
-      console.log(length);
-      this.growthLength= length;
+      // console.log("assigning values")
+            //??doesn't get into assignFormValues function
 
-      //length
-      // let length1= document.getElementById("length1");
-      // let length2= document.getElementById("length2");
-      // let length3= document.getElementById("length3");
+      //assigning growth length to flower constructor :
+      this.growthLength = length;
+      // console.log(this.growthLength);
+    
+    }
 
-      // if (length1.checked) {
-      //   console.log("length1 selected");
-      // } else if (length2.checked){
-      //   console.log("length2 selected")
-      // } else if(length3.checked){
-      //   console.log("length3 selected")
-      // }
-
-    //   let displayUser;
-    //   let showUser = document.getElementById("showUserOption");
-    //   let hideUser = document.getElementById("hideUserOption");
-
-    //   if (showUser.checked){
-    //     console.log("display user");
-    //   } else if (hideUser.checked){
-    //     console.log("hide user");
-    //   }
+    generative (){
+      let numGeneration = 4;
+      //temporairement alors que growthLength ne fonctionne pas
+      let totalCycle = 1000;
+      let nextStep = totalCycle/numGeneration;
+      let nextInterval;
     }
 
   } //end Flower.js

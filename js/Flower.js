@@ -67,6 +67,10 @@ class Flower {
       this.fruit= "";
 
 
+      this.flowerEl.style.left = `${this.posX-50}px`;
+      this.flowerEl.style.top = `${this.posY-50}px`; 
+
+
       //end Data from fill form
     } //end Constructor
 
@@ -102,10 +106,10 @@ class Flower {
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
         setTimeout(function(){
-          // self.changeState()}, this.growthLength);
-          self.changeState()}, 1000);
+          self.changeState()}, this.growthLength);
+          // self.changeState()}, 1000);
 
-          console.log(this.growthLength);
+         console.log(this.growthLength);
     }
       }
 
@@ -120,6 +124,10 @@ class Flower {
           if (this.stateIndex === this.state.length-1){
             this.growthCompleted = true;
             this.growthCompleted = false;
+          }
+//for debugging purposes : 
+          if (this.growthCompleted=== true){
+            console.log("timer done");
           }
 
     }
@@ -151,19 +159,38 @@ class Flower {
       this.sentence = nextSentence;    
     }
 
-    assignFormValues (length){
+    assignFormValues (length,autonomous_value, show_hide){
       // console.log("assigning values")
             //??doesn't get into assignFormValues function
 
       //assigning growth length to flower constructor :
       this.growthLength = length;
+      if(autonomous_value==="on"){
+        this.autonomousMode = true;
+      }
+      else{
+        this.autonomousMode = false;
+      }
+
+      //set 
+
+      if(show_hide==="Yes"){
+        this.hideUsername = true;
+      }
+      else{
+        this.hideUsername = false;
+      }
+   
+      // console.log(this.hideUsername);
       // console.log(this.growthLength);
+      // console.log(this.autonomousMode);
     
     }
 
     generative (){
       let numGeneration = 4;
       //temporairement alors que growthLength ne fonctionne pas
+      //??timer doesn't workkk
       let totalCycle = 1000;
       let nextStep = totalCycle/numGeneration;
       let nextInterval;

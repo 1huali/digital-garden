@@ -1,13 +1,13 @@
 /**
 Digital Garden
 Wawa Li
-Prototype with only placeholders
-14 novembre 2022
+Prototype 2
+24 novembre 2022
 */
 
 "use strict";
 function setup() {
-    console.log("hello stup")
+    console.log("hello helloo again")
 
   }
 
@@ -191,39 +191,40 @@ console.log(localStorage.getItem("password"));
         talkButton.addEventListener("click", function(){
             $("#talkBoxDialog").dialog('open');
         });
+//SABINE REMOVED :0
+        // submitButton.addEventListener("click", function(){
 
-        submitButton.addEventListener("click", function(){
+        //     flowerArray[flowerArray.length-1].flowerGenerated = true;
+        //     document.getElementById("seedIdPopUpFormContainer").style.display = "none";
+        //     creationSound.play();
 
-            flowerArray[flowerArray.length-1].flowerGenerated = true;
-            document.getElementById("seedIdPopUpFormContainer").style.display = "none";
-            creationSound.play();
-
-            currentFlower = flowerArray[flowerArray.length-1].flowerId;
-            currentFlowerContainer.innerHTML= "&#60;"+currentFlower+"&#62;";
-            document.getElementById("totalFlowerIndex").innerHTML=flowerArray.length;
+        //     currentFlower = flowerArray[flowerArray.length-1].flowerId;
+        //     currentFlowerContainer.innerHTML= "&#60;"+currentFlower+"&#62;";
+        //     document.getElementById("totalFlowerIndex").innerHTML=flowerArray.length;
 
       
-            let autonomousMode= document.getElementById('autonomousOption');
-            for (let i=0;i<flowerArray.length; i++){
-                if (autonomousMode.checked){
-                    flowerArray.autonomousMode=true;
-                } else{
-                    flowerArray.autonomousMode=false;
-                }
-            }
-        let hideUserOption = document.getElementById("hideUserOption");
-        for (let i=0;i<flowerArray.length; i++){
-            if (hideUserOption.checked){
-                flowerArray.hideUsername=true;
-            } else {
-                flowerArray.hideUsername=false;
-            }
-        }
+        //     let autonomousMode= document.getElementById('autonomousOption');
+        //     for (let i=0;i<flowerArray.length; i++){
+        //         if (autonomousMode.checked){
+        //             flowerArray.autonomousMode=true;
+        //         } else{
+        //             flowerArray.autonomousMode=false;
+        //         }
+        //     }
+        // let hideUserOption = document.getElementById("hideUserOption");
+        // for (let i=0;i<flowerArray.length; i++){
+        //     if (hideUserOption.checked){
+        //         flowerArray.hideUsername=true;
+        //     } else {
+        //         flowerArray.hideUsername=false;
+        //     }
+        // }
 
-    document.getElementById("insertFlower").reset();
-        });
+
+        // });
 
         document.getElementById("cancelFlowerFormButton").addEventListener("click", function (){
+            console.log("cancel was pressed");
             document.getElementById("seedIdPopUpFormContainer").style.display = "none";
             //??double-click doesnt work anymore
         });
@@ -232,20 +233,34 @@ console.log(localStorage.getItem("password"));
             $("#insertFlower").submit(function(event) {
                //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
               event.preventDefault();
-            //  console.log("insert triggered");
+            console.log("insert triggered");
 
             //retrieve the infos into objet key/value pairs
              let form = $('#insertFlower')[0];
              let data = new FormData(form);
-             flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000);
-             console.log(data);
+            //flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000);
+           //  console.log(data);
              //??? not accessing data
 
+             //NEW:: SABINE:: if these items are not checked then append the off values to the data...
+            if(data.get("autonomous_manual") == null){
+                data.append("autonomous_manual","off");
+            }   
+
+            if(data.get("show_hide") == null){
+                data.append("show_hide","No");
+            }   
+          
+
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
+
+            //SABINE :: assign the form values 
+            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide") );
                           /*console.log to inspect the data */
 
                         //   for (let pair of data.entries()) {
                         //     console.log(pair[0]+ ', ' + pair[1]);
+             
                         // }
 
         /*https://api.jquery.com/jQuery.ajax/*/
@@ -268,6 +283,10 @@ console.log(localStorage.getItem("password"));
         //response is a STRING (not a JavaScript object -> so we need to convert)
         console.log("we had success!");
         console.log(response);
+        //sabine:: reset flower
+        document.getElementById("insertFlower").reset();
+        flowerArray[flowerArray.length-1].flowerGenerated = true;
+        document.getElementById("seedIdPopUpFormContainer").style.display = "none";
        },
        error:function(){
       console.log("error occurred");

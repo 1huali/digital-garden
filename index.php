@@ -55,10 +55,10 @@
     </select></p>
        <p><label for="fruit">Fruit:</label>
   <select id="fruit" name="a_fruit">
-    <option value="ascii3">☆</option>
-    <option value="ascii2">♥</option>
-    <option value="ascii1">¥</option>
-    <option value="ascii0" selected>✿</option>
+    <option value="☆">☆</option>
+    <option value="♥">♥</option>
+    <option value="¥">¥</option>
+    <option value="✿" selected>✿</option>
     <option value="other">Other</option>
     <!-- if other : allow typing -->
   </select></p>

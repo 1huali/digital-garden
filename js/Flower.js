@@ -3,7 +3,9 @@
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
-    constructor(posX, posY, marker,map,arrayNumber,sound,length) {
+    // constructor(posX, posY, marker,map,arrayNumber,sound,length, begin, end) {
+      constructor(posX, posY, marker,map,arrayNumber,sound,length, fruit,user) {
+
       let date = new Date();
       this.germinationDay= date.toLocaleTimeString();
       this.arrayNumber= arrayNumber;
@@ -20,8 +22,10 @@ class Flower {
       this.growState = this.seed;
       this.state = ["seed", "sprout", "bud", "flower"];
       this.stateIndex = 0;
-      this.blossomState = false;
-
+//black ellipses at tip
+      this.budState= false;
+      //ascii symbol at tip
+      this.blossom = false;
 
       this.isGrowing = false;
       this.growthCompleted = false;
@@ -68,14 +72,16 @@ class Flower {
       this.growthLength; //done
       this.autonomousMode=false;
       this.hideUsername=false;
-      this.fruit= "";
-
 
       this.flowerEl.style.left = `${this.posX-50}px`;
       this.flowerEl.style.top = `${this.posY-50}px`; 
-
-
       //end Data from fill form
+
+      this.fruit=fruit; //symbol from the fill form
+      this.fruitArray= [];
+      // this.begin = begin;
+      // this.end = end;
+      this.user=user;
     } //end Constructor
 
     turtle () {
@@ -86,8 +92,7 @@ class Flower {
        this.p5Context.stroke(0, 255);
       for (let i = 0; i < this.sentence.length; i++) {
         let current = this.sentence.charAt(i);
-        // console.log(this.sentence);
-        console.log(current);
+        // console.log(current);
   
         if (current == "F") {
            this.p5Context.line(0, 0, 0, -this.len);
@@ -105,7 +110,6 @@ class Flower {
     }
 
     grow() {
-// console.log("flower is growing");
       let self=this;
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
@@ -128,16 +132,35 @@ class Flower {
             this.growthCompleted = true;
             this.growthCompleted = false;
           }
-//for debugging purposes : 
-          if (this.growthCompleted=== true){
-            console.log("timer done");
+//?? should this be at displayFlower?
+          if (this.blossom === true){
+            console.log("flowers at tip of branches");
+//call blossom function
+            //blooms retract after 5 mins :
+            setTimeout(function(){
+              this.blossom= false;
+            },300000);
+          }
+
+          //bud appears
+          if (this.stateIndex === this.state.length/2){
+            this.budState= true;
+            //??I need to create a vector of the last branch coordinate
+            let budCoordinates;
+            console.log("bud appeared!")
+            //   if (!this.growthCompleted) {
+            //     let leaf = tree[i].end.copy();
+            //     leaves.push(leaf);
+            // }
+            //call buds();
           }
 
     }
     
     displayFlower(){
-// console.log("gets to display flower")
         //  console.log(this.currentText);
+
+        //position of the center of the flower canvas :
         this.flowerEl.style.left = `${this.posX-50}px`;
         this.flowerEl.style.top = `${this.posY-50}px`; 
     }
@@ -160,14 +183,15 @@ class Flower {
         }
       }
       this.sentence = nextSentence;    
+
     }
 
-    assignFormValues (length,autonomous_value, show_hide){
-      // console.log("assigning values")
+    assignFormValues (length,autonomous_value, show_hide,fruit,user){
 
-      //assigning growth length to flower constructor :
+      //traversing flower data values to flower constructor values :
       this.growthLength = length;
-      console.log(this.growthLength);
+      this.fruit = fruit;
+      this.user=user;
       if(autonomous_value==="on"){
         this.autonomousMode = true;
       }
@@ -183,10 +207,6 @@ class Flower {
       else{
         this.hideUsername = false;
       }
-   
-      // console.log(this.hideUsername);
-      // console.log(this.growthLength);
-      // console.log(this.autonomousMode);
     
     }
 
@@ -194,6 +214,21 @@ class Flower {
       console.log("assign water and fertilizer");
       //water and fertilizer levels will be transferred from script to here
     }
+
+//     flowerBlossom (){
+// console.log("flower can blossom")
+// //flower blossons user talks to user && when bud state === true ; ascii symbol appears
+//blossom chime also
+//     }
+
+// buds(){
+  // for (var i = 0; i < leaves.length; i++) {
+  //   fill(255, 0, 100, 100);
+  //   noStroke();
+  //   ellipse(leaves[i].x, leaves[i].y, 8, 8);
+  //   leaves[i].y += random(0, 2);
+  // }
+// }
 
   } //end Flower.js
   

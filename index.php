@@ -102,17 +102,28 @@
     </div>
 </div>
 
-<div id="titleBar">
-<h2 id="title">THE DIGITAL GARDEN</h2>
-<section id="userDataContainer">
-<div id="messageBar"> msg : <span id="message">Sit down and reflect as you need</span></div>
-
-user: <span id="currentUser">hello</span><br>
+<div id="identificationBoxDialog" title="User Identification">
+user: <span id="currentUser">no user</span><br>
 <div id="password-container">password:<input id="password" type="text"></div>
       <input id="identifyButton" class="optionButtons" type="button" value="Identify">
       <input id="loginButton" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
       <br>
+      <!-- <input id="closeDialogButton" type="button" value="Done"> -->
+</div>
+
+<div id="titleBar">
+<h2 id="title">THE DIGITAL GARDEN</h2>
+<section id="userDataContainer">
+<div id="messageBar"> msg : <span id="message">Sit down and reflect as you need</span></div>
+
+<!-- ??why can't it also print here -->
+user: <span id="currentUser">hello</span><br>
+<!-- <div id="password-container">password:<input id="password" type="text"></div>
+      <input id="identifyButton" class="optionButtons" type="button" value="Identify">
+      <input id="loginButton" type="button" value="Login">
+      <input id="setPasswordButton" type="button" value="Save">
+      <br> -->
       <input id="flowerListButton" class="optionButtons" type="button" value="Flower"> seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
 </div>

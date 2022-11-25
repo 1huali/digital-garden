@@ -174,7 +174,7 @@ console.log(localStorage.getItem("password"));
 //end SETUPS
 
 
-//creates a talkbox dialog
+//creates a talkbox dialog when user press "talk" button
  $( "#talkBoxDialog" ).dialog({
 
                 position: { my: "left top", at: "right bottom", of: window },
@@ -187,6 +187,15 @@ console.log(localStorage.getItem("password"));
 //closes the talkbox dialog after creating it
               $("#talkBoxDialog").dialog('close');
 
+              //id diallog box : 
+              $( "#identificationBoxDialog" ).dialog({
+
+                position: { my: "right top", at: "right top", of: window },
+                classes: {
+                    "ui-dialog": "identificationBox"
+                }
+
+              });
 
     $.getJSON('Instructions.json',function(data) {
             showJournal(data);
@@ -195,6 +204,7 @@ console.log(localStorage.getItem("password"));
 
         talkButton.addEventListener("click", function(){
             $("#talkBoxDialog").dialog('open');
+            //activate flowerArray : blossom();
         });
 
 

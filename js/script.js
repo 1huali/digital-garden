@@ -149,19 +149,24 @@ console.log(localStorage.getItem("password"));
     }
     //end local storage setup
 
-    //L-SYSTEM
-    let generateButton = document.getElementById('generateButton');
+    //L-SYSTEM with generateButton:
+    // let generateButton = document.getElementById('generateButton');
     
-    generateButton.addEventListener("click", function(){
-        console.log("gets into genBUtt")
-        generateFlower();
-    });
+    // generateButton.addEventListener("click", function(){
+    //     console.log("gets into genBUtt")
+    //     generateFlower();
+    // });
+    // end L-SYSTEM with generateButton
     
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
-            flowerArray[i].generate();
+
+        if (flowerArray[i].flowerGenerated === true){
+        flowerArray[i].generate();
         flowerArray[i].turtle();
         }
+
+    }
       }
     // end L-SYSTEM
 
@@ -254,9 +259,12 @@ console.log(localStorage.getItem("password"));
 
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
 
-            //SABINE :: assign the form values 
+
             flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide") );
-                          /*console.log to inspect the data */
+            // flowerArray[flowerArray.length-1].generativeLSystem();
+
+                          
+            /*console.log to inspect the data */
 
                         //   for (let pair of data.entries()) {
                         //     console.log(pair[0]+ ', ' + pair[1]);
@@ -283,6 +291,7 @@ console.log(localStorage.getItem("password"));
         //response is a STRING (not a JavaScript object -> so we need to convert)
         console.log("we had success!");
         console.log(response);
+
         //sabine:: reset flower
         document.getElementById("insertFlower").reset();
         flowerArray[flowerArray.length-1].flowerGenerated = true;
@@ -480,7 +489,6 @@ function printIcon(){
 
                     if (flowerArray[i].flowerGenerated === true){
                     flowerArray[i].displayFlower();
-                    flowerArray[i].assignFormValues();
                    flowerArray[i].grow();
                 }
                 

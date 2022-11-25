@@ -4,8 +4,8 @@
     "Y_Location" : "y coords",
     "Zoom" : "zoom lvl",
     "Flower" : {
-        "Cycle" : "days in/days length",
-        "Double-Click" : "To Seed"
+        "Instructions" : "Identify to plant seed",
+        "Drag" : "To explore the land"
     }
     },
     "Main_Mode": {

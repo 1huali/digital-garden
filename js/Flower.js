@@ -1,3 +1,5 @@
+//??growingLength doesn't assign or something
+
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
@@ -16,8 +18,10 @@ class Flower {
       this.possibleEvolutionGeneration; //json file
       // this.flower = "꧁❀꧂";
       this.growState = this.seed;
-      this.state = ["seed", "sprout", "bud", "leaf", "blossom", "flower"];
+      this.state = ["seed", "sprout", "bud", "flower"];
       this.stateIndex = 0;
+      this.blossomState = false;
+
 
       this.isGrowing = false;
       this.growthCompleted = false;
@@ -106,10 +110,7 @@ class Flower {
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
         setTimeout(function(){
-          self.changeState()}, this.growthLength);
-          // self.changeState()}, 1000);
-
-         console.log(this.growthLength);
+          self.changeState()}, this.growthLength/this.state.length);
     }
       }
 
@@ -117,6 +118,8 @@ class Flower {
 //visual of the growing flower
 // console.log("gets to change state")
       this.stateIndex ++;
+      this.generate();
+      this.turtle();
           this.currentText= this.state[this.stateIndex];
           console.log(this.currentText) ;
           this.isGrowing =false;
@@ -161,10 +164,10 @@ class Flower {
 
     assignFormValues (length,autonomous_value, show_hide){
       // console.log("assigning values")
-            //??doesn't get into assignFormValues function
 
       //assigning growth length to flower constructor :
       this.growthLength = length;
+      console.log(this.growthLength);
       if(autonomous_value==="on"){
         this.autonomousMode = true;
       }
@@ -187,13 +190,9 @@ class Flower {
     
     }
 
-    generative (){
-      let numGeneration = 4;
-      //temporairement alors que growthLength ne fonctionne pas
-      //??timer doesn't workkk
-      let totalCycle = 1000;
-      let nextStep = totalCycle/numGeneration;
-      let nextInterval;
+    assignEnergyLevels(){
+      console.log("assign water and fertilizer");
+      //water and fertilizer levels will be transferred from script to here
     }
 
   } //end Flower.js

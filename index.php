@@ -40,14 +40,14 @@
        <p><label>Growth period:</label>
         <!-- <input type = "checkbox" size="24" maxlength = "40"  name = "a_lenght" required></p> -->
        <input type="checkbox" id="length1" name="a_length" value="1">
-       <label for="vehicle1"> 1 min</label>
+       <label for="length1"> 1 min</label>
        <input type="checkbox" id="length2" name="a_length" value="10">
-       <label for="vehicle2"> 10 min</label>
+       <label for="length2"> 10 min</label>
        <input type="checkbox" id="length3" name="a_length" value="1440">
-       <label for="vehicle3"> 1 day</label>
+       <label for="length3"> 1 day</label>
        <p><label>Autonomous growth:</label>
         <input type="checkbox" id="autonomousOption" name="autonomous_manual" value="Yes">
-       <label for="vehicle1">Activate</label>
+       <label for="autonomous1">Activate</label>
 
        <p><label for="pattern">Pattern:</label>
        <select id="pattern" name="a_pattern">
@@ -75,12 +75,12 @@
 </div> 
 
 <section id="flowerData-container">
-<section id="flowerMaintenanceButtons">
+<section id="flowerMaintenanceButtons" hidden>
 <div id="currentFlower"> &#60;<i>no flower selected</i>&#62;</div> 
 <input id="waterButton" class="optionButtons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="fertilizerButton" class="optionButtons" type="button" value="Fertilize"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="talkButton" class="optionButtons" type="button" value="Talk"><br>
-<input type="button" id="generateButton" value="Generate">
+<!-- <input type="button" id="generateButton" value="Generate"> -->
 </section>
 <section id="lSysTestZone">
 <div id="lSystem"></div>

@@ -4,7 +4,7 @@ class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
     // constructor(posX, posY, marker,map,arrayNumber,sound,length, begin, end) {
-      constructor(posX, posY, marker,map,arrayNumber,sound,length, fruit,user) {
+      constructor(posX, posY, marker,map,arrayNumber,sound,length,user,energyStatistics) {
 
       let date = new Date();
       this.germinationDay= date.toLocaleTimeString();
@@ -82,7 +82,37 @@ class Flower {
       // this.begin = begin;
       // this.end = end;
       this.user=user;
+
+      this.energyStatistics=energyStatistics;
+      this.vitaminsLevel=5;
+      this.waterLevel=5;
+      console.log(this.vitaminsLevel);
     } //end Constructor
+
+    energyAlgorithm() {
+//how to assign a label to a flower?
+  //     if (this.waterLevel <= 1) {
+  //       this.waterLevel = 1;
+  //     }
+  //     setInterval(() => {
+  //       this.waterLevel -= 1;
+  //       console.log("water--");
+  //     // printIcon();
+  //    }, this.length/10);
+  //    console.log(this.length);
+  //    console.log(this.waterLevel);
+
+
+  //    if (this.vitaminsLevel <= 1) {
+  //     this.vitaminsLevel = 1;
+  //     setInterval(() => {
+  //       this.vitaminsLevel -= 1;
+  //       console.log("vitamins--");
+  //     // printIcon();
+  //    }, this.length/10);  //how to assign by cycle length?
+
+  // }
+    }
 
     turtle () {
       // console.log("turtle rule applying....");
@@ -116,6 +146,30 @@ class Flower {
         setTimeout(function(){
           self.changeState()}, this.growthLength/this.state.length);
     }
+//??where to put this ? to assign do we need to implement in local storage? + change the name of flower
+    if (this.waterLevel <= 1) {
+      this.waterLevel = 1;
+    }
+    setInterval(() => {
+      this.waterLevel -= 1;
+      console.log("water--");
+    // printIcon();
+   }, this.growthLength/this.state.length);
+   console.log(this.length);
+   console.log(this.waterLevel);
+
+
+   if (this.vitaminsLevel <= 1) {
+    this.vitaminsLevel = 1;
+    setInterval(() => {
+      this.vitaminsLevel -= 1;
+      console.log("vitamins--");
+    // printIcon();
+   }, this.growthLength/this.state.length);  //how to assign by cycle length?
+
+}
+
+
       }
 
     changeState (){

@@ -196,3 +196,11 @@ z-index: 0;
 .outer{background-color:#0099ff;width:25%;margin:2%;}
 .content{background-color:#006bb3;width:100%;}
 .content p{color:white;padding:2%;background:#004d80;font-family:arial;}
+
+#flowerStatisticsContainer{
+display: block;
+}
+
+#flowerStatisticButtons{
+  display: none;
+}

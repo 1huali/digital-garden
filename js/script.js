@@ -7,14 +7,14 @@ Prototype 2
 
 "use strict";
 function setup() {
-    console.log("hello helloo again")
-
+    console.log("p5 setup")
   }
 
 $(document).ready(function(){
     // localStorage.clear();
+    //??why message doesnt display?
+    document.getElementById("message").innerHTML = "Welcome! Sit down and reflect as you need"
 
-    let flowerListButton = document.getElementById('flowerListButton');
     let modeButton = document.getElementById('modeButton');
     // let playMode = ["mainMode", "processMode"];
     let currentPlayMode= "mainMode";
@@ -41,6 +41,8 @@ $(document).ready(function(){
     let seedIdPopUpFormContainer = document.getElementById("seedIdPopUpFormContainer");
     // let seedIdPopUpForm = document.getElementsByClassName("seedFillFormDialog");
     // when the map is double clicked, go through the onMapDblClick function
+    
+    //message bar :
     if (userLoggedIn === false){
 setTimeout(() => {
     document.getElementById("message").innerHTML= "login or id to plant or access your flowers."
@@ -48,8 +50,8 @@ setTimeout(() => {
 };
 
     let flowerArray=[];
-    let currentFlowerContainer = document.getElementById("currentFlower");
-    let currentFlower;
+    let currentFlowerContainer = document.getElementById("currentFlowerContainer");
+    let currentFlower=[];
     let flowerArrayIndex=0;
     let idDataContainer = document.getElementById('idData');
     //get flower.flowerEl name printed in the container
@@ -61,14 +63,15 @@ setTimeout(() => {
     let submitButton = document.getElementById("submitButton");
     let flowerGenerated= false;
 
+//flower statistix data
     document.getElementById('waterHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
     document.getElementById('vitaminsHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
     let waterLevel = 5;
-
     let waterHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
     let vitaminsLevel = 5;
     let vitaminsHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
     let levelIcon = " ♥ ";
+//
 
     let archiveContainer = document.getElementById("archive-container");
     // let archiveButton = document.getElementById('showArchiveButton');
@@ -171,6 +174,8 @@ console.log(localStorage.getItem("password"));
         for (let i=0;i < flowerArray.length; i++){
 
         if (flowerArray[i].flowerGenerated === true){
+        energyStatistics();
+        printIcon();
         flowerArray[i].generate();
         flowerArray[i].turtle();
         }
@@ -189,13 +194,22 @@ console.log(localStorage.getItem("password"));
                 position: { my: "left top", at: "right bottom", of: window },
                 classes: {
                     "ui-dialog": "talkBox"
-                }
+                },
+                buttons: [
+                    {
+                      text: "Close",
+                      click: function() {
+                        $( this ).dialog( "close" );
+                      }
+                    }
+                  ]
               });
 //closes the talkbox dialog after creating it
               $("#talkBoxDialog").dialog('close');
 
 //login box
               //id dialog box : 
+              //??doesn't create at timeout, but used to work
               setTimeout(() => {
                 console.log("about to open ID dialogBox")
                 $("#identificationBoxDialog").dialog('open');
@@ -248,7 +262,7 @@ console.log(localStorage.getItem("password"));
 
 
     $.getJSON('Instructions.json',function(data) {
-            showJournal(data);
+            // showJournal(data);
             showFlowerData(data);
 
 
@@ -372,24 +386,32 @@ console.log(localStorage.getItem("password"));
         }
 
 //vitamins and waters ggoing down !!needs to be associated with the cycle length
-        setInterval(waterUpdate, 30000);
-        function waterUpdate() {
-            waterLevel -= 1;
-            printIcon();
+    //     setInterval(waterUpdate, 30000);
+    //     function waterUpdate() {
+    //         waterLevel -= 1;
+    //         printIcon();
         
-            if (waterLevel <= 1) {
-              waterLevel = 1;
-            }
-        };
+    //         if (waterLevel <= 1) {
+    //           waterLevel = 1;
+    //         }
+    //     };
 
-        setInterval(vitaminsUpdate, 20000);
-        function vitaminsUpdate() {
-            vitaminsLevel -= 1;
-            printIcon();
-        if (vitaminsLevel <= 1) {
-            vitaminsLevel = 1;
+    //     setInterval(vitaminsUpdate, 20000);
+    //     function vitaminsUpdate() {
+    //         vitaminsLevel -= 1;
+    //         printIcon();
+    //     if (vitaminsLevel <= 1) {
+    //         vitaminsLevel = 1;
+    //     }
+    // };
+
+    //fonction qui attrait toutes les statistiques énergtiques :
+    function energyStatistics(){
+        for (let i=0;i<flowerArray.length; i++){
+            flowerArray[i].energyAlgorithm();
+            console.log(flowerArray[i].waterLevel);
         }
-    };
+    }
 
     //prints html hearts icons on the energy bar of each flower
 function printIcon(){
@@ -419,22 +441,11 @@ function printIcon(){
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="blank_">OpenStreetMap</a>' // link to where we got the data for the map
     }).addTo(mainMap); // add tile layer to map
 
-    flowerListButton.addEventListener('click', function() {
-        // pan between flower array 
-
-            flowerArrayIndex++;
-            if (flowerArray.length>0){
-            if (flowerArrayIndex === flowerArray.length-1){
-                // console.log("gets here");
-                //!!! to fix
-                flowerArrayIndex = 0;
-                console.log("flowerArrayIndex");
-        }
-    }
+//Display message of "no flower displaying"
         if (flowerArray.length === 0){
             document.getElementById("message").innerHTML = "<no flowers registered>";
         }
-    });
+
 
                 waterButton.addEventListener("click", function () {
                     // console.log("water ++");
@@ -471,12 +482,11 @@ function printIcon(){
         // let image = L.imageOverlay(imageUrl, bounds).addTo(mainMap);
         // mainMap.fitBounds(bounds);
 
-
+//imprime les infos en bas à gauche ??peut-êre que je vais devoir le delete
             function showJournal(data){
-                let playModeDataContainer = $("#playModeData-container");
-                $(playModeDataContainer).empty();
-              displaySingleInstruction(data,playModeDataContainer);
-
+                let flowerDataContainer = $("#flowerData-container");
+                $(flowerDataContainer).empty();
+              displaySingleInstruction(data,flowerDataContainer);
             };
 
             //Display a marker on map at user's double-click
@@ -489,10 +499,23 @@ function printIcon(){
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
                     $("#seedIdPopUpFormContainer").dialog('open');
-                    // seedFillFormPopUp();
                     
-                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
+                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound,energyStatistics));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
+                currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
+
+                    //create an array for dropdown menu to add dynamically a flower to the list 
+                // let x= flowerArray[flowerArray.length-1].flowerId;
+                // currentFlower.push(x);
+                // console.log(currentFlower);
+
+                    //create an array for dropdown menu to add dynamically a flower to the list 
+                    let energyStatisticsIndex=0;
+                    let x= flowerArray[flowerArray.length-1].energyStatistics;
+                    energyStatisticsIndex++;
+                    energyStatistics.push(x);
+                    console.log(energyStatistics);
+
                 } else if (flowerArray[flowerArray.length-1].flowerGenerated === true){
                     
                     coordinateMarker // take the marker we have created earlier
@@ -522,6 +545,7 @@ function printIcon(){
                 requestAnimationFrame(loop);
             }
 
+            //bottom-left container, #playModeDataContainer;
             function displaySingleInstruction(data,parentContainer){
                 
                         if (currentPlayMode === 'exploreMode'){
@@ -559,7 +583,12 @@ function printIcon(){
                         });
                         }
                 // });
-        } //END DISPLAY
+        
+                if (userLoggedIn === true){
+
+                }
+        
+            } //END DISPLAY
 
         function showFlowerData(data){
             let flowerDataContainer = $("#flowerData-container");

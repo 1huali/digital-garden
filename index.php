@@ -71,23 +71,25 @@
 <div class="map" id="mainMap"></div>
 </div> 
 
-<section id="flowerData-container">
-<section id="flowerMaintenanceButtons" hidden>
-<div id="currentFlower"> &#60;<i>no flower selected</i>&#62;</div> 
+<!-- TEST FOR L-SYSTEM - useless -->
+<!-- <input type="button" id="generateButton" value="Generate"> -->
+<!-- <section id="lSysTestZone">
+<div id="lSystem"></div>
+ </section> -->
+
+  <section id="flowerData-container">
+<p><label for="flowerDropDownList">Current flower:</label>
+  <select id="flowerListButton">
+    <option value="flower0">noFlowR</option>
+  </select></p>
+  <div id="currentFlowerContainer"> &#60;<i>no flower selected</i>&#62;</div> 
+
+<div id="flowerStatisticButtons">
 <input id="waterButton" class="optionButtons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="fertilizerButton" class="optionButtons" type="button" value="Fertilize"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="talkButton" class="optionButtons" type="button" value="Talk"><br>
-<!-- <input type="button" id="generateButton" value="Generate"> -->
-</section>
-<section id="lSysTestZone">
-<div id="lSystem"></div>
-
- </section>
-</section>
-
- <!-- <section id="playModeData-container">
-  related to the json file ; kinda inactive atm but i'm keeping the placeholder if ever
- </section> -->
+</div>
+</section>  
 
  <section id="talkBoxDialog" title="Genetic Memory">
     <div id="archive-container">
@@ -98,6 +100,7 @@
       <input id="closeDialogButton" type="button" value="Done">
     </div>
 </section>
+
 
 <section id="identificationBoxDialog" title="User Identification">
 hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span><br>
@@ -113,16 +116,10 @@ hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span><br>
 <div id="titleBar">
 <h2 id="title">THE DIGITAL GARDEN</h2>
 <section id="userDataContainer">
-<div id="messageBar"> msg : <span id="message">Sit down and reflect as you need</span></div>
+<div id="messageBar"> Message : <span id="message">Welcome! Sit down and reflect as you need</span></div>
 
-<!-- ??why can't it also print here -->
 user: <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
-<!-- <div id="password-container">password:<input id="password" type="text"></div>
-      <input id="identifyButton" class="optionButtons" type="button" value="Identify">
-      <input id="loginButton" type="button" value="Login">
-      <input id="setPasswordButton" type="button" value="Save">
-      <br> -->
-      <input id="flowerListButton" class="optionButtons" type="button" value="Flower"> seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
+ seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
 </div>
 

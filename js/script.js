@@ -22,6 +22,8 @@ $(document).ready(function(){
     let waterButton = document.getElementById("waterButton");
     let vitaminsButton = document.getElementById("fertilizerButton");
     let talkButton = document.getElementById('talkButton');
+    let userLoggedIn = false;
+
 
    // We create a leaflet map, and in setView, we determine coordinates and zoom level
     let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
@@ -35,9 +37,15 @@ $(document).ready(function(){
 
 //setup function kinda
     let section = $('section');
-    let seedIdPopUpForm = document.getElementsByClassName("seedIdPopUpFormContainer");
+    //?? wondering if this is still relevant
+    let seedIdPopUpFormContainer = document.getElementById("seedIdPopUpFormContainer");
+    // let seedIdPopUpForm = document.getElementsByClassName("seedFillFormDialog");
     // when the map is double clicked, go through the onMapDblClick function
-    mainMap.on('dblclick', onMapDblClick);
+    if (userLoggedIn === false){
+setTimeout(() => {
+    document.getElementById("message").innerHTML= "login or id to plant or access your flowers."
+  }, "7000")
+};
 
     let flowerArray=[];
     let currentFlowerContainer = document.getElementById("currentFlower");
@@ -76,6 +84,7 @@ $(document).ready(function(){
     let username;
     let password;
     let currentUserBox = document.getElementById("currentUser");
+    let currentUserIdBox = document.getElementById("currentUserId"); //same than userId but in titleBar
     let loginButton = document.getElementById("loginButton");
     let setPasswordButton = document.getElementById("setPasswordButton");
 
@@ -92,6 +101,7 @@ $(document).ready(function(){
      if (localStorage[userKey]) {
     //   valToStore = password;
     currentUserBox.innerHTML = userValue;
+    currentUserIdBox.innerHTML = userValue;
     console.log("ask for password")
     document.getElementById("password-container").style = "display : block";
     identifyButton.style = "display : none";
@@ -107,6 +117,8 @@ $(document).ready(function(){
     localStorage.setItem(userKey,userValue);
 
     }
+
+    //!! close dialog
     };
 
     //if the user is recognized in the storage, verify the password
@@ -114,16 +126,19 @@ $(document).ready(function(){
 console.log(localStorage.getItem("password"));
                 //get the password and check if its the right one
                 if (password === localStorage.getItem("password")){
+                    userLoggedIn = true;
+                    mainMap.on('dblclick', onMapDblClick);
                     console.log("nice2c u again");
-                    setUserProfile();
+                    logUserProfile();
                 } else {
-
+                    userLoggedIn = false;
                     console.log("try again");
                 }
     };
 
     let passwordKey= "password";
     let passwordValue= "";
+
     function addPassword (password) {
 
         passwordValue = password;
@@ -138,25 +153,19 @@ console.log(localStorage.getItem("password"));
 
     setPasswordButton.addEventListener("click", function(){
         let userInputPassword = document.getElementById("password").value;
-        console.log(userInputPassword);
+        console.log("password inputed: "+userInputPassword);
         addPassword(userInputPassword);
     });
 
-    function setUserProfile(){
-        console.log("You are logged as "+localStorage.getItem("username"));
-        console.log("and your pw is "+localStorage.getItem("password"));
-
+    //The user if set, and the ID dialog box closes :
+    function logUserProfile(){
+        console.log(userLoggedIn);
+        $("#identificationBoxDialog").dialog('close');
+        console.log("You are logged as: "+localStorage.getItem("username"));
+        console.log("and your pw is: "+localStorage.getItem("password"));
     }
-    //end local storage setup
 
-    //L-SYSTEM with generateButton:
-    // let generateButton = document.getElementById('generateButton');
-    
-    // generateButton.addEventListener("click", function(){
-    //     console.log("gets into genBUtt")
-    //     generateFlower();
-    // });
-    // end L-SYSTEM with generateButton
+    //end local storage setup
 
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
@@ -169,33 +178,74 @@ console.log(localStorage.getItem("password"));
     }
       }
     // end L-SYSTEM
-
     requestAnimationFrame(loop);
 //end SETUPS
 
+//DIALOG POP-UP BOXES : 
 
-//creates a talkbox dialog when user press "talk" button
+//talkbox dialog: 
+//when user press "talk" button
  $( "#talkBoxDialog" ).dialog({
-
                 position: { my: "left top", at: "right bottom", of: window },
                 classes: {
                     "ui-dialog": "talkBox"
                 }
-
               });
-
 //closes the talkbox dialog after creating it
               $("#talkBoxDialog").dialog('close');
 
-              //id diallog box : 
+//login box
+              //id dialog box : 
+              setTimeout(() => {
+                console.log("about to open ID dialogBox")
+                $("#identificationBoxDialog").dialog('open');
+              }, "1800")
+
               $( "#identificationBoxDialog" ).dialog({
 
                 position: { my: "right top", at: "right top", of: window },
                 classes: {
                     "ui-dialog": "identificationBox"
                 }
-
               });
+
+            //   $("#identificationBoxDialog").dialog('close');
+              $( "#identificationBoxDialog" ).dialog({
+
+                dialogClass: "identificationBox",
+                buttons: [
+                  {
+                    text: "Close",
+                    click: function() {
+                      $( this ).dialog( "close" );
+                    }
+                  }
+                ]
+              });
+
+              
+    $( "#seedIdPopUpFormContainer" ).dialog({
+        position: { my: "left top", at: "right bottom", of: window },
+        classes: {
+            "ui-dialog": "seedFillFormDialog"
+        },
+                buttons: [
+          {
+            text: "Cancel",
+            click: function() {
+                            console.log("cancel was pressed");
+              $( this ).dialog( "close" );
+            }
+          }
+        ]
+      });
+
+// closes the talkbox dialog after creating it
+      $("#seedIdPopUpFormContainer").dialog('close');
+    
+//END FILL FORM
+
+
 
     $.getJSON('Instructions.json',function(data) {
             showJournal(data);
@@ -205,13 +255,6 @@ console.log(localStorage.getItem("password"));
         talkButton.addEventListener("click", function(){
             $("#talkBoxDialog").dialog('open');
             //activate flowerArray : blossom();
-        });
-
-
-        document.getElementById("cancelFlowerFormButton").addEventListener("click", function (){
-            console.log("cancel was pressed");
-            document.getElementById("seedIdPopUpFormContainer").style.display = "none";
-            //??double-click doesnt work anymore
         });
 
         //submission of php flower form thru AJAX :
@@ -267,8 +310,12 @@ console.log(localStorage.getItem("password"));
 
         //sabine:: reset flower
         document.getElementById("insertFlower").reset();
+
+        //FLOWER CONSTRUCTION
         flowerArray[flowerArray.length-1].flowerGenerated = true;
-        document.getElementById("seedIdPopUpFormContainer").style.display = "none";
+        $("#seedIdPopUpFormContainer").dialog('close');
+
+        //create flower with its own energy bar
        },
        error:function(){
       console.log("error occurred");
@@ -300,8 +347,10 @@ console.log(localStorage.getItem("password"));
 
         //current user identification : !!Add an association with flower
         identifyButton.addEventListener('click', function (){
-            let visitor = prompt("Hello! Who r u?", "secret passerby");
+            // let visitor = prompt("Hello! Who r u?", "secret passerby");
+            let visitor = document.getElementById("login").value;
             visitorListArray.push(visitor);
+            console.log(visitor);
             saveUserLogin(visitor)
 
             if (visitor != null) {
@@ -382,9 +431,9 @@ function printIcon(){
                 console.log("flowerArrayIndex");
         }
     }
-        // if (flowerArray.length === 0){
-        //     document.getElementById("message").innerHTML = "<no flowers registered>";
-        // }
+        if (flowerArray.length === 0){
+            document.getElementById("message").innerHTML = "<no flowers registered>";
+        }
     });
 
                 waterButton.addEventListener("click", function () {
@@ -439,7 +488,8 @@ function printIcon(){
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    seedFillFormPopUp();
+                    $("#seedIdPopUpFormContainer").dialog('open');
+                    // seedFillFormPopUp();
                     
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
@@ -449,7 +499,8 @@ function printIcon(){
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    seedFillFormPopUp();
+                    $("#seedFillFormDialog").dialog('open');
+                    // seedFillFormPopUp();
                     
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
@@ -521,10 +572,6 @@ function printIcon(){
         $(dataHTMLElement).appendTo(flowerDataContainer);
     });
 
-    }
-
-    function seedFillFormPopUp(){
-        document.getElementById("seedIdPopUpFormContainer").style.display = "block";
     }
 
         }); //end of windowOnLoad / document.ready

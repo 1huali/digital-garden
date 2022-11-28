@@ -26,8 +26,8 @@
   <body>
 
 <!-- Fill form to create a personalized flower -->
-    <div id="seedIdPopUpFormContainer">
-      <h3> Plant A Seed</h3>
+    <section id="seedIdPopUpFormContainer" class="seedFillFormDialog" title="Plant A Seed">
+      <h3> Contribute</h3>
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
         <p><label>Identification:</label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
@@ -36,9 +36,7 @@
         <p><label>Hide User:</label>
         <input type="checkbox" id="hideUserOption" name="show_hide" value="Yes">
        <label for="vehicle1"> Yes</label>
-
        <p><label>Growth period:</label>
-        <!-- <input type = "checkbox" size="24" maxlength = "40"  name = "a_lenght" required></p> -->
        <input type="checkbox" id="length1" name="a_length" value="1">
        <label for="length1"> 1 min</label>
        <input type="checkbox" id="length2" name="a_length" value="10">
@@ -48,7 +46,6 @@
        <p><label>Autonomous growth:</label>
         <input type="checkbox" id="autonomousOption" name="autonomous_manual" value="Yes">
        <label for="autonomous1">Activate</label>
-
        <p><label for="pattern">Pattern:</label>
        <select id="pattern" name="a_pattern">
     <option value="pattern" name="a_pattern">Axiom F</option>
@@ -68,7 +65,7 @@
        <input id="cancelFlowerFormButton" type="button" value="Cancel">
       </fieldset>
     </form>
-      </div>
+      </section>
 
     <div id="mapBox">
 <div class="map" id="mainMap"></div>
@@ -92,7 +89,7 @@
   related to the json file ; kinda inactive atm but i'm keeping the placeholder if ever
  </section> -->
 
- <div id="talkBoxDialog" title="Genetic Memory">
+ <section id="talkBoxDialog" title="Genetic Memory">
     <div id="archive-container">
     </div>    
     <div id="diary-container">
@@ -100,17 +97,18 @@
       <input id="saveButton" class="optionButtons" type="button" value="Send"> <br>
       <input id="closeDialogButton" type="button" value="Done">
     </div>
-</div>
+</section>
 
-<div id="identificationBoxDialog" title="User Identification">
-user: <span id="currentUser">no user</span><br>
+<section id="identificationBoxDialog" title="User Identification">
+hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span><br>
+<div id="login-container">login: <input id="login" type="text"></div><input id="identifyButton" class="optionButtons" type="button" value="Identify">
+
 <div id="password-container">password:<input id="password" type="text"></div>
-      <input id="identifyButton" class="optionButtons" type="button" value="Identify">
       <input id="loginButton" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
       <br>
       <!-- <input id="closeDialogButton" type="button" value="Done"> -->
-</div>
+</section>
 
 <div id="titleBar">
 <h2 id="title">THE DIGITAL GARDEN</h2>
@@ -118,7 +116,7 @@ user: <span id="currentUser">no user</span><br>
 <div id="messageBar"> msg : <span id="message">Sit down and reflect as you need</span></div>
 
 <!-- ??why can't it also print here -->
-user: <span id="currentUser">hello</span><br>
+user: <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
 <!-- <div id="password-container">password:<input id="password" type="text"></div>
       <input id="identifyButton" class="optionButtons" type="button" value="Identify">
       <input id="loginButton" type="button" value="Login">
@@ -127,10 +125,6 @@ user: <span id="currentUser">hello</span><br>
       <input id="flowerListButton" class="optionButtons" type="button" value="Flower"> seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
 </div>
-
-<section id="idBoxDialog" title="Authentification">
-
-</section>
 
     <!-- My script(s) -->
     <script src="js/script.js"></script>

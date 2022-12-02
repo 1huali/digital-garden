@@ -1,3 +1,4 @@
+//back-up copy as of december 2022 2pm, with L-System
 
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
@@ -59,14 +60,10 @@ class Flower {
         let canvas1 = sketch.createCanvas(100, 100);
         canvas1.parent(self.flowerId);
       }
-      sketch.draw = function (){
-        // console.log("get into sketchDraw")
-        self.displayFlower();
-      }
       }
 
     this.p5Context = new p5(this.s1);
-    // this.turtle();
+    this.turtle();
       //end L-system
 
       //Data from fill form
@@ -86,23 +83,11 @@ class Flower {
       this.vitaminsLevel=5;
       this.waterLevel=5;
       // console.log(this.vitaminsLevel);
-      //fractal tree
-      this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
-      this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
-      this.root = new Stem(this.a, this.b, this.p5Context);
-      this.flower = [];
-
-      this.flower[0]=this.root;
-
-      this.petals = [];
-      this.petalCount=0;
-
     } //end Constructor
 
 
     turtle () {
       // console.log("turtle rule applying....");
-
       this.p5Context.resetMatrix();
       //this.p5Context.background(0);
        this.p5Context.translate( this.p5Context.width / 2,  this.p5Context.height);
@@ -124,27 +109,47 @@ class Flower {
            this.p5Context.pop();
         }
       }
-
     }
 
     grow() {
-
       let self=this;
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
         setTimeout(function(){
           self.changeState()}, this.growthLength/this.state.length);
     }
+//??where to put this ? to assign do we need to implement in local storage? + change the name of flower
+  //   if (this.waterLevel <= 1) {
+  //     this.waterLevel = 1;
+  //   }
+  //   setInterval(() => {
+  //     this.waterLevel -= 1;
+  //     console.log("water--");
+  //   // printIcon();
+  //  }, this.growthLength/this.state.length);
+  // //  console.log(this.length);
+  // //  console.log(this.waterLevel);
+
+
+  //  if (this.vitaminsLevel <= 1) {
+  //   this.vitaminsLevel = 1;
+  //   setInterval(() => {
+  //     this.vitaminsLevel -= 1;
+  //     console.log("vitamins--");
+  //   // printIcon();
+  //  }, this.growthLength/this.state.length);  //how to assign by cycle length?
+
+// }
+
 
       }
 
     changeState (){
 //visual of the growing flower
 // console.log("gets to change state")
-
       this.stateIndex ++;
-      // this.generate(); //uncommented L-Systems
-      // this.turtle();
+      this.generate();
+      this.turtle();
           this.currentText= this.state[this.stateIndex];
           console.log(this.currentText) ;
           this.isGrowing =false;
@@ -162,14 +167,16 @@ class Flower {
               this.blossom= false;
             },300000);
           }
+
           //bud appears
           if (this.stateIndex === this.state.length/2){
             this.budState= true;
+            //??I need to create a vector of the last branch coordinate
             let budCoordinates;
             console.log("bud appeared!")
             //   if (!this.growthCompleted) {
             //     let leaf = tree[i].end.copy();
-            //     petals.push(leaf);
+            //     leaves.push(leaf);
             // }
             //call buds();
           }
@@ -183,61 +190,28 @@ class Flower {
         this.flowerEl.style.left = `${this.posX-50}px`;
         this.flowerEl.style.top = `${this.posY-50}px`; 
 
-        //fractal tree
-        for (let i = 0; i < this.flower.length; i++) {
-        this.flower[i].show();
-        }
+        
 
-        for (let i = 0; i < this.petals.length; i++) {
-          fill(255, 0, 100, 100);
-          noStroke();
-          // ellipse(petals[i].x, petals[i].y, 8, 8);
-          // petals[i].y += random(0, 2);
-        }
-
-        //end fractal
     }
 
     generate (){
-//L-System
-      // this.len *= 0.5;
-      // let nextSentence = "";
-      // for (let i = 0; i < this.sentence.length; i++) {
-      //   let current = this.sentence.charAt(i);
-      //   let found = false;
-      //   for (let j = 0; j < this.rules.length; j++) {
-      //     if (current == this.rules[j].a) {
-      //       found = true;
-      //       nextSentence += this.rules[j].b;
-      //       break;
-      //     }
-      //   }
-      //   if (!found) {
-      //     nextSentence += current;
-      //   }
-      // }
-      // this.sentence = nextSentence;    
-//end L-System 
-
-//Fractal method
-for (let i = this.flower.length - 1; i >= 0; i--) {
-  if (!this.flower[i].finished) {
-    this.flower.push(this.flower[i].stemA());
-    this.flower.push(this.flower[i].stemB());
-  }
-  // this.stem.finished = true;
-}
-this.petalCount++;
-
-if (this.petalCount === 6) {
-  for (var i = 0; i < this.flower.length; i++) {
-    if (!this.flower[i].finished) {
-      let petal = this.flower[i].end.copy();
-      this.petals.push(petal);
-    }
-  }
-}
-//end fractal method
+      this.len *= 0.5;
+      let nextSentence = "";
+      for (let i = 0; i < this.sentence.length; i++) {
+        let current = this.sentence.charAt(i);
+        let found = false;
+        for (let j = 0; j < this.rules.length; j++) {
+          if (current == this.rules[j].a) {
+            found = true;
+            nextSentence += this.rules[j].b;
+            break;
+          }
+        }
+        if (!found) {
+          nextSentence += current;
+        }
+      }
+      this.sentence = nextSentence;    
 
     }
 
@@ -253,7 +227,9 @@ if (this.petalCount === 6) {
       else{
         this.autonomousMode = false;
       }
+
       //set 
+
       if(show_hide==="Yes"){
         this.hideUsername = true;
       }
@@ -267,6 +243,21 @@ if (this.petalCount === 6) {
       console.log("assign water and fertilizer");
       //water and fertilizer levels will be transferred from script to here
     }
+
+//     flowerBlossom (){
+// console.log("flower can blossom")
+// //flower blossons user talks to user && when bud state === true ; ascii symbol appears
+//blossom chime also
+//     }
+
+// buds(){
+  // for (var i = 0; i < leaves.length; i++) {
+  //   fill(255, 0, 100, 100);
+  //   noStroke();
+  //   ellipse(leaves[i].x, leaves[i].y, 8, 8);
+  //   leaves[i].y += random(0, 2);
+  // }
+// }
 
 
   } //end Flower.js

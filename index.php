@@ -86,7 +86,7 @@
   <!-- water drop -->
   <i class="fa-thin fa-droplet"></i>
 <!-- TEST FOR L-SYSTEM - useless -->
-<!-- <input type="button" id="generateButton" value="Generate"> -->
+<input type="button" id="generateButton" value="Generate">
 <section id="lSysTestZone">
 <div id="lSystem"></div>
  </section>

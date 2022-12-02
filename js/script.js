@@ -9,12 +9,6 @@ Prototype 2
 function setup() {
     console.log("p5 setup");
 
-    // let a = createVector(width / 2, height);
-    // let b = createVector(width / 2, height - 100);
-    // let root = new Branch(a, b);
-
-    // tree[0] = root;
-
   }
 
 $(document).ready(function(){
@@ -97,12 +91,9 @@ setTimeout(() => {
     let userKey = "username";
     let userValue = "";
     let seedCount =0;
-
-    //fractal tree
-    let tree = [];
-    let leaves = [];
-    let leafCount=0;
     
+    let generateButton= document.getElementById('generateButton');
+
     //local storge set-up
     function saveUserLogin (username){
     // Create a local storage item (key value pair)
@@ -194,14 +185,15 @@ console.log(localStorage.getItem("password"));
             updateSeedCount();
             // energyStatistics();
         // printIcon();
-        flowerArray[i].generate();
-        flowerArray[i].turtle();
+        // flowerArray[i].generate();
+        // flowerArray[i].turtle();
         }
 
     }
       }
     // end L-SYSTEM
-    requestAnimationFrame(loop);
+    // requestAnimationFrame(loop);
+
 //end SETUPS
 
 //DIALOG POP-UP BOXES : 
@@ -393,6 +385,12 @@ console.log(localStorage.getItem("password"));
               }
         });
 
+        generateButton.addEventListener("click", function(){
+
+            for (let i=0;i<flowerArray.length;i++){
+                flowerArray[i].generate();
+            }
+        });
 
         function thoughtDateData(){
             //add hours if less than 24 hours?
@@ -543,20 +541,20 @@ function printIcon(){
                 }
         }
 
-            function loop(){
+            // function loop(){
 
-                for (let i=0; i < flowerArray.length; i++){
+            //     for (let i=0; i < flowerArray.length; i++){
 
-                    if (flowerArray[i].flowerGenerated === true){
-                    flowerArray[i].displayFlower();
-                   flowerArray[i].grow();
-                }
+            //         if (flowerArray[i].flowerGenerated === true){
+            //         flowerArray[i].displayFlower();
+            //     //    flowerArray[i].grow();
+            //     }
                 
 
 
-                }
-                requestAnimationFrame(loop);
-            }
+            //     }
+            //     requestAnimationFrame(loop);
+            // }
 
             //bottom-left container, #playModeDataContainer;
             function displaySingleInstruction(data,parentContainer){

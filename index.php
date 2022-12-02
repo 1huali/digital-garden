@@ -25,7 +25,7 @@
     <script src="https://kit.fontawesome.com/82ea518a78.js" crossorigin="anonymous"></script>
    
     <script src="js/script.js"></script>
-    <script src="js/stem.js"></script>
+    <script src="js/branch.js"></script>
 
   </head>
   <body>

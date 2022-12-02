@@ -89,13 +89,13 @@ class Flower {
       //fractal tree
       this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
       this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
-      this.root = new Stem(this.a, this.b, this.p5Context);
+      this.root = new Branch(this.a, this.b, this.p5Context);
       this.flower = [];
 
       this.flower[0]=this.root;
 
-      this.petals = [];
-      this.petalCount=0;
+      this.stems = [];
+      this.stemCount=0;
 
     } //end Constructor
 
@@ -169,7 +169,7 @@ class Flower {
             console.log("bud appeared!")
             //   if (!this.growthCompleted) {
             //     let leaf = tree[i].end.copy();
-            //     petals.push(leaf);
+            //     stems.push(leaf);
             // }
             //call buds();
           }
@@ -188,17 +188,19 @@ class Flower {
         this.flower[i].show();
         }
 
-        for (let i = 0; i < this.petals.length; i++) {
+        for (let i = 0; i < this.stems.length; i++) {
           fill(255, 0, 100, 100);
           noStroke();
-          // ellipse(petals[i].x, petals[i].y, 8, 8);
-          // petals[i].y += random(0, 2);
+          this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
+          this.stems[i].y += random(0, 2);
         }
 
         //end fractal
     }
 
     generate (){
+
+      // if (this.pattern === "axiomF"){
 //L-System
       // this.len *= 0.5;
       // let nextSentence = "";
@@ -218,7 +220,7 @@ class Flower {
       // }
       // this.sentence = nextSentence;    
 //end L-System 
-
+// } else if (this.pattern === "fractal"){
 //Fractal method
 for (let i = this.flower.length - 1; i >= 0; i--) {
   if (!this.flower[i].finished) {
@@ -227,16 +229,17 @@ for (let i = this.flower.length - 1; i >= 0; i--) {
   }
   // this.stem.finished = true;
 }
-this.petalCount++;
+this.stemCount++;
 
-if (this.petalCount === 6) {
+if (this.stemCount === 6) {
   for (var i = 0; i < this.flower.length; i++) {
     if (!this.flower[i].finished) {
-      let petal = this.flower[i].end.copy();
-      this.petals.push(petal);
+      let stem = this.flower[i].end.copy();
+      this.stems.push(stem);
     }
   }
 }
+// }
 //end fractal method
 
     }

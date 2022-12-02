@@ -1,4 +1,4 @@
-class Stem {
+class Branch {
     //stem.js
       constructor(begin, end, p5Context) {
         this.begin = begin;
@@ -26,7 +26,7 @@ class Stem {
         dir.rotate(PI / 6);
         dir.mult(0.67); //to shrink the newcoming branches
         let newEnd = p5.Vector.add(this.end, dir);
-        let b = new Stem(this.end, newEnd,this.p5Context);
+        let b = new Branch(this.end, newEnd,this.p5Context);
         return b;
       }
     
@@ -35,7 +35,7 @@ class Stem {
         dir.rotate(-PI / 4);
         dir.mult(0.67);
         let newEnd = p5.Vector.add(this.end, dir);
-        let b = new Stem(this.end, newEnd,this.p5Context);
+        let b = new Branch(this.end, newEnd,this.p5Context);
         return b;
       }
     }

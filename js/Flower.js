@@ -3,7 +3,6 @@
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
-    // constructor(posX, posY, marker,map,arrayNumber,sound,length, begin, end) {
       constructor(posX, posY, marker,map,arrayNumber,sound,length,user,energyStatistics) {
 
       let date = new Date();
@@ -43,7 +42,6 @@ class Flower {
       this.sound= sound;
     
       //L-System
-
       this.angle= radians(25);
       this.axiom = "F";
       this.sentence = this.axiom;
@@ -76,43 +74,17 @@ class Flower {
       this.flowerEl.style.left = `${this.posX-50}px`;
       this.flowerEl.style.top = `${this.posY-50}px`; 
       //end Data from fill form
-
-      this.fruit=fruit; //symbol from the fill form
-      this.fruitArray= [];
-      // this.begin = begin;
-      // this.end = end;
       this.user=user;
+
+      this.fruitArray= [];
+      this.fruit=fruit; //symbol from the fill form
 
       this.energyStatistics=energyStatistics;
       this.vitaminsLevel=5;
       this.waterLevel=5;
-      console.log(this.vitaminsLevel);
+      // console.log(this.vitaminsLevel);
     } //end Constructor
 
-    energyAlgorithm() {
-//how to assign a label to a flower?
-  //     if (this.waterLevel <= 1) {
-  //       this.waterLevel = 1;
-  //     }
-  //     setInterval(() => {
-  //       this.waterLevel -= 1;
-  //       console.log("water--");
-  //     // printIcon();
-  //    }, this.length/10);
-  //    console.log(this.length);
-  //    console.log(this.waterLevel);
-
-
-  //    if (this.vitaminsLevel <= 1) {
-  //     this.vitaminsLevel = 1;
-  //     setInterval(() => {
-  //       this.vitaminsLevel -= 1;
-  //       console.log("vitamins--");
-  //     // printIcon();
-  //    }, this.length/10);  //how to assign by cycle length?
-
-  // }
-    }
 
     turtle () {
       // console.log("turtle rule applying....");
@@ -147,27 +119,27 @@ class Flower {
           self.changeState()}, this.growthLength/this.state.length);
     }
 //??where to put this ? to assign do we need to implement in local storage? + change the name of flower
-    if (this.waterLevel <= 1) {
-      this.waterLevel = 1;
-    }
-    setInterval(() => {
-      this.waterLevel -= 1;
-      console.log("water--");
-    // printIcon();
-   }, this.growthLength/this.state.length);
-   console.log(this.length);
-   console.log(this.waterLevel);
+  //   if (this.waterLevel <= 1) {
+  //     this.waterLevel = 1;
+  //   }
+  //   setInterval(() => {
+  //     this.waterLevel -= 1;
+  //     console.log("water--");
+  //   // printIcon();
+  //  }, this.growthLength/this.state.length);
+  // //  console.log(this.length);
+  // //  console.log(this.waterLevel);
 
 
-   if (this.vitaminsLevel <= 1) {
-    this.vitaminsLevel = 1;
-    setInterval(() => {
-      this.vitaminsLevel -= 1;
-      console.log("vitamins--");
-    // printIcon();
-   }, this.growthLength/this.state.length);  //how to assign by cycle length?
+  //  if (this.vitaminsLevel <= 1) {
+  //   this.vitaminsLevel = 1;
+  //   setInterval(() => {
+  //     this.vitaminsLevel -= 1;
+  //     console.log("vitamins--");
+  //   // printIcon();
+  //  }, this.growthLength/this.state.length);  //how to assign by cycle length?
 
-}
+// }
 
 
       }

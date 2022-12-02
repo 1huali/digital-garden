@@ -7,7 +7,14 @@ Prototype 2
 
 "use strict";
 function setup() {
-    console.log("p5 setup")
+    console.log("p5 setup");
+
+    // let a = createVector(width / 2, height);
+    // let b = createVector(width / 2, height - 100);
+    // let root = new Branch(a, b);
+
+    // tree[0] = root;
+
   }
 
 $(document).ready(function(){
@@ -37,15 +44,11 @@ $(document).ready(function(){
 
 //setup function kinda
     let section = $('section');
-    //?? wondering if this is still relevant
-    let seedIdPopUpFormContainer = document.getElementById("seedIdPopUpFormContainer");
-    // let seedIdPopUpForm = document.getElementsByClassName("seedFillFormDialog");
-    // when the map is double clicked, go through the onMapDblClick function
     
     //message bar :
     if (userLoggedIn === false){
 setTimeout(() => {
-    document.getElementById("message").innerHTML= "login or id to plant or access your flowers."
+    document.getElementById("message").innerHTML= "Welcome! Sit down and reflect as you need."
   }, "7000")
 };
 
@@ -93,6 +96,13 @@ setTimeout(() => {
 
     let userKey = "username";
     let userValue = "";
+    let seedCount =0;
+
+    //fractal tree
+    let tree = [];
+    let leaves = [];
+    let leafCount=0;
+    
     //local storge set-up
     function saveUserLogin (username){
     // Create a local storage item (key value pair)
@@ -168,14 +178,22 @@ console.log(localStorage.getItem("password"));
         console.log("and your pw is: "+localStorage.getItem("password"));
     }
 
+    function updateSeedCount(){
+        console.log("goes here")
+        seedCount++;
+        console.log(seedCount);
+        console.log("seed + 1");
+    }
+
     //end local storage setup
 
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
 
         if (flowerArray[i].flowerGenerated === true){
-        energyStatistics();
-        printIcon();
+            updateSeedCount();
+            // energyStatistics();
+        // printIcon();
         flowerArray[i].generate();
         flowerArray[i].turtle();
         }
@@ -238,10 +256,10 @@ console.log(localStorage.getItem("password"));
               });
 
               
-    $( "#seedIdPopUpFormContainer" ).dialog({
+    $( "#seedIdPopUpForm-container" ).dialog({
         position: { my: "left top", at: "right bottom", of: window },
         classes: {
-            "ui-dialog": "seedFillFormDialog"
+            "ui-dialog": "seedFillForm-dialog"
         },
                 buttons: [
           {
@@ -255,7 +273,7 @@ console.log(localStorage.getItem("password"));
       });
 
 // closes the talkbox dialog after creating it
-      $("#seedIdPopUpFormContainer").dialog('close');
+      $("#seedIdPopUpForm-container").dialog('close');
     
 //END FILL FORM
 
@@ -280,6 +298,8 @@ console.log(localStorage.getItem("password"));
             //retrieve the infos into objet key/value pairs
              let form = $('#insertFlower')[0];
              let data = new FormData(form);
+
+             updateSeedCount();
 
 
              //NEW:: SABINE:: if these items are not checked then append the off values to the data...
@@ -327,7 +347,7 @@ console.log(localStorage.getItem("password"));
 
         //FLOWER CONSTRUCTION
         flowerArray[flowerArray.length-1].flowerGenerated = true;
-        $("#seedIdPopUpFormContainer").dialog('close');
+        $("#seedIdPopUpForm-container").dialog('close');
 
         //create flower with its own energy bar
        },
@@ -405,13 +425,6 @@ console.log(localStorage.getItem("password"));
     //     }
     // };
 
-    //fonction qui attrait toutes les statistiques énergtiques :
-    function energyStatistics(){
-        for (let i=0;i<flowerArray.length; i++){
-            flowerArray[i].energyAlgorithm();
-            console.log(flowerArray[i].waterLevel);
-        }
-    }
 
     //prints html hearts icons on the energy bar of each flower
 function printIcon(){
@@ -498,9 +511,9 @@ function printIcon(){
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    $("#seedIdPopUpFormContainer").dialog('open');
+                    $("#seedIdPopUpForm-container").dialog('open');
                     
-                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound,energyStatistics));
+                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
                 currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
 
@@ -510,11 +523,11 @@ function printIcon(){
                 // console.log(currentFlower);
 
                     //create an array for dropdown menu to add dynamically a flower to the list 
-                    let energyStatisticsIndex=0;
-                    let x= flowerArray[flowerArray.length-1].energyStatistics;
-                    energyStatisticsIndex++;
-                    energyStatistics.push(x);
-                    console.log(energyStatistics);
+                    // let energyStatisticsIndex=0;
+                    // let x= flowerArray[flowerArray.length-1].energyStatistics;
+                    // energyStatisticsIndex++;
+                    // // energyStatistics.push(x);
+                    // console.log(energyStatistics);
 
                 } else if (flowerArray[flowerArray.length-1].flowerGenerated === true){
                     
@@ -522,7 +535,7 @@ function printIcon(){
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    $("#seedFillFormDialog").dialog('open');
+                    $("#seedFillForm-dialog").dialog('open');
                     // seedFillFormPopUp();
                     
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
@@ -602,5 +615,12 @@ function printIcon(){
     });
 
     }
+
+    // ??set up for fractal tree (temporary)
+    // object.addEventListener("click", function (){
+    //     console.log("click for fractal generation");
+    // });
+
+
 
         }); //end of windowOnLoad / document.ready

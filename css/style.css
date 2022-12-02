@@ -8,86 +8,46 @@
 body{
 width: 100vw;
 height: 100vh;
+padding: 3px;
 }
 
-#buttonOverlayBox{
-position: absolute;
-margin: 0px;
-padding: 2px;
-top: 0;
-left: 0;
-z-index: 0;
+h1{
+  font-size:medium;
 }
 
-
-#mapBox{
-    position: relative;
-    margin: 0px;
-    padding: 2px;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-}
-
-.optionButtons{
-    /* display: flex; */
-    width: 60px;
-    text-align: center;
+#gardenInfoHeader{
+  display: inline-block ;
+  /* margin-bottom: 4px; */
+  padding: 5px;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+  left: 0px;
+  /* background-color: aqua; */
 }
 
 .map {
-    /* Set the map's width and height */
-    width: 100vw;
-    height: 100vh;
-    position:absolute;
-    z-index:3;
+  /* Set the map's width and height */
+  width: 100vw;
+  height: 100vh;
+  position:absolute;
+  z-index:3;
 }
 
-#editModeButtons{
-    display: none;
+#mapBox{
+  position: relative;
+  margin: 0px;
+  padding: 2px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
-#flowerData-container{
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  z-index: 10;
-    width: 180px;
-    flex-wrap:wrap;
-    background-color: darkkhaki;
-  }
 
-  .single-day-para{
-    width:95%;
-    margin:2%;
-    font-size:1em;
-    color:#000000;
-    padding:1%;
-  }
-
-  .single-archive-line{
-    background:#d9bfd6;
-    margin-left:5%;
-    padding:1%;
-    margin-bottom:2%;
-  }
-  
-  .mode-container{
-    width:min-content;
-    margin:2%;
-    font-size:1em;
-    color:#b1b1b1;
-    padding:1%;
-  }
-
-  .mode-prop{
-    width:90%;
-    background:rgb(255, 127, 246);
-  }
-
-  /* #seedIdPopUpFormContainer{
+  /* #seedIdPopUpForm-container{
     width: max-content;
     height: max-content;
     position: absolute;
@@ -99,11 +59,9 @@ z-index: 0;
     /* display: block;
   } */
 
-  /* useless? */
-  /* #flower{
-    font-size: medium;
-    font-style: normal;
-  } */
+
+  /* CONTAINERS */
+
 
   .flower-container{
     width: 100px;
@@ -123,16 +81,8 @@ z-index: 0;
     color: #000000;
   }
 
-  .flowerEl{
-    top:0px;
-    left: 0px;
-    color: #000000;
-    width: 100px;
-    height: 100px;
-    position:absolute;
-    z-index: 100;
-    background: deeppink;
-    
+  #password-container{
+    display: none;
   }
 
   #archive-container{
@@ -143,41 +93,50 @@ z-index: 0;
     color: #000000;
   }
 
-  #archives{
-    background-color: rgb(228, 132, 183);
-    width: 300px;
+  .mode-container{
+    width:min-content;
+    margin:2%;
+    font-size:1em;
+    color:#b1b1b1;
+    padding:1%;
   }
 
-  #titleBar{
-    display: inline-block ;
+  #flowerData-container{
     position: absolute;
-    z-index: 10;
-    top: 0px;
+    bottom: 0px;
     left: 0px;
-    background-color: aqua;
-  }
+    z-index: 10;
+      width: 250px;
+      flex-wrap:wrap;
+      /* background-color: darkkhaki; */
+      padding: 5px;
+    }
 
+/* DIALOG BOXES : */
   .talkBox{
     /* display: none; */
     background-color: aqua;
     /* opacity: 0; */
     /* visibility: none; */
   }
-
-  .seedFillFormDialog{
-    /* display: none; */
-    background-color: rgb(49, 90, 90);
-    /* opacity: 0; */
-    /* visibility: none; */
-  }
-
   #talkBoxDialog{
     display: none;
   }
 
-  #password-container{
-    display: none;
+  .seedFillForm-dialog{
+    right: 20px;
+    bottom: 20px;
+    /* background-color: rgb(49, 90, 90); */
+    /* visibility: none; */
   }
+
+/* BUTTONS : */
+
+.buttons{
+  /* display: flex; */
+  width: 60px;
+  text-align: center;
+}
 
   #loginButton{
     display: none;
@@ -186,21 +145,66 @@ z-index: 0;
   #setPasswordButton{
     display: none;
   }
-  .p5Canvas{
-    width: 100%;
-    height: 100%;
-    position: relative;
+  
+  #flowerStatistic-buttons{
+    display: none;
   }
-
-  #back{display:flex;flex-wrap: wrap;width:100%;padding-left:5%;}
-.outer{background-color:#0099ff;width:25%;margin:2%;}
-.content{background-color:#006bb3;width:100%;}
-.content p{color:white;padding:2%;background:#004d80;font-family:arial;}
 
 #flowerStatisticsContainer{
 display: block;
 }
 
-#flowerStatisticButtons{
-  display: none;
+/* ELEMENTS */
+
+.single-day-para{
+  width:95%;
+  margin:2%;
+  font-size:1em;
+  color:#000000;
+  padding:1%;
 }
+
+.single-archive-line{
+  background:#d9bfd6;
+  margin-left:5%;
+  padding:1%;
+  margin-bottom:2%;
+}
+
+.mode-prop{
+  width:90%;
+  background:rgb(255, 127, 246);
+}
+
+.flowerEl{
+  top:0px;
+  left: 0px;
+  color: #000000;
+  width: 100px;
+  height: 100px;
+  position:absolute;
+  z-index: 100;
+  /* background: deeppink; */
+  
+}
+
+.p5Canvas{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#back{display:flex;flex-wrap: wrap;width:100%;padding-left:5%;}
+.outer{background-color:#0099ff;width:25%;margin:2%;}
+.content{background-color:#006bb3;width:100%;}
+.content p{color:white;padding:2%;background:#004d80;font-family:arial;}
+
+#archives{
+  background-color: rgb(228, 132, 183);
+  width: 300px;
+}
+  
+/* hover element on tree */
+/* .p5Canvas :hover + article {
+  display: block;
+} */

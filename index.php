@@ -34,7 +34,7 @@
 <h1 id="title">THE DIGITAL GARDEN</h1>
 <div id="about-container">This is a space to plant and seed personal objectives. <br> Login or identify to plant or access your flowers. </div>
 <div id="messageContainer">
-<div id="messageBar"> Message : <marquee scrollamount="2" direction="right" width="130px"><i><span id="message"></span></i></marquee> </div>
+<div id="messageBar"> Message : <marquee scrollamount="2" direction="left" width="130px"><i><span id="message">aaaaaa</span></i></marquee> </div>
 </div>
  seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
@@ -43,27 +43,24 @@
     <section id="seedIdPopUpForm-container" class="seedFillForm-dialog" title="Plant A Seed">
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
-        <p><label>Identification:</label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
-        <p><label>Motivation:</label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
-        <p><label>User:</label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
-        <p><label>Hide User:</label>
+        <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
+        <p><label>Motivation </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
+        <p><label>User </label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
+        <p><label>Hide User </label>
         <input type="checkbox" id="hideUserOption" name="show_hide" value="Yes">
-       <label for="vehicle1"> Yes</label>
-       <p><label>Growth period:</label>
-       <input type="checkbox" id="length1" name="a_length" value="1">
-       <label for="length1"> 1 min</label>
-       <input type="checkbox" id="length2" name="a_length" value="10">
-       <label for="length2"> 10 min</label>
-       <input type="checkbox" id="length3" name="a_length" value="1440">
-       <label for="length3"> 1 day</label>
-       <p><label>Autonomous growth:</label>
-        <input type="checkbox" id="autonomousOption" name="autonomous_manual" value="Yes">
-       <label for="autonomous1">Activate</label>
-       <p><label for="pattern">Pattern:</label>
+       <label for="hideUser"> Yes</label>
+       blablbal
+       <p><label>Growth period </label>
+       <input type="number" id="length1" name="a_length" min="1"> day
+       <p><label>Manual growth </label>
+        <input type="checkbox" id="manualOption" name="autonomous_manual" value="Yes">
+       <label for="autonomous1">Activate </label>
+       <p><label for="pattern">Pattern </label>
        <select id="pattern" name="a_pattern">
-    <option value="pattern" name="a_pattern">Axiom F</option>
+    <option value="lsystemAxiomF" name="a_pattern">Axiom F</option>
+    <option value="fractals" name="a_pattern">Fractals</option>
     </select></p>
-       <p><label for="fruit">Fruit:</label>
+       <p><label for="fruit">Fruit </label>
   <select id="fruit" name="a_fruit">
     <option value="☆">☆</option>
     <option value="♥">♥</option>
@@ -83,8 +80,6 @@
 <div class="map" id="mainMap"></div>
 </div> 
 
-  <!-- water drop -->
-  <i class="fa-thin fa-droplet"></i>
 <!-- TEST FOR L-SYSTEM - useless -->
 <input type="button" id="generateButton" value="Generate">
 <section id="lSysTestZone">
@@ -95,13 +90,13 @@
   <h2>CURRENT SESSION</h2>hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
 <label for="flowerDropDownList">Current flower </label>
   <select id="flowerList-dropdown">
-    <option value="flower0">Login to access data</option>
+    <option id="currentFlowerName" value="flower0">Login to access data</option>
   </select>
 
 <div id="flowerStatistic-buttons">
 <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div> 
 <input id="waterButton" class="buttons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
-<input id="fertilizerButton" class="buttons" type="button" value="Fertilize"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
+<input id="fertilizerButton" class="buttons" type="button" value="Love"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
 <input id="talkButton" class="buttons" type="button" value="Talk"><br>
 </div>
 </section> 

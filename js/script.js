@@ -14,7 +14,7 @@ function setup() {
 $(document).ready(function(){
     // localStorage.clear();
     //??why message doesnt display?
-    document.getElementById("message").innerHTML = "Welcome! Sit down and reflect as you need"
+    document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
 
     let modeButton = document.getElementById('modeButton');
     // let playMode = ["mainMode", "processMode"];
@@ -40,11 +40,11 @@ $(document).ready(function(){
     let section = $('section');
     
     //message bar :
-    if (userLoggedIn === false){
-setTimeout(() => {
-    document.getElementById("message").innerHTML= "Welcome! Sit down and reflect as you need."
-  }, "7000")
-};
+//     if (userLoggedIn === false){
+// setTimeout(() => {
+//     document.getElementById("message").innerHTML= "Wander in peace or regist"
+//   }, "7000")
+// };
 
     let flowerArray=[];
     let currentFlowerContainer = document.getElementById("currentFlowerContainer");
@@ -73,7 +73,6 @@ setTimeout(() => {
     let archiveContainer = document.getElementById("archive-container");
     // let archiveButton = document.getElementById('showArchiveButton');
     // let closeArchiveButton = document.getElementById("closeArchiveButton");
-    //!! WILL NEED A CLOSE BUTTON TO SHUT THE CHAT BOX 
     let saveThoughtButton = document.getElementById('saveButton');
     let thoughtCount = 0;
     let thoughts=[];
@@ -90,7 +89,8 @@ setTimeout(() => {
 
     let userKey = "username";
     let userValue = "";
-    let seedCount =0;
+    let userSeedCount = document.getElementById("userFlowerIndex"); 
+    let globalSeedCount = document.getElementById("totalFlowerIndex"); 
     
     let generateButton= document.getElementById('generateButton');
 
@@ -169,20 +169,12 @@ console.log(localStorage.getItem("password"));
         console.log("and your pw is: "+localStorage.getItem("password"));
     }
 
-    function updateSeedCount(){
-        console.log("goes here")
-        seedCount++;
-        console.log(seedCount);
-        console.log("seed + 1");
-    }
-
     //end local storage setup
 
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
 
         if (flowerArray[i].flowerGenerated === true){
-            updateSeedCount();
             // energyStatistics();
         // printIcon();
         // flowerArray[i].generate();
@@ -192,7 +184,7 @@ console.log(localStorage.getItem("password"));
     }
       }
     // end L-SYSTEM
-    // requestAnimationFrame(loop);
+    requestAnimationFrame(loop);
 
 //end SETUPS
 
@@ -257,7 +249,7 @@ console.log(localStorage.getItem("password"));
           {
             text: "Cancel",
             click: function() {
-                            console.log("cancel was pressed");
+                            console.log("!!change for html button");
               $( this ).dialog( "close" );
             }
           }
@@ -281,6 +273,21 @@ console.log(localStorage.getItem("password"));
             //activate flowerArray : blossom();
         });
 
+        submitButton.addEventListener("click", function(){
+
+            //displays the users total flower array length :
+            userSeedCount.innerHTML= flowerArray.length;
+
+            //displays the grand total flower array length :
+           //!!to-do)
+
+           setCurrentFlower();
+
+            
+
+
+        });
+
         //submission of php flower form thru AJAX :
             $("#insertFlower").submit(function(event) {
                //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
@@ -291,7 +298,7 @@ console.log(localStorage.getItem("password"));
              let form = $('#insertFlower')[0];
              let data = new FormData(form);
 
-             updateSeedCount();
+            //  updateSeedCount();
 
 
              //NEW:: SABINE:: if these items are not checked then append the off values to the data...
@@ -306,7 +313,9 @@ console.log(localStorage.getItem("password"));
 
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
             //traversing fill form data to constructor : 
-            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide"),data.get("a_fruit"),data.get("a_user"));
+            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"));
+            // console.log(data.get("a_length"))
+            // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                           
             /*console.log to inspect the data */
                         //   for (let pair of data.entries()) {
@@ -379,10 +388,10 @@ console.log(localStorage.getItem("password"));
             console.log(visitor);
             saveUserLogin(visitor)
 
-            if (visitor != null) {
-                document.getElementById("message").innerHTML =
-                "Hello " + visitor + " !! Thank U for passing by";
-              }
+            // if (visitor != null) {
+            //     document.getElementById("message").innerHTML =
+            //     "Hello " + visitor + " !! Thank U for passing by";
+            //   }
         });
 
         generateButton.addEventListener("click", function(){
@@ -452,10 +461,6 @@ function printIcon(){
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="blank_">OpenStreetMap</a>' // link to where we got the data for the map
     }).addTo(mainMap); // add tile layer to map
 
-//Display message of "no flower displaying"
-        if (flowerArray.length === 0){
-            document.getElementById("message").innerHTML = "<no flowers registered>";
-        }
 
 
                 waterButton.addEventListener("click", function () {
@@ -541,20 +546,20 @@ function printIcon(){
                 }
         }
 
-            // function loop(){
+            function loop(){
 
-            //     for (let i=0; i < flowerArray.length; i++){
+                for (let i=0; i < flowerArray.length; i++){
 
-            //         if (flowerArray[i].flowerGenerated === true){
-            //         flowerArray[i].displayFlower();
-            //     //    flowerArray[i].grow();
-            //     }
+                    if (flowerArray[i].flowerGenerated === true){
+                    flowerArray[i].displayFlower();
+                //    flowerArray[i].grow();
+                }
                 
 
 
-            //     }
-            //     requestAnimationFrame(loop);
-            // }
+                }
+                requestAnimationFrame(loop);
+            }
 
             //bottom-left container, #playModeDataContainer;
             function displaySingleInstruction(data,parentContainer){
@@ -620,5 +625,10 @@ function printIcon(){
     // });
 
 
+    function setCurrentFlower(){
+        //??passing the current flower in the function
+        document.getElementById("flowerStatistic-buttons").style = "display : block";
+
+    }
 
         }); //end of windowOnLoad / document.ready

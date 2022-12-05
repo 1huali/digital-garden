@@ -71,7 +71,7 @@ class Flower {
 
       //Data from fill form
       this.growthLength; //done
-      this.autonomousMode=false;
+      this.manualMode=false;
       this.hideUsername=false;
 
       this.flowerEl.style.left = `${this.posX-50}px`;
@@ -83,9 +83,15 @@ class Flower {
       this.fruit=fruit; //symbol from the fill form
 
       this.energyStatistics=energyStatistics;
-      this.vitaminsLevel=5;
-      this.waterLevel=5;
-      // console.log(this.vitaminsLevel);
+
+      this.loveDailyLevel=0;
+      this.waterDailyLevel=0;
+      this.loveLevelArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
+      this.waterLevelArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
+      //level array  like  let levelIcon = " ♥ ";
+
+
+ 
       //fractal tree
       this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
       this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
@@ -97,6 +103,7 @@ class Flower {
       this.stems = [];
       this.stemCount=0;
 
+      this.pattern="";
     } //end Constructor
 
 
@@ -132,46 +139,47 @@ class Flower {
       let self=this;
       if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
         this.isGrowing =true;
+
+        //Regulates the growing changes: 
+        //with timeout divided by number of states
         setTimeout(function(){
           self.changeState()}, this.growthLength/this.state.length);
+
+
+        if (this.manualMode===true){
+          console.log("!!stages happening by clicks and nurturing");
+        } 
     }
+
 
       }
 
     changeState (){
-//visual of the growing flower
-// console.log("gets to change state")
+//change the growing state of the flower
+      
+      // let counter=0;
+      // this.stateIndex ++;
+      // counter++;
 
-      this.stateIndex ++;
-      // this.generate(); //uncommented L-Systems
-      // this.turtle();
+      if (this.pattern === "lsystemAxiomF"){
+      this.turtle();
+    }
+
+      //Logs the text to see the state// for debugging :
           this.currentText= this.state[this.stateIndex];
+          console.log("state counter : "+counter);
           console.log(this.currentText) ;
+
           this.isGrowing =false;
 
+//Whole growing array completed, the flower cycle is completed: 
           if (this.stateIndex === this.state.length-1){
+            console.log("!!send notif/email to user");
             this.growthCompleted = true;
             this.growthCompleted = false;
           }
-//?? should this be at displayFlower?
-          if (this.blossom === true){
-            console.log("flowers at tip of branches");
-//call blossom function
-            //blooms retract after 5 mins :
-            setTimeout(function(){
-              this.blossom= false;
-            },300000);
-          }
-          //bud appears
           if (this.stateIndex === this.state.length/2){
             this.budState= true;
-            let budCoordinates;
-            console.log("bud appeared!")
-            //   if (!this.growthCompleted) {
-            //     let leaf = tree[i].end.copy();
-            //     stems.push(leaf);
-            // }
-            //call buds();
           }
 
     }
@@ -184,44 +192,44 @@ class Flower {
         this.flowerEl.style.top = `${this.posY-50}px`; 
 
         //fractal tree
+        if (this.pattern==="fractals"){
         for (let i = 0; i < this.flower.length; i++) {
         this.flower[i].show();
         }
+      }
 
-        for (let i = 0; i < this.stems.length; i++) {
-          fill(255, 0, 100, 100);
-          noStroke();
-          this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
-          this.stems[i].y += random(0, 2);
+        if (this.budState=== true){
+          displayBuds();
         }
 
         //end fractal
     }
 
     generate (){
+      
+      //L-System pattern :
+      if (this.pattern === "lsystemAxiomF"){
+      this.len *= 0.5;
+      let nextSentence = "";
+      for (let i = 0; i < this.sentence.length; i++) {
+        let current = this.sentence.charAt(i);
+        let found = false;
+        for (let j = 0; j < this.rules.length; j++) {
+          if (current == this.rules[j].a) {
+            found = true;
+            nextSentence += this.rules[j].b;
+            break;
+          }
+        }
+        if (!found) {
+          nextSentence += current;
+        }
+      }
+      this.sentence = nextSentence;    
+} //end L-System
 
-      // if (this.pattern === "axiomF"){
-//L-System
-      // this.len *= 0.5;
-      // let nextSentence = "";
-      // for (let i = 0; i < this.sentence.length; i++) {
-      //   let current = this.sentence.charAt(i);
-      //   let found = false;
-      //   for (let j = 0; j < this.rules.length; j++) {
-      //     if (current == this.rules[j].a) {
-      //       found = true;
-      //       nextSentence += this.rules[j].b;
-      //       break;
-      //     }
-      //   }
-      //   if (!found) {
-      //     nextSentence += current;
-      //   }
-      // }
-      // this.sentence = nextSentence;    
-//end L-System 
-// } else if (this.pattern === "fractal"){
-//Fractal method
+  //Fractal method generation:
+else if (this.pattern === "fractals"){
 for (let i = this.flower.length - 1; i >= 0; i--) {
   if (!this.flower[i].finished) {
     this.flower.push(this.flower[i].stemA());
@@ -239,22 +247,23 @@ if (this.stemCount === 6) {
     }
   }
 }
-// }
-//end fractal method
+}//end fractal method
 
     }
 
-    assignFormValues (length,autonomous_value, show_hide,fruit,user){
+    assignFormValues (length,autonomous_manual,show_hide,fruit,user,pattern){
 
       //traversing flower data values to flower constructor values :
       this.growthLength = length;
       this.fruit = fruit;
       this.user=user;
-      if(autonomous_value==="on"){
-        this.autonomousMode = true;
+      this.pattern=pattern;
+
+      if(autonomous_manual==="on"){
+        this.manualMode = true;
       }
       else{
-        this.autonomousMode = false;
+        this.manualMode = false;
       }
       //set 
       if(show_hide==="Yes"){
@@ -263,12 +272,37 @@ if (this.stemCount === 6) {
       else{
         this.hideUsername = false;
       }
+
+      if (pattern=== "lsystemAxiomF"){
+        this.pattern = "lsystemAxiomF";
+      } else if (pattern=== "fractal"){
+        this.pattern= "fractal";
+      }
     
     }
 
     assignEnergyLevels(){
       console.log("assign water and fertilizer");
-      //water and fertilizer levels will be transferred from script to here
+      //?? does a button go in constructor
+    }
+
+    displayBuds(){
+      for (let i = 0; i < this.stems.length; i++) {
+        fill(255, 0, 100, 100);
+        noStroke();
+        this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
+        this.stems[i].y += random(0, 2);
+      }
+
+      //Blossom:  should this be at displayFlower?
+      if (this.blossom === true){
+        console.log("flowers at tip of branches");
+//call blossom function
+        //blooms retract after 5 mins :
+        setTimeout(function(){
+          this.blossom= false;
+        },300000);
+      }
     }
 
 

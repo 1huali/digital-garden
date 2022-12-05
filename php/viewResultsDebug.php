@@ -1,11 +1,12 @@
 <?php
 require('openDB.php');
 
-//temporary view of result
-//?? doesnt work
+//temporary view of result, for debugging
 try {
-
+  //will display all :
     $sql_select='SELECT * FROM flowerObjects';
+
+
     // the result set
     $result = $file_db->query($sql_select);
     if (!$result) die("Cannot execute query.");
@@ -13,6 +14,7 @@ try {
 //
     echo "<h3> Query Results:::</h3>";
 echo"<div id='back'>";
+
 // get a row...
 while($row = $result->fetch(PDO::FETCH_ASSOC))
 {
@@ -37,5 +39,4 @@ catch(PDOException $e) {
     // Print PDOException message
     echo $e->getMessage();
   }
- 
 ?>

@@ -87,7 +87,7 @@ class Flower {
       this.loveDailyLevel=0;
       this.waterDailyLevel=0;
       this.loveLevelArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-      this.waterLevelArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
+      this.waterLevelArray=[".",":","░","▒","▓","█"];
       //level array  like  let levelIcon = " ♥ ";
 
 
@@ -206,6 +206,8 @@ class Flower {
     }
 
     generate (){
+      console.log("gets there at generation");
+      //??doesnt get there
       
       //L-System pattern :
       if (this.pattern === "lsystemAxiomF"){
@@ -282,8 +284,10 @@ if (this.stemCount === 6) {
     }
 
     assignEnergyLevels(){
-      console.log("assign water and fertilizer");
-      //?? does a button go in constructor
+      console.log("assign water and fertilizer for ??each flower");
+      document.getElementById('waterHeartLevelBox').innerHTML = "" ;
+      document.getElementById('vitaminsHeartLevelBox').innerHTML = "" ;
+
     }
 
     displayBuds(){

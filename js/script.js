@@ -61,13 +61,14 @@ $(document).ready(function(){
     let flowerGenerated= false;
 
 //flower statistix data
-    document.getElementById('waterHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
-    document.getElementById('vitaminsHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
-    let waterLevel = 5;
-    let waterHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-    let vitaminsLevel = 5;
-    let vitaminsHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-    let levelIcon = " ♥ ";
+//MOVED TO CONSTRUCTOR
+    // document.getElementById('waterHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
+    // document.getElementById('vitaminsHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
+    // let waterLevel = 5;
+    // let waterHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
+    // let vitaminsLevel = 5;
+    // let vitaminsHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
+    // let levelIcon = " ♥ ";
 //
 
     let archiveContainer = document.getElementById("archive-container");
@@ -76,7 +77,7 @@ $(document).ready(function(){
     let saveThoughtButton = document.getElementById('saveButton');
     let thoughtCount = 0;
     let thoughts=[];
-    let creationSound = document.getElementById("chimeSound");
+    let chimeSound = document.getElementById("chimeSound");
 
     let identifyButton = document.getElementById("identifyButton");
     let visitorListArray= [];
@@ -106,7 +107,7 @@ $(document).ready(function(){
     //   valToStore = password;
     currentUserBox.innerHTML = userValue;
     currentUserIdBox.innerHTML = userValue;
-    console.log("ask for password")
+    // console.log("ask for password")
     document.getElementById("password-container").style = "display : block";
     identifyButton.style = "display : none";
     loginButton.style = "display : block";
@@ -163,7 +164,7 @@ console.log(localStorage.getItem("password"));
 
     //The user if set, and the ID dialog box closes :
     function logUserProfile(){
-        console.log(userLoggedIn);
+        // console.log(userLoggedIn);
         $("#identificationBoxDialog").dialog('close');
         console.log("You are logged as: "+localStorage.getItem("username"));
         console.log("and your pw is: "+localStorage.getItem("password"));
@@ -177,8 +178,9 @@ console.log(localStorage.getItem("password"));
         if (flowerArray[i].flowerGenerated === true){
             // energyStatistics();
         // printIcon();
-        // flowerArray[i].generate();
-        // flowerArray[i].turtle();
+        flowerArray[i].generate();
+        flowerArray[i].turtle();
+
         }
 
     }
@@ -340,16 +342,18 @@ console.log(localStorage.getItem("password"));
         timeout: 600000,
         success: function (response) {
         //response is a STRING (not a JavaScript object -> so we need to convert)
-        console.log("we had success!");
-        console.log(response);
+        // console.log("we had success!");
+        // console.log(response);
 
         //sabine:: reset flower
         document.getElementById("insertFlower").reset();
 
         //FLOWER CONSTRUCTION
         flowerArray[flowerArray.length-1].flowerGenerated = true;
+        console.log(flowerArray[flowerArray.length-1].flowerGenerated);
         $("#seedIdPopUpForm-container").dialog('close');
 
+        flowerArray[flowerArray.length-1].assignEnergyLevels();
         //create flower with its own energy bar
        },
        error:function(){
@@ -359,14 +363,17 @@ console.log(localStorage.getItem("password"));
            });
 
         waterButton.addEventListener("click", function(){
-            console.log("water++");
-            waterLevel = 5;
+        flowerArray[flowerArray.length-1].waterDailyLevel++;
+        console.log(flowerArray[flowerArray.length-1].waterDailyLevel);
+        if (flowerArray[flowerArray.length-1].waterDailyLevel ===3){
+            console.log("enough water for 2day");
+        }
         });
 
         vitaminsButton.addEventListener("click", function(){
-            console.log("vitamins++");
-            vitaminsLevel = 5;
-
+            flowerArray[flowerArray.length-1].loveDailyLevel++;
+            console.log(flowerArray[flowerArray.length-1].loveDailyLevel);
+                console.log("flower reaction");
         });
 
         //thoughts are saved in an array and displayed with their date :
@@ -385,7 +392,6 @@ console.log(localStorage.getItem("password"));
             // let visitor = prompt("Hello! Who r u?", "secret passerby");
             let visitor = document.getElementById("login").value;
             visitorListArray.push(visitor);
-            console.log(visitor);
             saveUserLogin(visitor)
 
             // if (visitor != null) {
@@ -412,7 +418,7 @@ console.log(localStorage.getItem("password"));
             return fullDate;
         }
 
-//vitamins and waters ggoing down !!needs to be associated with the cycle length
+//vitamins and waters lvls going down !!needs to be associated with the cycle length
     //     setInterval(waterUpdate, 30000);
     //     function waterUpdate() {
     //         waterLevel -= 1;
@@ -432,20 +438,6 @@ console.log(localStorage.getItem("password"));
     //     }
     // };
 
-
-    //prints html hearts icons on the energy bar of each flower
-function printIcon(){
-    document.getElementById('waterHeartLevelBox').innerHTML = "" ;
-    document.getElementById('vitaminsHeartLevelBox').innerHTML = "" ;
-
-
-    for (let i = 0; i < waterLevel; i++) {
-        document.getElementById('waterHeartLevelBox').innerHTML += waterHeartLevelBoxArray[i];
-    }
-    for (let i = 0; i < vitaminsLevel; i++) {
-        document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
-    }
-}
         }) //getJson 
 
         .fail(function() {
@@ -462,14 +454,6 @@ function printIcon(){
     }).addTo(mainMap); // add tile layer to map
 
 
-
-                waterButton.addEventListener("click", function () {
-                    // console.log("water ++");
-                }); //end water button
-
-                fertilizerButton.addEventListener("click", function () {
-                    // console.log("vitamins ++");
-                }); //end fertilizer button
 
                 talkButton.addEventListener("click", function () {
                     // console.log("opens up to the diary typing section");
@@ -516,7 +500,7 @@ function printIcon(){
                     locationDataContainer.value = e.latlng;
                     $("#seedIdPopUpForm-container").dialog('open');
                     
-                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
+                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
                 currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
 
@@ -533,7 +517,7 @@ function printIcon(){
                     // console.log(energyStatistics);
 
                 } else if (flowerArray[flowerArray.length-1].flowerGenerated === true){
-                    
+                    //?? flwoer doesn't display
                     coordinateMarker // take the marker we have created earlier
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
@@ -541,7 +525,7 @@ function printIcon(){
                     $("#seedFillForm-dialog").dialog('open');
                     // seedFillFormPopUp();
                     
-                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,creationSound));
+                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
                 }
         }

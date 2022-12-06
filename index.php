@@ -51,14 +51,14 @@
        <label for="hideUser"> Yes</label>
        blablbal
        <p><label>Growth period </label>
-       <input type="number" id="length1" name="a_length" min="1"> day
+       <input type="number" id="length1" name="a_length" min="1"> min
        <p><label>Manual growth </label>
         <input type="checkbox" id="manualOption" name="autonomous_manual" value="Yes">
        <label for="autonomous1">Activate </label>
        <p><label for="pattern">Pattern </label>
        <select id="pattern" name="a_pattern">
+       <option value="fractals" name="a_pattern">Fractals</option>
     <option value="lsystemAxiomF" name="a_pattern">Axiom F</option>
-    <option value="fractals" name="a_pattern">Fractals</option>
     </select></p>
        <p><label for="fruit">Fruit </label>
   <select id="fruit" name="a_fruit">
@@ -81,10 +81,10 @@
 </div> 
 
 <!-- TEST FOR L-SYSTEM - useless -->
-<input type="button" id="generateButton" value="Generate">
-<section id="lSysTestZone">
+<!-- <input type="button" id="generateButton" value="Generate"> -->
+<!-- <section id="lSysTestZone">
 <div id="lSystem"></div>
- </section>
+ </section> -->
 
   <section id="flowerData-container"> 
   <h2>CURRENT SESSION</h2>hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
@@ -107,8 +107,7 @@
     </div>    
     <div id="diary-container">
       <input id="diaryTextContainer" type="text" placeholder="What is on your mind?">
-      <input id="saveButton" class="buttons" type="button" value="Send"> <br>
-      <input id="closeDialogButton" type="button" value="Done">
+      <input id="sendThoughtButton" class="buttons" type="button" value="Send"> <br>
     </div>
 </section>
 

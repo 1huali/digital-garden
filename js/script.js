@@ -56,8 +56,8 @@ $(document).ready(function(){
 
     let myFlowerArray=[];
 
-    let doneButton = document.getElementById("doneDiaryButton");
-    let submitButton = document.getElementById("submitButton");
+    let sendThoughtButton = document.getElementById("sendThoughtButton");
+    let submitButton = document.getElementById("submitButton"); //fill form
     let flowerGenerated= false;
 
 //flower statistix data
@@ -186,7 +186,7 @@ console.log(localStorage.getItem("password"));
     }
       }
     // end L-SYSTEM
-    requestAnimationFrame(loop);
+    // requestAnimationFrame(loop);
 
 //end SETUPS
 
@@ -204,6 +204,10 @@ console.log(localStorage.getItem("password"));
                       text: "Close",
                       click: function() {
                         $( this ).dialog( "close" );
+                        flowerArray.bloom();
+                        flowerArray[flowerArray.length-1].blossom=true;
+
+                        chimeSound.play();
                       }
                     }
                   ]
@@ -275,19 +279,22 @@ console.log(localStorage.getItem("password"));
             //activate flowerArray : blossom();
         });
 
+        //submit at seed fill form
         submitButton.addEventListener("click", function(){
-
             //displays the users total flower array length :
             userSeedCount.innerHTML= flowerArray.length;
-
-            //displays the grand total flower array length :
+       //displays the grand total flower array length :
            //!!to-do)
-
            setCurrentFlower();
 
-            
 
+                // for (let i=0; i < flowerArray.length; i++){
 
+                //     if (flowerArray[i].flowerGenerated === true){
+                //     flowerArray[i].displayFlower();
+                //    flowerArray[i].grow();
+                // }
+                // }
         });
 
         //submission of php flower form thru AJAX :
@@ -317,6 +324,7 @@ console.log(localStorage.getItem("password"));
             //traversing fill form data to constructor : 
             flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"));
             // console.log(data.get("a_length"))
+
             // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                           
             /*console.log to inspect the data */
@@ -366,25 +374,46 @@ console.log(localStorage.getItem("password"));
         flowerArray[flowerArray.length-1].waterDailyLevel++;
         console.log(flowerArray[flowerArray.length-1].waterDailyLevel);
         if (flowerArray[flowerArray.length-1].waterDailyLevel ===3){
-            console.log("enough water for 2day");
+            document.getElementById("message").innerHTML= "Enough water for today, thank u!!"
         }
+        if (flowerArray[flowerArray.length-1].waterDailyLevel ===7){
+            document.getElementById("message").innerHTML= "Omg i'm gonna drown please stop"
+        }
+
+        //
+        for (let j=0;j<flowerArray.length;j++){
+            for (let i=0; i<flowerArray[j].waterDailyLevel;i++){
+                document.getElementById('waterHeartLevelBox').innerHTML ="";
+                document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[j].waterLevelArray[i];
+
+            }
+        }
+
         });
 
         vitaminsButton.addEventListener("click", function(){
             flowerArray[flowerArray.length-1].loveDailyLevel++;
             console.log(flowerArray[flowerArray.length-1].loveDailyLevel);
-                console.log("flower reaction");
+            chimeSound.play();
+                setTimeout(() => {
+                    document.getElementById("message").innerHTML= "I love U too!!"
+                  }, "100");
         });
 
         //thoughts are saved in an array and displayed with their date :
-        saveThoughtButton.addEventListener('click', function(){
-            let thoughtDate = thoughtDateData();
-            console.log("saved to archive");
-            thoughtCount += 1;
-            let thought = document.getElementById("diaryTextContainer").value;
-            thoughts.push(thought);
-            let singleLineElement = $("<article>").addClass("single-archive-line").html(thought + ": on " + thoughtDate ).appendTo("#archive-container");
-//??set to php
+//         saveThoughtButton.addEventListener('click', function(){
+//             let thoughtDate = thoughtDateData();
+//             console.log("saved to archive");
+//             thoughtCount += 1;
+//             let thought = document.getElementById("diaryTextContainer").value;
+//             thoughts.push(thought);
+//             let singleLineElement = $("<article>").addClass("single-archive-line").html(thought + ": on " + thoughtDate ).appendTo("#archive-container");
+// //??set to php
+//         });
+
+        sendThoughtButton.addEventListener("click", function(){
+            //??resets the input field at send
+            document.getElementById(diaryTextContainer).value.innerHTML= "";
         });
 
         //current user identification : !!Add an association with flower
@@ -400,12 +429,12 @@ console.log(localStorage.getItem("password"));
             //   }
         });
 
-        generateButton.addEventListener("click", function(){
+        // generateButton.addEventListener("click", function(){
 
-            for (let i=0;i<flowerArray.length;i++){
-                flowerArray[i].generate();
-            }
-        });
+        //     for (let i=0;i<flowerArray.length;i++){
+        //         flowerArray[i].generate();
+        //     }
+        // });
 
         function thoughtDateData(){
             //add hours if less than 24 hours?
@@ -418,25 +447,6 @@ console.log(localStorage.getItem("password"));
             return fullDate;
         }
 
-//vitamins and waters lvls going down !!needs to be associated with the cycle length
-    //     setInterval(waterUpdate, 30000);
-    //     function waterUpdate() {
-    //         waterLevel -= 1;
-    //         printIcon();
-        
-    //         if (waterLevel <= 1) {
-    //           waterLevel = 1;
-    //         }
-    //     };
-
-    //     setInterval(vitaminsUpdate, 20000);
-    //     function vitaminsUpdate() {
-    //         vitaminsLevel -= 1;
-    //         printIcon();
-    //     if (vitaminsLevel <= 1) {
-    //         vitaminsLevel = 1;
-    //     }
-    // };
 
         }) //getJson 
 
@@ -492,58 +502,45 @@ console.log(localStorage.getItem("password"));
             //Display a marker on map at user's double-click
             function onMapDblClick(e){
 
-                if (flowerArray.length === 0){
-                    
+                let counter=0;
+                counter++;
+
+                if (counter < 3){
                     coordinateMarker // take the marker we have created earlier
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
                     $("#seedIdPopUpForm-container").dialog('open');
-                    
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
                 idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
-                currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
 
+                currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
+            } else {
+                document.getElementById("message").innerHTML = "Limit exceeded, try again in 24 hours."
+
+                //User can plant in 24 hours :
+                setTimeout(() => {
+                    counter=0;
+                }, "86400000")
+
+            }
                     //create an array for dropdown menu to add dynamically a flower to the list 
                 // let x= flowerArray[flowerArray.length-1].flowerId;
                 // currentFlower.push(x);
                 // console.log(currentFlower);
-
-                    //create an array for dropdown menu to add dynamically a flower to the list 
-                    // let energyStatisticsIndex=0;
-                    // let x= flowerArray[flowerArray.length-1].energyStatistics;
-                    // energyStatisticsIndex++;
-                    // // energyStatistics.push(x);
-                    // console.log(energyStatistics);
-
-                } else if (flowerArray[flowerArray.length-1].flowerGenerated === true){
-                    //?? flwoer doesn't display
-                    coordinateMarker // take the marker we have created earlier
-                    .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
-                    .addTo(mainMap); // add the marker to the map
-                    locationDataContainer.value = e.latlng;
-                    $("#seedFillForm-dialog").dialog('open');
-                    // seedFillFormPopUp();
-                    
-                    flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
-                idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
-                }
         }
 
-            function loop(){
+        //Draw loop was moved to constructor now : 
+            // function loop(){
+            //     for (let i=0; i < flowerArray.length; i++){
 
-                for (let i=0; i < flowerArray.length; i++){
-
-                    if (flowerArray[i].flowerGenerated === true){
-                    flowerArray[i].displayFlower();
-                //    flowerArray[i].grow();
-                }
-                
-
-
-                }
-                requestAnimationFrame(loop);
-            }
+            //         if (flowerArray[i].flowerGenerated === true){
+            //         flowerArray[i].displayFlower();
+            //     //    flowerArray[i].grow();
+            //     }
+            //     }
+            //     requestAnimationFrame(loop);
+            // }
 
             //bottom-left container, #playModeDataContainer;
             function displaySingleInstruction(data,parentContainer){
@@ -613,6 +610,15 @@ console.log(localStorage.getItem("password"));
         //??passing the current flower in the function
         document.getElementById("flowerStatistic-buttons").style = "display : block";
 
+    }
+
+    function printIcon(){
+        for (let i = 0; i < 1; i++) {
+            document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[i].waterLevelArray[i];
+        }
+        // for (let i = 0; i < flowerArray[flowerArray.length-1].loveDailyLevel; i++) {
+        //     document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
+        // }
     }
 
         }); //end of windowOnLoad / document.ready

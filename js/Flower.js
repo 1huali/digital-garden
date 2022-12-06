@@ -21,9 +21,8 @@ class Flower {
       this.state = ["seed", "sprout", "bud", "flower"];
       this.stateIndex = 0;
 //black ellipses at tip
-      this.budState= false;
+      this.blossom= true;
       //ascii symbol at tip
-      this.blossom = false;
 
       this.isGrowing = false;
       this.growthCompleted = false;
@@ -60,9 +59,16 @@ class Flower {
         canvas1.parent(self.flowerId);
       }
       sketch.draw = function (){
-        // console.log("get into sketchDraw")
+        console.log("get into sketchDraw")
+        if (self.flowerGenerated === true){
+          background(255);
+          //grow calls change state who calls generate
         self.displayFlower();
+        self.grow();
+        self.bloom();
+        }
       }
+
       }
 
     this.p5Context = new p5(this.s1);
@@ -71,6 +77,7 @@ class Flower {
 
       //Data from fill form
       this.growthLength; //done
+     
       this.manualMode=false;
       this.hideUsername=false;
 
@@ -87,7 +94,7 @@ class Flower {
       this.loveDailyLevel=0;
       this.waterDailyLevel=0;
       this.loveLevelArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-      this.waterLevelArray=[".",":","░","▒","▓","█"];
+      this.waterLevelArray=["░","▒","▓","█","█"];
       //level array  like  let levelIcon = " ♥ ";
 
 
@@ -135,39 +142,37 @@ class Flower {
     }
 
     grow() {
+      // console.log(this.growthLength);
+      // console.log(this.state);
 
       let self=this;
-      if (self.stateIndex < self.state.length-1 && this.isGrowing===false){
+      if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
         this.isGrowing =true;
 
         //Regulates the growing changes: 
         //with timeout divided by number of states
         setTimeout(function(){
+          //??undefined function
           self.changeState()}, this.growthLength/this.state.length);
-
 
         if (this.manualMode===true){
           console.log("!!stages happening by clicks and nurturing");
         } 
     }
-
-
       }
 
     changeState (){
 //change the growing state of the flower
-      
-      // let counter=0;
-      // this.stateIndex ++;
-      // counter++;
 
+if(this.growthCompleted===false){
+    this.generate();
       if (this.pattern === "lsystemAxiomF"){
-      this.turtle();
+        this.turtle();
+      }
     }
-
+    this.stateIndex++;
       //Logs the text to see the state// for debugging :
           this.currentText= this.state[this.stateIndex];
-          console.log("state counter : "+counter);
           console.log(this.currentText) ;
 
           this.isGrowing =false;
@@ -175,13 +180,14 @@ class Flower {
 //Whole growing array completed, the flower cycle is completed: 
           if (this.stateIndex === this.state.length-1){
             console.log("!!send notif/email to user");
+            document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
             this.growthCompleted = true;
-            this.growthCompleted = false;
-          }
-          if (this.stateIndex === this.state.length/2){
-            this.budState= true;
+            this.blossom= true;
           }
 
+          // if (this.stateIndex === this.state.length/2){
+          //   this.blossom= true;
+          // }
     }
     
     displayFlower(){
@@ -198,16 +204,10 @@ class Flower {
         }
       }
 
-        if (this.budState=== true){
-          displayBuds();
-        }
-
         //end fractal
     }
 
     generate (){
-      console.log("gets there at generation");
-      //??doesnt get there
       
       //L-System pattern :
       if (this.pattern === "lsystemAxiomF"){
@@ -284,29 +284,29 @@ if (this.stemCount === 6) {
     }
 
     assignEnergyLevels(){
-      console.log("assign water and fertilizer for ??each flower");
+      // console.log("assign water and fertilizer for ??each flower");
       document.getElementById('waterHeartLevelBox').innerHTML = "" ;
       document.getElementById('vitaminsHeartLevelBox').innerHTML = "" ;
 
     }
 
-    displayBuds(){
+    bloom(){
+      
+    if (this.blossom=== true){
       for (let i = 0; i < this.stems.length; i++) {
         fill(255, 0, 100, 100);
         noStroke();
-        this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
-        this.stems[i].y += random(0, 2);
+        // this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
+        this.p5Context.textSize(8);
+        this.p5Context.text(this.fruit,this.stems[i].x, this.stems[i].y);
+        // this.stems[i].y += random(0, 2);
       }
-
-      //Blossom:  should this be at displayFlower?
-      if (this.blossom === true){
-        console.log("flowers at tip of branches");
-//call blossom function
+    }
         //blooms retract after 5 mins :
         setTimeout(function(){
           this.blossom= false;
-        },300000);
-      }
+        }, 300000);
+      
     }
 
 

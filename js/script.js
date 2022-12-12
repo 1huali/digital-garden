@@ -335,7 +335,7 @@ console.log(localStorage.getItem("password"));
 
             //traversing fill form data to constructor : 
             flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
-            console.log(data.get("manual_growth"))
+            // console.log(data.get("manual_growth"));
 
             // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                           
@@ -370,7 +370,6 @@ console.log(localStorage.getItem("password"));
 
         //FLOWER CONSTRUCTION
         flowerArray[flowerArray.length-1].flowerGenerated = true;
-        console.log(flowerArray[flowerArray.length-1].flowerGenerated);
         $("#seedIdPopUpForm-container").dialog('close');
 
         flowerArray[flowerArray.length-1].assignEnergyLevels();
@@ -384,7 +383,6 @@ console.log(localStorage.getItem("password"));
 
         waterButton.addEventListener("click", function(){
         flowerArray[flowerArray.length-1].waterDailyLevel++;
-        console.log(flowerArray[flowerArray.length-1].waterDailyLevel);
         if (flowerArray[flowerArray.length-1].waterDailyLevel ===3){
             document.getElementById("message").innerHTML= "Enough water for today, thank u!!"
         }
@@ -405,7 +403,6 @@ console.log(localStorage.getItem("password"));
 
         vitaminsButton.addEventListener("click", function(){
             flowerArray[flowerArray.length-1].loveDailyLevel++;
-            console.log(flowerArray[flowerArray.length-1].loveDailyLevel);
             chimeSound.play();
                 setTimeout(() => {
                     document.getElementById("message").innerHTML= "I love U too!!"

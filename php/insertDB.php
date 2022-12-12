@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  $yPosition = $_POST['y_pos'];
  $diaryFile = $_POST['diary_file'];
  $growthCompleted = $_POST['completed_state'];
- $energyLevels = $_POST['energy_levels'];
+ $numberVisits = $_POST['number_visits'];
  $email = $_POST['email'];
  $careList = $_POST['care_list'];
  $magicUnlocked = $_POST['magic_unlocked'];
@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $yPosition =$file_db->quote($yPosition);
            $diaryFile =$file_db->quote($diaryFile);
            $growthCompleted=$file_db->quote("false");
-           $energyLevels=$file_db->quote("null"); //!!
+           $userVisits=$file_db->quote("null"); //!!
            $email=$file_db->quote("null");
            $careList=$careList->quote("null");
            $magicUnlocked=$magicUnlocked->quote("false");
@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $other=$other->quote("null");
 
 
-           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, diaryFile, growthCompleted, energyLevels, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$fruit,$color,$xPosition,$yPosition,$diaryFile,$growthCompleted,$energyLevels,$email,$careList,$magicUnlocked,$pollen,$other)";
+           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, diaryFile, growthCompleted, userVisits, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$fruit,$color,$xPosition,$yPosition,$diaryFile,$growthCompleted,$userVisits,$email,$careList,$magicUnlocked,$pollen,$other)";
            $file_db->exec($queryInsert);
            $file_db = null;
            echo("done");

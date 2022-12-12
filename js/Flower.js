@@ -6,6 +6,8 @@ class Flower {
 
       let date = new Date();
       this.germinationDay= date.toLocaleTimeString();
+      console.log(date);
+      console.log(this.germinationDay);
       this.arrayNumber= arrayNumber;
       
       // this.name = "";
@@ -264,8 +266,7 @@ if (this.stemCount === 6) {
       this.user=user;
       this.pattern=pattern;
       this.color=color;
-      console.log(this.color);
-
+      
       if(autonomous_manual==="on"){
         this.manualMode = true;
       }

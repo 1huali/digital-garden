@@ -3,7 +3,7 @@
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
  
-  require('openDB.php');
+  // require('openDB.php');
    try {
       // need to process
       // could have different types of queries

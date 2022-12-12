@@ -10,7 +10,7 @@ require('openDB.php');
 //check if there has been something posted to the server to be processed
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-  echo ("hello");
+  // echo ("hello");
 // need to process
  $id = $_POST['a_identification'];
  $motivation = $_POST['a_motivation'];
@@ -21,8 +21,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  $pattern = $_POST['a_pattern'];
  $fruit = $_POST['a_fruit'];
  $color = $_POST['a_color'];
- $latitude = $_POST['a_location'];
- $longitude = $_POST['a_location'];
+ $xPosition = $_POST['x_pos'];
+ $yPosition = $_POST['y_pos'];
  $timeStamp = $_POST['a_timeStamp'];
 
 
@@ -37,8 +37,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $pattern =$file_db->quote($pattern);
            $fruit =$file_db->quote($fruit);
            $color =$file_db->quote($color);
-           $latitude =$file_db->quote($latitude);
-           $longitude =$file_db->quote($longitude);
+           $xPosition =$file_db->quote($xPosition);
+           $yPosition =$file_db->quote($yPosition);
            $timeStamp =$file_db->quote($timeStamp);
            $completedState=$file_db->quote("false");
 

@@ -297,7 +297,7 @@ console.log(localStorage.getItem("password"));
                 // }
         });
 
-        //submission of php flower form thru AJAX :
+        //submission of php flower data thru AJAX :
             $("#insertFlower").submit(function(event) {
                //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
               event.preventDefault();
@@ -317,7 +317,11 @@ console.log(localStorage.getItem("password"));
 
             if(data.get("show_hide") == null){
                 data.append("show_hide","No");
-            }   
+            } 
+// storing x and y position of elements so be retrieved in db : 
+            // data.append("")
+            // flowerArray[flowerArray.length-1].posX
+
           
 
              data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);

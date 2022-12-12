@@ -153,7 +153,9 @@ class Flower {
         //with timeout divided by number of states
         setTimeout(function(){
           //??undefined function
-          self.changeState()}, this.growthLength/this.state.length);
+          // self.changeState()}, this.growthLength/this.state.length);
+          self.changeState()}, 5000);
+
 
         if (this.manualMode===true){
           console.log("!!stages happening by clicks and nurturing");

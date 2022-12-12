@@ -311,12 +311,12 @@ console.log(localStorage.getItem("password"));
 
 
              //NEW:: SABINE:: if these items are not checked then append the off values to the data...
-            if(data.get("autonomous_manual") == null){
-                data.append("autonomous_manual","off");
+            if(data.get("manual_growth") == null){
+                data.append("manual_growth","off");
             }   
 
-            if(data.get("show_hide") == null){
-                data.append("show_hide","No");
+            if(data.get("hide_user") == null){
+                data.append("hide_user","No");
             } 
 // storing x and y position of elements so be retrieved in db : 
             // data.append("")

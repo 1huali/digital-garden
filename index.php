@@ -43,18 +43,18 @@
     <section id="seedIdPopUpForm-container" class="seedFillForm-dialog" title="Plant A Seed">
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
-        <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "a_identification" required> </p>
+        <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
         <p><label>Motivation </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
         <p><label>User </label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Hide User </label>
-        <input type="checkbox" id="hideUserOption" name="show_hide" value="Yes">
+        <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
        <label for="hideUser"> Yes</label>
        blablbal
        <p><label>Growth period </label>
-       <input type="number" id="length1" name="a_length" min="1"> min
+       <input type="number" id="length1" name="a_length" min="0.5"> min
        <p><label>Manual growth </label>
-        <input type="checkbox" id="manualOption" name="autonomous_manual" value="Yes">
-       <label for="autonomous1">Activate </label>
+        <input type="checkbox" id="manualOption" name="manual_growth" value="Yes">
+       <label for="manual_growth">Activate </label>
        <p><label for="pattern">Pattern </label>
        <select id="pattern" name="a_pattern">
        <option value="fractals" name="a_pattern">Fractals</option>
@@ -70,7 +70,7 @@
     <!-- if other : allow typing -->
   </select></p>
        <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ff0000"></p>
-       <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"  name = "a_location" required></p>
+       <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"></p>
        <input id="submitButton" type="submit" value="Submit">
       </fieldset>
     </form>

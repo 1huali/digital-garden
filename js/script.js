@@ -312,22 +312,30 @@ console.log(localStorage.getItem("password"));
 
              //NEW:: SABINE:: if these items are not checked then append the off values to the data...
             if(data.get("manual_growth") == null){
-                data.append("manual_growth","off");
+                data.append("manual_growth","Off");
             }   
 
             if(data.get("hide_user") == null){
                 data.append("hide_user","No");
             } 
-// storing x and y position of elements so be retrieved in db : 
-            // data.append("")
-            // flowerArray[flowerArray.length-1].posX
+
+            // if(data.get("email") == null){
+            //     data.append("email","NA");
+            // } 
+
+            // if(data.get("pollen") == null){
+            //     data.append("pollen","false");
+            // } 
 
           
+            data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
+            data.append("xPosition", flowerArray[flowerArray.length-1].posX);
+            data.append("yPosition", flowerArray[flowerArray.length-1].posY);
+            data.append("growthCompleted", flowerArray[flowerArray.length-1].growthCompleted);
 
-             data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
             //traversing fill form data to constructor : 
-            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("autonomous_manual"),data.get("show_hide"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"));
-            // console.log(data.get("a_length"))
+            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
+            console.log(data.get("manual_growth"))
 
             // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                           

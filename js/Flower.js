@@ -111,6 +111,7 @@ class Flower {
       this.stemCount=0;
 
       this.pattern="";
+      this.color="";
     } //end Constructor
 
 
@@ -255,13 +256,15 @@ if (this.stemCount === 6) {
 
     }
 
-    assignFormValues (length,autonomous_manual,show_hide,fruit,user,pattern){
+    assignFormValues (length,autonomous_manual,show_hide,fruit,user,pattern,color){
 
       //traversing flower data values to flower constructor values :
       this.growthLength = length;
       this.fruit = fruit;
       this.user=user;
       this.pattern=pattern;
+      this.color=color;
+      console.log(this.color);
 
       if(autonomous_manual==="on"){
         this.manualMode = true;

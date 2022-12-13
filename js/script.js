@@ -8,10 +8,24 @@ Prototype 2
 "use strict";
 function setup() {
     console.log("p5 setup");
-
   }
 
 $(document).ready(function(){
+
+    $.ajax({
+                  type: "POST",
+                  enctype: 'text/plain',
+                  url: "php/retrieveData.php",
+                  processData: false,//prevents from converting into a query string
+                  contentType: false,
+                  cache: false,
+                  timeout: 600000,
+                  success: function (response) {
+                  console.log(response);
+                  //use the JSON .parse function to convert the JSON string into a Javascript object
+                  let parsedJSON = JSON.parse(response);
+
+
     // localStorage.clear();
     //??why message doesnt display?
     document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
@@ -319,15 +333,6 @@ console.log(localStorage.getItem("password"));
                 data.append("hide_user","No");
             } 
 
-            // if(data.get("email") == null){
-            //     data.append("email","NA");
-            // } 
-
-            // if(data.get("pollen") == null){
-            //     data.append("pollen","false");
-            // } 
-
-          
             data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
             data.append("xPosition", flowerArray[flowerArray.length-1].posX);
             data.append("yPosition", flowerArray[flowerArray.length-1].posY);
@@ -340,9 +345,9 @@ console.log(localStorage.getItem("password"));
             // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                           
             /*console.log to inspect the data */
-                        //   for (let pair of data.entries()) {
-                        //     console.log(pair[0]+ ', ' + pair[1]);
-                        // }
+                          for (let pair of data.entries()) {
+                            console.log(pair[0]+ ', ' + pair[1]);
+                        }
 
         /*https://api.jquery.com/jQuery.ajax/*/
      $.ajax({
@@ -362,8 +367,8 @@ console.log(localStorage.getItem("password"));
         timeout: 600000,
         success: function (response) {
         //response is a STRING (not a JavaScript object -> so we need to convert)
-        // console.log("we had success!");
-        // console.log(response);
+        console.log("we had success!");
+        console.log(response);
 
         //sabine:: reset flower
         document.getElementById("insertFlower").reset();
@@ -629,5 +634,10 @@ console.log(localStorage.getItem("password"));
         //     document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
         // }
     }
+},
 
+error:function(){
+console.log("error occurred");
+}
+});
         }); //end of windowOnLoad / document.ready

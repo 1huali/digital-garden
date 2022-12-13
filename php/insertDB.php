@@ -10,6 +10,7 @@ require('openDB.php');
 //check if there has been something posted to the server to be processed
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+  try{
 // stringify the data : 
  $flowerId = $_POST['flower_identification'];
  $timeStamp = $_POST['a_timeStamp'];
@@ -32,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  $pollen = $_POST['pollen'];
  $other = $_POST['other'];
 
-    try{
+
         /*The data stringified (ajax) his put into quote() for driver (sqlite library for php PDO). */
            $flowerId =$file_db->quote($flowerId);
            $timeStamp =$file_db->quote($timeStamp);
@@ -50,13 +51,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $growthCompleted=$file_db->quote("false");
            $userVisits=$file_db->quote("null"); //!!
            $email=$file_db->quote("null");
-           $careList=$careList->quote("null");
-           $magicUnlocked=$magicUnlocked->quote("false");
-           $pollen=$pollen->quote('false');
-           $other=$other->quote("null");
+           $careList=$file_db->quote("null");
+           $magicUnlocked=$file_db->quote("false");
+           $pollen=$file_db->quote('false');
+           $other=$file_db->quote("null");
 
 
-           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, diaryFile, growthCompleted, userVisits, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$fruit,$color,$xPosition,$yPosition,$diaryFile,$growthCompleted,$userVisits,$email,$careList,$magicUnlocked,$pollen,$other)";
+           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, diaryFile, growthCompleted, userVisits, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$pattern,$fruit,$color,$xPosition,$yPosition,$diaryFile,$growthCompleted,$userVisits,$email,$careList,$magicUnlocked,$pollen,$other)";
            $file_db->exec($queryInsert);
            $file_db = null;
            echo("done");

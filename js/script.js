@@ -74,7 +74,7 @@ L.tileLayer.kitten().addTo(mainMap);
 
                     //for the flowers display since the condition for display is true for flowerGenerated
                     flowerArray[flowerArray.length-1].flowerGenerated = true;
-                    flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color);
+                    flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].creationDate),parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
                     // console.log(flowerArray);
@@ -379,13 +379,14 @@ console.log(localStorage.getItem("password"));
                 data.append("hide_user","No");
             } 
 
-            data.append('a_timeStamp', flowerArray[flowerArray.length-1].timeStamp);
+            let date= new Date();
+            data.append('a_timeStamp', date.getTime());
             data.append("x_pos", flowerArray[flowerArray.length-1].posX);
             data.append("y_pos", flowerArray[flowerArray.length-1].posY);
             data.append("growthCompleted", flowerArray[flowerArray.length-1].growthCompleted);
 
             //traversing fill form data to constructor : 
-            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
+            flowerArray[flowerArray.length-1].assignFormValues(data.get("a_timestamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
             // console.log(data.get("manual_growth"));
 
             // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes

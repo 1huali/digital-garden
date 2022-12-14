@@ -4,11 +4,10 @@ class Flower {
 
       constructor(posX, posY, marker,map,arrayNumber,sound,length,user) {
 
-      let date = new Date();
-      this.timeStamp= date.getTime();
-      this.currentDate= date.getTime();
-      // console.log(date);
-      // console.log(this.germinationDay);
+      this.timeStamp=0;
+      this.currentAge;
+      this.currentState;
+
       this.arrayNumber= arrayNumber;
 
       // this.name = "";
@@ -158,9 +157,7 @@ class Flower {
         //with timeout divided by number of states
         setTimeout(function(){
           //??undefined function
-          // self.changeState()}, this.growthLength/this.state.length);
-          self.changeState()}, 5000);
-
+          self.changeState()}, this.growthLength/this.state.length);
 
         if (this.manualMode===true){
           console.log("!!stages happening by clicks and nurturing");
@@ -171,13 +168,18 @@ class Flower {
     changeState (){
 //change the growing state of the flower
 
+//if the growth isn't completed, the changingState() will activate the generate();.
 if(this.growthCompleted===false){
     this.generate();
+
+//The L-System requires the extra turtle(); step so it has to be activated here too :
       if (this.pattern === "lsystemAxiomF"){
         this.turtle();
       }
     }
+
     this.stateIndex++;
+
       //Logs the text to see the state// for debugging :
           this.currentText= this.state[this.stateIndex];
           console.log(this.currentText) ;
@@ -217,7 +219,7 @@ if(this.growthCompleted===false){
     }
 
     generate (){
-      // this is where it generates the pattern :
+      // this is where we generate both patterns. L-System requires turtle too :
       //L-System pattern :
       if (this.pattern === "lsystemAxiomF"){
       this.len *= 0.5;
@@ -262,9 +264,10 @@ if (this.stemCount === 6) {
 
     }
 
-    assignFormValues (length,autonomous_manual,show_hide,fruit,user,pattern,color){
+    assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color){
 
       //traversing flower data values to flower constructor values :
+      this.timeStamp=timeStamp;
       this.growthLength = length;
       this.fruit = fruit;
       this.user=user;
@@ -292,6 +295,8 @@ if (this.stemCount === 6) {
         this.pattern= "fractal";
       }
     
+      this.age();
+
     }
 
     assignEnergyLevels(){
@@ -320,6 +325,56 @@ if (this.stemCount === 6) {
       
     }
 
+    age(){
+
+      //calculation of the age of the tree. With the age variable, we can give it an evolution tracking time stamp to assign its visual representation.
+      let date = new Date();
+      this.currentAge = date.getTime() - this.timeStamp;
+
+     let ageIntervalPerState;//25
+    //  this currentState=0;
+    //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
+     ageIntervalPerState = (this.growthLength)/this.state.length;// 100/4
+
+     this.currentState= this.currentAge/ageIntervalPerState;
+
+     if (this.currentState >= this.state.length){
+      this.currentState = this.state.length-1;
+
+     }
+
+      //change the growing state of the flower
+      
+      //if the growth isn't completed, the changingState() will activate the generate();.
+    for (let j=0; j< this.currentState;j++){   
+      this.generate();
+    }
+
+      //The L-System requires the extra turtle(); step so it has to be activated here too :
+            if (this.pattern === "lsystemAxiomF"){
+              this.turtle();
+            }
+        
+      
+          // this.stateIndex++;
+      
+            //Logs the text to see the state// for debugging :
+                // this.currentText= this.state[this.stateIndex];
+                // console.log(this.currentText) ;
+      
+                // this.isGrowing =false;
+      
+      //Whole growing array completed, the flower cycle is completed: 
+                // if (this.stateIndex === this.state.length-1){
+                //   // console.log("!!send notif/email to user");
+                //   document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
+                //   this.growthCompleted = true;
+                //   this.blossom= true;
+                // }
+      
+          
+
+    }
 
   } //end Flower.js
   

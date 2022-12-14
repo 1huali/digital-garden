@@ -2,13 +2,17 @@
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
 
-      constructor(posX, posY, marker,map,arrayNumber,sound,length,user,energyStatistics) {
+      constructor(posX, posY, marker,map,arrayNumber,sound,length,user) {
 
       let date = new Date();
       this.germinationDay= date.toLocaleTimeString();
       console.log(date);
       console.log(this.germinationDay);
       this.arrayNumber= arrayNumber;
+
+      
+
+    
       
       // this.name = "";
       this.posX = posX;
@@ -31,6 +35,7 @@ class Flower {
 
       //to access the map to have the flower div on top of the map
       this.mapLayerArray= Object.keys(this.map._layers);
+      console.log(this.map._layers[this.mapLayerArray[1]]._container);
       //  //the flower DIV based on the leaflet librairy to create a div element
       //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
@@ -61,9 +66,10 @@ class Flower {
         canvas1.parent(self.flowerId);
       }
       sketch.draw = function (){
-        console.log("get into sketchDraw")
+        // console.log("get into sketchDraw")
         if (self.flowerGenerated === true){
-          background(255);
+          sketch.background(0,15,240);
+
           //grow calls change state who calls generate
         self.displayFlower();
         self.grow();
@@ -90,8 +96,6 @@ class Flower {
 
       this.fruitArray= [];
       this.fruit=fruit; //symbol from the fill form
-
-      this.energyStatistics=energyStatistics;
 
       this.loveDailyLevel=0;
       this.waterDailyLevel=0;
@@ -198,6 +202,8 @@ if(this.growthCompleted===false){
     displayFlower(){
         //  console.log(this.currentText);
 
+        // console.log(this.posX);
+        // console.log(this.posY);
         //position of the center of the flower canvas :
         this.flowerEl.style.left = `${this.posX-50}px`;
         this.flowerEl.style.top = `${this.posY-50}px`; 

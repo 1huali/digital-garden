@@ -12,6 +12,38 @@ function setup() {
 
 $(document).ready(function(){
 
+    let flowerArray=[];
+       // We create a leaflet map, and in setView, we determine coordinates and zoom level
+       let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
+       let coordinateMarker = L.marker();
+       $(".leaflet-control-zoom").css("visibility", "hidden");
+       mainMap.touchZoom.disable();
+       mainMap.doubleClickZoom.disable();
+       mainMap.scrollWheelZoom.disable();
+
+       //source : https://mathi330.github.io/cart351/Demo/demo.html
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 3, // you cannot zoom in more than 9, if set to 10, the map turns gray
+        // doubleClickZoom: false, // this is just so when I double click on the map it doesn't zoom in
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="blank_">OpenStreetMap</a>' // link to where we got the data for the map
+    }).addTo(mainMap); // add tile layer to map
+//custom tiles : https://leafletjs.com/examples/extending/extending-2-layers.html
+L.TileLayer.Kitten = L.TileLayer.extend({
+    getTileUrl: function(coords) {
+        let i = Math.ceil( Math.random() * 3 );
+        return "https://hybrid.concordia.ca/l_wanhua/cart351/ascii-lands/ascii-land_plain"+i+".jpg";
+    },
+    getAttribution: function() {
+        return "<a href='https://placekitten.com/attribution.html'>ASCII Custom Earths</a>"
+    }
+});
+
+L.tileLayer.kitten = function() {
+    return new L.TileLayer.Kitten();
+}
+
+L.tileLayer.kitten().addTo(mainMap);
+
     $.ajax({
                   type: "POST",
                   enctype: 'text/plain',
@@ -24,6 +56,30 @@ $(document).ready(function(){
                   console.log(response);
                   //use the JSON .parse function to convert the JSON string into a Javascript object
                   let parsedJSON = JSON.parse(response);
+
+                  for(let i = 0; i<parsedJSON.length; i++){
+                    //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
+                    console.log(parsedJSON[i].xPosition)
+                    console.log(parsedJSON[i].yPosition)
+
+                    flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
+                    parseInt(parsedJSON[i].yPosition),
+                      null,
+                      mainMap,
+                      parsedJSON[i].flowerID,
+                      null,
+                      parseFloat(parsedJSON[i].growthLength),
+                      parsedJSON[i].user
+                    ));
+
+                    //for the flowers display since the condition for display is true for flowerGenerated
+                    flowerArray[flowerArray.length-1].flowerGenerated = true;
+                    flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color);
+                    // flowerArray[flowerArray.length-1].isGrowing = true;
+
+                    // console.log(flowerArray);
+
+                  }
 
 
     // localStorage.clear();
@@ -39,15 +95,6 @@ $(document).ready(function(){
     let talkButton = document.getElementById('talkButton');
     let userLoggedIn = false;
 
-
-   // We create a leaflet map, and in setView, we determine coordinates and zoom level
-    let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
-    let coordinateMarker = L.marker();
-    $(".leaflet-control-zoom").css("visibility", "hidden");
-    mainMap.touchZoom.disable();
-    mainMap.doubleClickZoom.disable();
-    mainMap.scrollWheelZoom.disable();
-
     let locationDataContainer = document.getElementById('locationData');
 
 //setup function kinda
@@ -60,7 +107,6 @@ $(document).ready(function(){
 //   }, "7000")
 // };
 
-    let flowerArray=[];
     let currentFlowerContainer = document.getElementById("currentFlowerContainer");
     let currentFlower=[];
     let flowerArrayIndex=0;
@@ -334,8 +380,8 @@ console.log(localStorage.getItem("password"));
             } 
 
             data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
-            data.append("xPosition", flowerArray[flowerArray.length-1].posX);
-            data.append("yPosition", flowerArray[flowerArray.length-1].posY);
+            data.append("x_pos", flowerArray[flowerArray.length-1].posX);
+            data.append("y_pos", flowerArray[flowerArray.length-1].posY);
             data.append("growthCompleted", flowerArray[flowerArray.length-1].growthCompleted);
 
             //traversing fill form data to constructor : 
@@ -468,38 +514,12 @@ console.log(localStorage.getItem("password"));
             // built function in that will alert if error
                     console.log( "error" );
                 });
-              
-
-//source : https://mathi330.github.io/cart351/Demo/demo.html
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 3, // you cannot zoom in more than 9, if set to 10, the map turns gray
-        // doubleClickZoom: false, // this is just so when I double click on the map it doesn't zoom in
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="blank_">OpenStreetMap</a>' // link to where we got the data for the map
-    }).addTo(mainMap); // add tile layer to map
-
 
 
                 talkButton.addEventListener("click", function () {
                     // console.log("opens up to the diary typing section");
                 }); //talk button fertilizer button
 
-
-//custom tiles : https://leafletjs.com/examples/extending/extending-2-layers.html
-            L.TileLayer.Kitten = L.TileLayer.extend({
-                getTileUrl: function(coords) {
-                    let i = Math.ceil( Math.random() * 3 );
-                    return "https://hybrid.concordia.ca/l_wanhua/cart351/ascii-lands/ascii-land_plain"+i+".jpg";
-                },
-                getAttribution: function() {
-                    return "<a href='https://placekitten.com/attribution.html'>ASCII Custom Earths</a>"
-                }
-            });
-            
-            L.tileLayer.kitten = function() {
-                return new L.TileLayer.Kitten();
-            }
-            
-           L.tileLayer.kitten().addTo(mainMap);
 
         //  let imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
         // let bounds= [[40.712216, -74.22655], [40.773941, -74.12544]];
@@ -634,6 +654,10 @@ console.log(localStorage.getItem("password"));
         //     document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
         // }
     }
+
+    // function drawFlowerPoints(){
+
+    // }
 },
 
 error:function(){

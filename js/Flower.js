@@ -5,15 +5,12 @@ class Flower {
       constructor(posX, posY, marker,map,arrayNumber,sound,length,user) {
 
       let date = new Date();
-      this.germinationDay= date.toLocaleTimeString();
-      console.log(date);
-      console.log(this.germinationDay);
+      this.timeStamp= date.getTime();
+      this.currentDate= date.getTime();
+      // console.log(date);
+      // console.log(this.germinationDay);
       this.arrayNumber= arrayNumber;
 
-      
-
-    
-      
       // this.name = "";
       this.posX = posX;
       this.posY = posY;
@@ -35,12 +32,11 @@ class Flower {
 
       //to access the map to have the flower div on top of the map
       this.mapLayerArray= Object.keys(this.map._layers);
-      console.log(this.map._layers[this.mapLayerArray[1]]._container);
       //  //the flower DIV based on the leaflet librairy to create a div element
       //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       //attributing an ID to those DIVs
-      this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.germinationDay);
+      this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.timeStamp);
       //the id element :
       this.flowerId= this.flowerEl.id;
       this.flowerGenerated = false;
@@ -57,6 +53,8 @@ class Flower {
         b: "FF+[+F-F-F]-[-F+F+F]"
     }
 
+
+
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
     let self=this;
     this.s1 = function( sketch ) {
@@ -68,12 +66,12 @@ class Flower {
       sketch.draw = function (){
         // console.log("get into sketchDraw")
         if (self.flowerGenerated === true){
-          sketch.background(0,15,240);
+          // sketch.background(255);
 
-          //grow calls change state who calls generate
+          //grow calls changeState(), who calls generate()
         self.displayFlower();
         self.grow();
-        self.bloom();
+        self.bloom(); //only at fractals
         }
       }
 
@@ -130,7 +128,7 @@ class Flower {
        this.p5Context.stroke(0, 255);
       for (let i = 0; i < this.sentence.length; i++) {
         let current = this.sentence.charAt(i);
-        // console.log(current);
+        console.log(this.len);
   
         if (current == "F") {
            this.p5Context.line(0, 0, 0, -this.len);
@@ -188,7 +186,7 @@ if(this.growthCompleted===false){
 
 //Whole growing array completed, the flower cycle is completed: 
           if (this.stateIndex === this.state.length-1){
-            console.log("!!send notif/email to user");
+            // console.log("!!send notif/email to user");
             document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
             this.growthCompleted = true;
             this.blossom= true;
@@ -219,7 +217,7 @@ if(this.growthCompleted===false){
     }
 
     generate (){
-      
+      // this is where it generates the pattern :
       //L-System pattern :
       if (this.pattern === "lsystemAxiomF"){
       this.len *= 0.5;
@@ -271,6 +269,7 @@ if (this.stemCount === 6) {
       this.fruit = fruit;
       this.user=user;
       this.pattern=pattern;
+      console.log(this.pattern);
       this.color=color;
       
       if(autonomous_manual==="on"){

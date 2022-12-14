@@ -59,8 +59,8 @@ L.tileLayer.kitten().addTo(mainMap);
 
                   for(let i = 0; i<parsedJSON.length; i++){
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
-                    console.log(parsedJSON[i].xPosition)
-                    console.log(parsedJSON[i].yPosition)
+                    // console.log(parsedJSON[i].xPosition)
+                    // console.log(parsedJSON[i].yPosition)
 
                     flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
                     parseInt(parsedJSON[i].yPosition),
@@ -379,7 +379,7 @@ console.log(localStorage.getItem("password"));
                 data.append("hide_user","No");
             } 
 
-            data.append('a_timeStamp', flowerArray[flowerArray.length-1].germinationDay);
+            data.append('a_timeStamp', flowerArray[flowerArray.length-1].timeStamp);
             data.append("x_pos", flowerArray[flowerArray.length-1].posX);
             data.append("y_pos", flowerArray[flowerArray.length-1].posY);
             data.append("growthCompleted", flowerArray[flowerArray.length-1].growthCompleted);

@@ -12,6 +12,7 @@ function setup() {
 
 $(document).ready(function(){
 
+    let diary= new Diary();
     let flowerArray=[];
        // We create a leaflet map, and in setView, we determine coordinates and zoom level
        let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
@@ -93,6 +94,7 @@ L.tileLayer.kitten().addTo(mainMap);
     let waterButton = document.getElementById("waterButton");
     let vitaminsButton = document.getElementById("fertilizerButton");
     let talkButton = document.getElementById('talkButton');
+
     let userLoggedIn = false;
 
     let locationDataContainer = document.getElementById('locationData');
@@ -116,7 +118,7 @@ L.tileLayer.kitten().addTo(mainMap);
 
     let myFlowerArray=[];
 
-    let sendThoughtButton = document.getElementById("sendThoughtButton");
+    // let sendThoughtButton = document.getElementById("sendThoughtButton");
     let submitButton = document.getElementById("submitButton"); //fill form
     let flowerGenerated= false;
 
@@ -134,9 +136,9 @@ L.tileLayer.kitten().addTo(mainMap);
     let archiveContainer = document.getElementById("archive-container");
     // let archiveButton = document.getElementById('showArchiveButton');
     // let closeArchiveButton = document.getElementById("closeArchiveButton");
-    let saveThoughtButton = document.getElementById('saveButton');
-    let thoughtCount = 0;
-    let thoughts=[];
+    // let saveThoughtButton = document.getElementById('saveButton');
+    // let thoughtCount = 0;
+    // let thoughts=[];
     let chimeSound = document.getElementById("chimeSound");
 
     let identifyButton = document.getElementById("identifyButton");
@@ -252,28 +254,28 @@ console.log(localStorage.getItem("password"));
 
 //DIALOG POP-UP BOXES : 
 
-//talkbox dialog: 
-//when user press "talk" button
- $( "#talkBoxDialog" ).dialog({
-                position: { my: "left top", at: "right bottom", of: window },
-                classes: {
-                    "ui-dialog": "talkBox"
-                },
-                buttons: [
-                    {
-                      text: "Close",
-                      click: function() {
-                        $( this ).dialog( "close" );
-                        flowerArray.bloom();
-                        flowerArray[flowerArray.length-1].blossom=true;
+// //talkbox dialog: 
+// //when user press "talk" button
+//  $( "#talkBoxDialog" ).dialog({
+//                 position: { my: "left top", at: "right bottom", of: window },
+//                 classes: {
+//                     "ui-dialog": "talkBox"
+//                 },
+//                 buttons: [
+//                     {
+//                       text: "Close",
+//                       click: function() {
+//                         $( this ).dialog( "close" );
+//                         flowerArray.bloom();
+//                         flowerArray[flowerArray.length-1].blossom=true;
 
-                        chimeSound.play();
-                      }
-                    }
-                  ]
-              });
-//closes the talkbox dialog after creating it
-              $("#talkBoxDialog").dialog('close');
+//                         chimeSound.play();
+//                       }
+//                     }
+//                   ]
+//               });
+// //closes the talkbox dialog after creating it
+//               $("#talkBoxDialog").dialog('close');
 
 //login box
               //id dialog box : 
@@ -335,7 +337,7 @@ console.log(localStorage.getItem("password"));
 
 
         talkButton.addEventListener("click", function(){
-            $("#talkBoxDialog").dialog('open');
+            diary.openDiary();
             //activate flowerArray : blossom();
         });
 
@@ -472,10 +474,10 @@ console.log(localStorage.getItem("password"));
 // //??set to php
 //         });
 
-        sendThoughtButton.addEventListener("click", function(){
-            //??resets the input field at send
-            document.getElementById(diaryTextContainer).value.innerHTML= "";
-        });
+        // sendThoughtButton.addEventListener("click", function(){
+        //     //??resets the input field at send
+        //     document.getElementById(diaryTextContainer).value.innerHTML= "";
+        // });
 
         //current user identification : !!Add an association with flower
         identifyButton.addEventListener('click', function (){
@@ -497,16 +499,6 @@ console.log(localStorage.getItem("password"));
         //     }
         // });
 
-        function thoughtDateData(){
-            //add hours if less than 24 hours?
-            let date = new Date()
-            let day = date.getDate();
-            let month = date.getMonth()+1;
-            let year = date.getFullYear();
-            
-            let fullDate = `${day}.${month}.${year}.`;
-            return fullDate;
-        }
 
 
         }) //getJson 

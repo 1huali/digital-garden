@@ -1,4 +1,4 @@
-
+//not activated, but lets say its the "L-System" program : write the new functions or those we want to overwrite.
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
   // Should eventually extend the Flower class into 2 superclass : L-System and Fractal. 
@@ -68,7 +68,6 @@ class Flower {
         let canvas1 = sketch.createCanvas(100, 100);
         canvas1.parent(self.flowerId);
       }
-      //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
       sketch.draw = function (){
         // console.log("get into sketchDraw")
         if (self.flowerGenerated === true){

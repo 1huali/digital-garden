@@ -1,3 +1,4 @@
+//next : now we have a diary class object but its not linked to the flower constructor. We'd need to set up the table to hold the table data and  add a function to the flower.
 class Diary {
 
     constructor (){

@@ -211,11 +211,14 @@ if(this.growthCompleted===false){
         this.flowerEl.style.top = `${this.posY-50}px`; 
 
         //fractal tree
-        if (this.pattern==="fractals"){
+        if (this.pattern==="fractals" && this.growthCompleted ===false){
         for (let i = 0; i < this.flower.length; i++) {
         this.flower[i].show();
         }
+      } else {
+        console.log("growth completed");
       }
+
 
         //end fractal
     }
@@ -301,11 +304,8 @@ if (this.stemCount === 6) {
 
     }
 
-    assignEnergyLevels(){
-      // console.log("assign water and fertilizer for ??each flower");
+    printEnergyLevels(){
       document.getElementById('waterHeartLevelBox').innerHTML = "" ;
-      document.getElementById('vitaminsHeartLevelBox').innerHTML = "" ;
-
     }
 
     bloom(){

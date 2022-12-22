@@ -22,6 +22,7 @@
     <script src="js/libraries/p5.min.js"></script>   
     <script src="js/Flower.js"></script> 
     <script src="js/Diary.js" ></script>
+    <script src="js/InputForm.js"></script>
     <script src="js/libraries/jquery-ui.js"></script> 
     <script src="https://kit.fontawesome.com/82ea518a78.js" crossorigin="anonymous"></script>
    
@@ -97,7 +98,7 @@
 <div id="flowerStatistic-buttons">
 <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div> 
 <input id="waterButton" class="buttons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
-<input id="fertilizerButton" class="buttons" type="button" value="Love"> Vitamins: <span id="vitaminsHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
+<input id="loveButton" class="buttons" type="button" value="Love"> Thoughts: <span id="flowerThoughts-container">  </span><br>
 <input id="talkButton" class="buttons" type="button" value="Talk"><br>
 </div>
 </section> 

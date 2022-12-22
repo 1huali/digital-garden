@@ -13,6 +13,7 @@ function setup() {
 $(document).ready(function(){
 
     let diary= new Diary();
+    let inputForm = new InputForm();
     let flowerArray=[];
        // We create a leaflet map, and in setView, we determine coordinates and zoom level
        let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
@@ -91,8 +92,9 @@ L.tileLayer.kitten().addTo(mainMap);
     // let playMode = ["mainMode", "processMode"];
     let currentPlayMode= "mainMode";
     let editMode = true;
+
     let waterButton = document.getElementById("waterButton");
-    let vitaminsButton = document.getElementById("fertilizerButton");
+    let loveButton = document.getElementById("loveButton");
     let talkButton = document.getElementById('talkButton');
 
     let userLoggedIn = false;
@@ -105,7 +107,7 @@ L.tileLayer.kitten().addTo(mainMap);
     //message bar :
 //     if (userLoggedIn === false){
 // setTimeout(() => {
-//     document.getElementById("message").innerHTML= "Wander in peace or regist"
+//     document.getElementById("message").innerHTML= "Wander in peace or register"
 //   }, "7000")
 // };
 
@@ -122,24 +124,7 @@ L.tileLayer.kitten().addTo(mainMap);
     let submitButton = document.getElementById("submitButton"); //fill form
     let flowerGenerated= false;
 
-//flower statistix data
-//MOVED TO CONSTRUCTOR
-    // document.getElementById('waterHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
-    // document.getElementById('vitaminsHeartLevelBox').innerHTML = " ♥ ♥ ♥ ♥ ♥  ";
-    // let waterLevel = 5;
-    // let waterHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-    // let vitaminsLevel = 5;
-    // let vitaminsHeartLevelBoxArray=[" ♥"," ♥"," ♥"," ♥"," ♥"];
-    // let levelIcon = " ♥ ";
-//
-
-    let archiveContainer = document.getElementById("archive-container");
-    // let archiveButton = document.getElementById('showArchiveButton');
-    // let closeArchiveButton = document.getElementById("closeArchiveButton");
-    // let saveThoughtButton = document.getElementById('saveButton');
-    // let thoughtCount = 0;
-    // let thoughts=[];
-    let chimeSound = document.getElementById("chimeSound");
+    let loveSound = document.getElementById("chimeSound");
 
     let identifyButton = document.getElementById("identifyButton");
     let visitorListArray= [];
@@ -254,29 +239,6 @@ console.log(localStorage.getItem("password"));
 
 //DIALOG POP-UP BOXES : 
 
-// //talkbox dialog: 
-// //when user press "talk" button
-//  $( "#talkBoxDialog" ).dialog({
-//                 position: { my: "left top", at: "right bottom", of: window },
-//                 classes: {
-//                     "ui-dialog": "talkBox"
-//                 },
-//                 buttons: [
-//                     {
-//                       text: "Close",
-//                       click: function() {
-//                         $( this ).dialog( "close" );
-//                         flowerArray.bloom();
-//                         flowerArray[flowerArray.length-1].blossom=true;
-
-//                         chimeSound.play();
-//                       }
-//                     }
-//                   ]
-//               });
-// //closes the talkbox dialog after creating it
-//               $("#talkBoxDialog").dialog('close');
-
 //login box
               //id dialog box : 
               //??doesn't create at timeout, but used to work
@@ -308,24 +270,24 @@ console.log(localStorage.getItem("password"));
               });
 
               
-    $( "#seedIdPopUpForm-container" ).dialog({
-        position: { my: "left top", at: "right bottom", of: window },
-        classes: {
-            "ui-dialog": "seedFillForm-dialog"
-        },
-                buttons: [
-          {
-            text: "Cancel",
-            click: function() {
-                            console.log("!!change for html button");
-              $( this ).dialog( "close" );
-            }
-          }
-        ]
-      });
+//     $( "#seedIdPopUpForm-container" ).dialog({
+//         position: { my: "left top", at: "right bottom", of: window },
+//         classes: {
+//             "ui-dialog": "seedFillForm-dialog"
+//         },
+//                 buttons: [
+//           {
+//             text: "Cancel",
+//             click: function() {
+//                             console.log("!!change for html button");
+//               $( this ).dialog( "close" );
+//             }
+//           }
+//         ]
+//       });
 
-// closes the talkbox dialog after creating it
-      $("#seedIdPopUpForm-container").dialog('close');
+// // closes the talkbox dialog after creating it
+//       $("#seedIdPopUpForm-container").dialog('close');
     
 //END FILL FORM
 
@@ -426,7 +388,7 @@ console.log(localStorage.getItem("password"));
         flowerArray[flowerArray.length-1].flowerGenerated = true;
         $("#seedIdPopUpForm-container").dialog('close');
 
-        flowerArray[flowerArray.length-1].assignEnergyLevels();
+        flowerArray[flowerArray.length-1].printEnergyLevels();
         //create flower with its own energy bar
        },
        error:function(){
@@ -438,10 +400,10 @@ console.log(localStorage.getItem("password"));
         waterButton.addEventListener("click", function(){
         flowerArray[flowerArray.length-1].waterDailyLevel++;
         if (flowerArray[flowerArray.length-1].waterDailyLevel ===3){
-            document.getElementById("message").innerHTML= "Enough water for today, thank u!!"
+            document.getElementById("flowerThoughts-container").innerHTML= "Enough water for today, thank u!!"
         }
         if (flowerArray[flowerArray.length-1].waterDailyLevel ===7){
-            document.getElementById("message").innerHTML= "Omg i'm gonna drown please stop"
+            document.getElementById("flowerThoughts-container").innerHTML= "Omg i'm gonna drown please stop"
         }
 
         //
@@ -455,29 +417,14 @@ console.log(localStorage.getItem("password"));
 
         });
 
-        vitaminsButton.addEventListener("click", function(){
+        loveButton.addEventListener("click", function(){
             flowerArray[flowerArray.length-1].loveDailyLevel++;
-            chimeSound.play();
+            loveSound.play();
                 setTimeout(() => {
-                    document.getElementById("message").innerHTML= "I love U too!!"
+                    document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
                   }, "100");
         });
 
-        //thoughts are saved in an array and displayed with their date :
-//         saveThoughtButton.addEventListener('click', function(){
-//             let thoughtDate = thoughtDateData();
-//             console.log("saved to archive");
-//             thoughtCount += 1;
-//             let thought = document.getElementById("diaryTextContainer").value;
-//             thoughts.push(thought);
-//             let singleLineElement = $("<article>").addClass("single-archive-line").html(thought + ": on " + thoughtDate ).appendTo("#archive-container");
-// //??set to php
-//         });
-
-        // sendThoughtButton.addEventListener("click", function(){
-        //     //??resets the input field at send
-        //     document.getElementById(diaryTextContainer).value.innerHTML= "";
-        // });
 
         //current user identification : !!Add an association with flower
         identifyButton.addEventListener('click', function (){
@@ -509,11 +456,6 @@ console.log(localStorage.getItem("password"));
                 });
 
 
-                talkButton.addEventListener("click", function () {
-                    // console.log("opens up to the diary typing section");
-                }); //talk button fertilizer button
-
-
         //  let imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
         // let bounds= [[40.712216, -74.22655], [40.773941, -74.12544]];
         // let image = L.imageOverlay(imageUrl, bounds).addTo(mainMap);
@@ -537,8 +479,11 @@ console.log(localStorage.getItem("password"));
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    $("#seedIdPopUpForm-container").dialog('open');
+                    inputForm.openInputForm();
+
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
+                    userSeedCount.innerHTML= flowerArray.length;
+
                 // idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
 
                 currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";

@@ -3,7 +3,7 @@ class Diary {
     constructor (){
         this.thoughtCount=0;
         this.thoughts=[];
-        // this.thought;
+        this.closingSound = document.getElementById("chimeSound");
 
         //talkbox dialog: 
 //when user press "talk" button
@@ -17,10 +17,11 @@ class Diary {
           text: "Close",
           click: function() {
             $( this ).dialog( "close" );
-            flowerArray.bloom();
-            flowerArray[flowerArray.length-1].blossom=true;
+            //create its own function, and it will be part of the Flower class so we will call the flower
+            // flowerArray.bloom();
+            // flowerArray[flowerArray.length-1].blossom=true;
 
-            chimeSound.play();
+            this.closingSound.play();
           }
         }
       ]
@@ -37,6 +38,7 @@ class Diary {
   self.thoughtCount += 1;
   self.thought = document.getElementById("diaryTextContainer").value;
   self.thoughts.push(self.thought);
+          //thoughts are saved in an array and displayed with their date :
   self.singleLineElement = $("<article>").addClass("single-archive-line").html(self.thought + ": on " + self.thoughtDate ).appendTo("#archive-container");
 });
 

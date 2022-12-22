@@ -4,6 +4,7 @@ class Flower {
 
       constructor(posX, posY, marker,map,arrayNumber,sound,length,user) {
 
+      this.creationTimeStamp=new Date();
       this.timeStamp=0;
       this.currentAge;
       this.currentState;
@@ -35,7 +36,7 @@ class Flower {
       //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       //attributing an ID to those DIVs
-      this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.timeStamp);
+      this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.creationTimeStamp.getTime());
       //the id element :
       this.flowerId= this.flowerEl.id;
       this.flowerGenerated = false;

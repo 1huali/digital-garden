@@ -61,7 +61,7 @@ L.tileLayer.kitten().addTo(mainMap);
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
                     // console.log(parsedJSON[i].xPosition)
                     // console.log(parsedJSON[i].yPosition)
-
+//retrieving data, outputting from the database :  
                     flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
                     parseInt(parsedJSON[i].yPosition),
                       null,
@@ -547,7 +547,7 @@ console.log(localStorage.getItem("password"));
                     locationDataContainer.value = e.latlng;
                     $("#seedIdPopUpForm-container").dialog('open');
                     flowerArray.push(new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound));
-                idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
+                // idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
 
                 currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {

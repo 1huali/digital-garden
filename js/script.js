@@ -12,7 +12,7 @@ function setup() {
 
 $(document).ready(function(){
 
-    let diary= new Diary();
+    let journal= new Journal();
     let inputForm = new InputForm();
     let flowerArray=[];
        // We create a leaflet map, and in setView, we determine coordinates and zoom level
@@ -280,7 +280,7 @@ console.log(localStorage.getItem("password"));
 
 
         talkButton.addEventListener("click", function(){
-            diary.openDiary();
+            journal.openJournal();
             //activate flowerArray : blossom();
         });
 

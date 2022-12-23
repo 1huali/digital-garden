@@ -21,7 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
     <script src="js/libraries/p5.min.js"></script>   
     <script src="js/Flower.js"></script> 
-    <script src="js/Diary.js" ></script>
+    <script src="js/Journal.js" ></script>
     <script src="js/InputForm.js"></script>
     <script src="js/libraries/jquery-ui.js"></script> 
     <script src="https://kit.fontawesome.com/82ea518a78.js" crossorigin="anonymous"></script>
@@ -107,8 +107,8 @@
  <section id="talkBoxDialog" title="Genetic Memory">
     <div id="archive-container">
     </div>    
-    <div id="diary-container">
-      <input id="diaryTextContainer" type="text" placeholder="What is on your mind?">
+    <div id="journal-container">
+      <input id="journalTextContainer" type="text" placeholder="What is on your mind?">
       <input id="sendThoughtButton" class="buttons" type="button" value="Send"> <br>
     </div>
 </section>

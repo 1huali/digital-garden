@@ -1,5 +1,5 @@
-//next : now we have a diary class object but its not linked to the flower constructor. We'd need to set up the table to hold the table data and  add a function to the flower.
-class Diary {
+//next : now we have a journal class object but its not linked to the flower constructor. We'd need to set up the table to hold the table data and  add a function to the flower.
+class Journal {
 
     constructor (){
         this.thoughtCount=0;
@@ -37,7 +37,7 @@ class Diary {
   self.thoughtDate = thoughtDateData();
   console.log("saved to archive");
   self.thoughtCount += 1;
-  self.thought = document.getElementById("diaryTextContainer").value;
+  self.thought = document.getElementById("journalTextContainer").value;
   self.thoughts.push(self.thought);
           //thoughts are saved in an array and displayed with their date :
   self.singleLineElement = $("<article>").addClass("single-archive-line").html(self.thought + ": on " + self.thoughtDate ).appendTo("#archive-container");
@@ -45,7 +45,7 @@ class Diary {
 
     } //en construtor
 
-    openDiary(){
+    openJournal(){
         $("#talkBoxDialog").dialog('open');
     }
 

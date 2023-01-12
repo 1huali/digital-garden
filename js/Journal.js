@@ -34,6 +34,9 @@ class Journal {
 
     let self=this;
     self.sendThoughtButton.addEventListener("click", function(){
+        //?? IS THIS WHERE THE AJAX FORM FORM FOR JOURNAL FORM IS CALLED
+          //do I create an html <form id="message"> and ajax it here?
+
   self.thoughtDate = thoughtDateData();
   console.log("saved to archive");
   self.thoughtCount += 1;
@@ -41,9 +44,10 @@ class Journal {
   self.thoughts.push(self.thought);
           //thoughts are saved in an array and displayed with their date :
   self.singleLineElement = $("<article>").addClass("single-archive-line").html(self.thought + ": on " + self.thoughtDate ).appendTo("#archive-container");
+
 });
 
-    } //en construtor
+    } //end construtor
 
     openJournal(){
         $("#talkBoxDialog").dialog('open');

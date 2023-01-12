@@ -1,7 +1,7 @@
 <?php
 require('openDB.php');
 
-// $queryInsert = "INSERT INTO flowerObjects (creationDate, user, enableDisplay, growthLength, enableAutonomous, pattern, lattitude, longitude, journalFile, completedState, energyLevels) VALUES ('test','test', 'test','test','test','test','test','test','test','test','test')";
+// $queryInsert = "INSERT INTO flowerObjects (creationDate, user, enableDisplay, growthLength, enableAutonomous, pattern, lattitude, longitude, completedState, energyLevels) VALUES ('test','test', 'test','test','test','test','test','test','test','test','test')";
 // $file_db->exec($queryInsert);
 // $file_db = null;
 // echo("done");
@@ -24,7 +24,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  $color = $_POST['a_color'];
  $xPosition = $_POST['x_pos'];
  $yPosition = $_POST['y_pos'];
- $journalFile = $_POST['journal_file'];
  $growthCompleted = $_POST['completed_state'];
  $numberVisits = $_POST['number_visits'];
  $email = $_POST['email'];
@@ -32,6 +31,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
  $magicUnlocked = $_POST['magic_unlocked'];
  $pollen = $_POST['pollen'];
  $other = $_POST['other'];
+
+
 
 
         /*The data stringified (ajax) his put into quote() for driver (sqlite library for php PDO). */
@@ -47,7 +48,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $color =$file_db->quote($color);
            $xPosition =$file_db->quote($xPosition);
            $yPosition =$file_db->quote($yPosition);
-           $journalFile =$file_db->quote($journalFile);
            $growthCompleted=$file_db->quote("false");
            $userVisits=$file_db->quote("null"); //!!
            $email=$file_db->quote("null");
@@ -57,7 +57,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            $other=$file_db->quote("null");
 
 
-           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, journalFile, growthCompleted, userVisits, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$pattern,$fruit,$color,$xPosition,$yPosition,$journalFile,$growthCompleted,$userVisits,$email,$careList,$magicUnlocked,$pollen,$other)";
+           $queryInsert = "INSERT INTO flowerObjects (creationDate, user, motivation, hideUser, growthLength, manualGrowth, pattern, fruit, color, xPosition, yPosition, growthCompleted, userVisits, email, careList, magicUnlocked, pollen, other) VALUES ($timeStamp,$user,$motivation,$hideUser, $growthLength,$manualGrowth,$pattern,$fruit,$color,$xPosition,$yPosition,$growthCompleted,$userVisits,$email,$careList,$magicUnlocked,$pollen,$other)";
            $file_db->exec($queryInsert);
            $file_db = null;
            echo("done");

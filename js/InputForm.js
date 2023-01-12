@@ -28,7 +28,6 @@ class InputForm {
         $("#seedIdPopUpForm-container").dialog('open');
         this.newFlower = newFlower;
 
-        //ajax
  //submission of php flower data thru AJAX :
  $("#insertFlower").submit(function(event) {
     //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
@@ -72,7 +71,7 @@ class InputForm {
 $.ajax({
 type: "POST",
 enctype: 'multipart/form-data',
-url: "php/insertDB.php",
+url: "php/insertDB_flowerObj.php",
 data: data,
 processData: false,//prevents from converting into a query string
 /*contentType option to false is used for multipart/form-data forms that pass files.

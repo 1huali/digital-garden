@@ -90,10 +90,12 @@
 
   <section id="flowerData-container"> 
   <h2>CURRENT SESSION</h2>hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
-<label for="flowerDropDownList">Current flower </label>
-  <select id="flowerList-dropdown">
-    <option id="currentFlowerName" value="flower0">Login to access data</option>
-  </select>
+<label for="flowerDropDownList">Seeds : </label>
+  <select id="flowerList-select">
+    <option id="currentFlowerName" value="flower0">Flower 0</option>
+    <option value="Flower1">Flower 1</option>
+  </select> <br>
+  current flower : <span id="demo"></span>
 
 <div id="flowerStatistic-buttons">
 <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div> 

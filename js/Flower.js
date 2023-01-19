@@ -122,6 +122,8 @@ class Flower {
 
       this.pattern="";
       this.color="";
+
+      this.journal = new Journal();
     } //end Constructor
 
 

@@ -12,9 +12,20 @@ function setup() {
 
 $(document).ready(function(){
 
-    let journal= new Journal();
+    // let journal= new Journal();
     let inputForm = new InputForm();
+
     let flowerArray=[];
+    
+    let selectedFlower;
+    let flowerMenuSelect = document.getElementById("flowerList-select"); 
+
+    flowerMenuSelect.addEventListener("change", function(){
+        selectedFlower = flowerMenuSelect.value;
+        document.getElementById("demo").innerHTML = selectedFlower ;
+    });
+
+           //MAP SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
        // We create a leaflet map, and in setView, we determine coordinates and zoom level
        let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
        let coordinateMarker = L.marker();
@@ -476,6 +487,7 @@ console.log(localStorage.getItem("password"));
     function setCurrentFlower(){
         //??passing the current flower in the function
         document.getElementById("flowerStatistic-buttons").style = "display : block";
+        //let flowerStatisticButtons= new Button;
 
     }
 

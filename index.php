@@ -48,7 +48,7 @@
       <fieldset>
         <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
         <p><label>Motivation </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
-        <p><label>User </label><input type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
+        <p><label>User </label><input id="usernameInputField" type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Hide User </label>
         <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
        <label for="hideUser"> Yes</label>
@@ -93,8 +93,7 @@
   <h2>CURRENT SESSION</h2>hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
 <label for="flowerDropDownList">Seeds : </label>
   <select id="flowerList-select">
-    <option id="currentFlowerName" value="flower0">Flower 0</option>
-    <option value="Flower1">Flower 1</option>
+    <option value="none">none</option>
   </select> <br>
   current flower : <span id="demo"></span>
 

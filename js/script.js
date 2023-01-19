@@ -20,6 +20,66 @@ $(document).ready(function(){
     let selectedFlower;
     let flowerMenuSelect = document.getElementById("flowerList-select"); 
 
+        // localStorage.clear();
+    //??why message doesnt display?
+    document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
+
+    let modeButton = document.getElementById('modeButton');
+    // let playMode = ["mainMode", "processMode"];
+    let currentPlayMode= "mainMode";
+    let editMode = true;
+
+    let waterButton = document.getElementById("waterButton");
+    let loveButton = document.getElementById("loveButton");
+    let talkButton = document.getElementById('talkButton');
+
+    let userLoggedIn = false;
+    let currentUser;
+
+    let locationDataContainer = document.getElementById('locationData');
+
+//setup function kinda
+    let section = $('section');
+    
+    //message bar :
+//     if (userLoggedIn === false){
+// setTimeout(() => {
+//     document.getElementById("message").innerHTML= "Wander in peace or register"
+//   }, "7000")
+// };
+
+    let currentFlowerContainer = document.getElementById("currentFlowerContainer");
+    let currentFlower=[];
+    let flowerArrayIndex=0;
+    let idDataContainer = document.getElementById('idData');
+    //get flower.flowerEl name printed in the container
+    let idData; 
+
+    let myFlowerArray=[];
+
+    // let sendThoughtButton = document.getElementById("sendThoughtButton");
+    let submitButton = document.getElementById("submitButton"); //fill form
+    let flowerGenerated= false;
+
+    let loveSound = document.getElementById("chimeSound");
+
+    let identifyButton = document.getElementById("identifyButton");
+    let visitorListArray= [];
+    let username;
+    let password;
+    let currentUserBox = document.getElementById("currentUser");
+    let currentUserIdBox = document.getElementById("currentUserId"); //same than userId but in titleBar
+    let loginButton = document.getElementById("loginButton");
+    let setPasswordButton = document.getElementById("setPasswordButton");
+
+    let userKey = "username";
+    let userValue = "";
+    let userSeedCount = document.getElementById("userFlowerIndex"); 
+    let globalSeedCount = document.getElementById("totalFlowerIndex"); 
+    
+    let generateButton= document.getElementById('generateButton');
+
+
     flowerMenuSelect.addEventListener("change", function(){
         selectedFlower = flowerMenuSelect.value;
         document.getElementById("demo").innerHTML = selectedFlower ;
@@ -90,68 +150,7 @@ L.tileLayer.kitten().addTo(mainMap);
                     flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].creationDate),parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
-                    // console.log(flowerArray);
-
                   }
-
-
-    // localStorage.clear();
-    //??why message doesnt display?
-    document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
-
-    let modeButton = document.getElementById('modeButton');
-    // let playMode = ["mainMode", "processMode"];
-    let currentPlayMode= "mainMode";
-    let editMode = true;
-
-    let waterButton = document.getElementById("waterButton");
-    let loveButton = document.getElementById("loveButton");
-    let talkButton = document.getElementById('talkButton');
-
-    let userLoggedIn = false;
-
-    let locationDataContainer = document.getElementById('locationData');
-
-//setup function kinda
-    let section = $('section');
-    
-    //message bar :
-//     if (userLoggedIn === false){
-// setTimeout(() => {
-//     document.getElementById("message").innerHTML= "Wander in peace or register"
-//   }, "7000")
-// };
-
-    let currentFlowerContainer = document.getElementById("currentFlowerContainer");
-    let currentFlower=[];
-    let flowerArrayIndex=0;
-    let idDataContainer = document.getElementById('idData');
-    //get flower.flowerEl name printed in the container
-    let idData; 
-
-    let myFlowerArray=[];
-
-    // let sendThoughtButton = document.getElementById("sendThoughtButton");
-    let submitButton = document.getElementById("submitButton"); //fill form
-    let flowerGenerated= false;
-
-    let loveSound = document.getElementById("chimeSound");
-
-    let identifyButton = document.getElementById("identifyButton");
-    let visitorListArray= [];
-    let username;
-    let password;
-    let currentUserBox = document.getElementById("currentUser");
-    let currentUserIdBox = document.getElementById("currentUserId"); //same than userId but in titleBar
-    let loginButton = document.getElementById("loginButton");
-    let setPasswordButton = document.getElementById("setPasswordButton");
-
-    let userKey = "username";
-    let userValue = "";
-    let userSeedCount = document.getElementById("userFlowerIndex"); 
-    let globalSeedCount = document.getElementById("totalFlowerIndex"); 
-    
-    let generateButton= document.getElementById('generateButton');
 
     //local storge set-up
     function saveUserLogin (username){
@@ -159,6 +158,9 @@ L.tileLayer.kitten().addTo(mainMap);
     //The localStorage property is read-only.
     //username : password and input fields
     userValue = username;
+    currentUser = username;
+    appendFlowerSelect();
+    assignUsernameTemporary();
 
     // check if this key-val alreday exists
      if (localStorage[userKey]) {
@@ -178,7 +180,6 @@ L.tileLayer.kitten().addTo(mainMap);
     document.getElementById("password-container").style = "display : block";
     setPasswordButton.style = "display : block";
     localStorage.setItem(userKey,userValue);
-
     }
 
     //!! close dialog
@@ -229,6 +230,15 @@ console.log(localStorage.getItem("password"));
     }
 
     //end local storage setup
+
+    function assignUsernameTemporary(){
+        //temporary function where the connected user is filled in the fill form, although it has to be changed for something more solid
+        document.getElementById("usernameInputField").value = currentUser;
+        if (userLoggedIn=false){
+            //eventually when ppl that are not logged in can also plant seeds, this option will work
+        document.getElementById("usernameInputField").value = "passerby";
+        }
+    }
 
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
@@ -302,7 +312,6 @@ console.log(localStorage.getItem("password"));
        //displays the grand total flower array length :
            //!!to-do)
            flowerArray[flowerArray.length-1].setOptionButtons();
-        //    setCurrentFlower();
 
 
                 // for (let i=0; i < flowerArray.length; i++){
@@ -485,13 +494,6 @@ console.log(localStorage.getItem("password"));
     // });
 
 
-    // function setCurrentFlower(){
-    //     //??passing the current flower in the function
-    //     document.getElementById("flowerStatistic-buttons").style = "display : block";
-    //     //let flowerStatisticButtons= new Button;
-
-    // }
-
     function printIcon(){
         for (let i = 0; i < 1; i++) {
             document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[i].waterLevelArray[i];
@@ -501,9 +503,19 @@ console.log(localStorage.getItem("password"));
         // }
     }
 
-    // function drawFlowerPoints(){
+    function appendFlowerSelect(){
+        console.log(currentUser);
+        for (let i =0;i< flowerArray.length; i++){
+            if (flowerArray[i].user === currentUser ){
+            let option = document.createElement("option");
+            option.text =   flowerArray[flowerArray.length-1].flowerId;
+            option.value = i;
+            flowerMenuSelect.add(option);
+        }
 
-    // }
+        }
+    }
+
 },
 
 error:function(){

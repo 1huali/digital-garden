@@ -22,6 +22,7 @@
     <script src="js/libraries/p5.min.js"></script>   
     <script src="js/Flower.js"></script> 
     <script src="js/Journal.js" ></script>
+    <script src="js/Button.js" ></script>
     <script src="js/InputForm.js"></script>
     <script src="js/libraries/jquery-ui.js"></script> 
     <script src="https://kit.fontawesome.com/82ea518a78.js" crossorigin="anonymous"></script>

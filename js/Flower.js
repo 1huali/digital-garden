@@ -124,6 +124,7 @@ class Flower {
       this.color="";
 
       this.journal = new Journal();
+      this.buttons = new Button(this);
     } //end Constructor
 
 
@@ -387,9 +388,11 @@ if (this.stemCount === 6) {
                 //   this.growthCompleted = true;
                 //   this.blossom= true;
                 // }
-      
-          
 
+    }
+
+    setOptionButtons(){
+      document.getElementById("flowerStatistic-buttons").style = "display : block";
     }
 
   } //end Flower.js

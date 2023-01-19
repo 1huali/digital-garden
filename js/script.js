@@ -301,7 +301,8 @@ console.log(localStorage.getItem("password"));
             userSeedCount.innerHTML= flowerArray.length;
        //displays the grand total flower array length :
            //!!to-do)
-           setCurrentFlower();
+           flowerArray[flowerArray.length-1].setOptionButtons();
+        //    setCurrentFlower();
 
 
                 // for (let i=0; i < flowerArray.length; i++){
@@ -484,12 +485,12 @@ console.log(localStorage.getItem("password"));
     // });
 
 
-    function setCurrentFlower(){
-        //??passing the current flower in the function
-        document.getElementById("flowerStatistic-buttons").style = "display : block";
-        //let flowerStatisticButtons= new Button;
+    // function setCurrentFlower(){
+    //     //??passing the current flower in the function
+    //     document.getElementById("flowerStatistic-buttons").style = "display : block";
+    //     //let flowerStatisticButtons= new Button;
 
-    }
+    // }
 
     function printIcon(){
         for (let i = 0; i < 1; i++) {

@@ -76,6 +76,9 @@ $(document).ready(function(){
     let userValue = "";
     let userSeedCount = document.getElementById("userFlowerIndex"); 
     let globalSeedCount = document.getElementById("totalFlowerIndex"); 
+    globalSeedCount.innerHTML= flowerArray.length;
+    console.log(flowerArray.length);
+
     
     let generateButton= document.getElementById('generateButton');
 

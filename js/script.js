@@ -91,7 +91,6 @@ $(document).ready(function(){
             flowerMenuSelect = -1;
         } else {
         //displays the energy levels of the selected flowers
-        flowerArray[selectedFlower].assignFlowerStatistics(selectedFlower);
         flowerArray[selectedFlower].printPositions(selectedFlower);
         flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
         }
@@ -130,6 +129,7 @@ L.tileLayer.kitten = function() {
 
 L.tileLayer.kitten().addTo(mainMap);
 
+           //AJAX SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
     $.ajax({
                   type: "POST",
                   enctype: 'text/plain',
@@ -164,6 +164,7 @@ L.tileLayer.kitten().addTo(mainMap);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
                   }
+           //LOGIN SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
     //local storge set-up
     function saveUserLogin (username){
@@ -253,6 +254,7 @@ console.log(localStorage.getItem("password"));
         document.getElementById("usernameInputField").value = "passerby";
         }
     }
+           //OBJECT SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
     function generateFlower(){
         for (let i=0;i < flowerArray.length; i++){
@@ -269,9 +271,10 @@ console.log(localStorage.getItem("password"));
     // end L-SYSTEM
     // requestAnimationFrame(loop);
 
-//end SETUPS
+//end SETUPS  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
-//DIALOG POP-UP BOXES : 
+
+           //DIALOG POP-UP BOXES SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
 //login box
               //id dialog box : 
@@ -307,7 +310,7 @@ console.log(localStorage.getItem("password"));
 //END FILL FORM
 
 
-
+//?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
             // showJournal(data);
             showFlowerData(data);
@@ -324,17 +327,7 @@ console.log(localStorage.getItem("password"));
             userSeedCount.innerHTML= flowerArray.length;
        //displays the grand total flower array length :
            //!!to-do)
-           //TO DELE : 
-        //    flowerArray[flowerArray.length-1].setOptionButtons();
 
-
-                // for (let i=0; i < flowerArray.length; i++){
-
-                //     if (flowerArray[i].flowerGenerated === true){
-                //     flowerArray[i].displayFlower();
-                //    flowerArray[i].grow();
-                // }
-                // }
         });
 
 
@@ -372,7 +365,7 @@ console.log(localStorage.getItem("password"));
         });
 
 
-        //current user identification : !!Add an association with flower
+        //current user identification : 
         identifyButton.addEventListener('click', function (){
             // let visitor = prompt("Hello! Who r u?", "secret passerby");
             let visitor = document.getElementById("login").value;
@@ -407,6 +400,7 @@ console.log(localStorage.getItem("password"));
         // let image = L.imageOverlay(imageUrl, bounds).addTo(mainMap);
         // mainMap.fitBounds(bounds);
 
+        //??do we still need?
 //imprime les infos en bas à gauche ??peut-êre que je vais devoir le delete
             function showJournal(data){
                 let flowerDataContainer = $("#flowerData-container");

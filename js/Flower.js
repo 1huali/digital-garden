@@ -396,10 +396,6 @@ if (this.stemCount === 6) {
       document.getElementById("flowerStatistic-buttons").style = "display : block";
     }
 
-    assignFlowerStatistics(currentFlower){
-      console.log("assigning flower stats");
-      // ?? are the levels appearing here
-    }
 
     printPositions(){
       document.getElementById('xPosBox').innerHTML = this.posX;

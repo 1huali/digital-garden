@@ -41,7 +41,7 @@ class Flower {
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       //attributing an ID to those DIVs
       this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.creationTimeStamp.getTime());
-      console.log(this.creationTimeStamp.getTime());
+      // console.log(this.creationTimeStamp.getTime());
       //the id element :
       this.flowerId= this.flowerEl.id;
       this.flowerGenerated = false;
@@ -108,7 +108,7 @@ class Flower {
       //level array  like  let levelIcon = " ♥ ";
 
 
- 
+
       //fractal tree
       this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
       this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
@@ -123,8 +123,10 @@ class Flower {
       this.pattern="";
       this.color="";
 
+      //each flower object has its own journal and energy class
       this.journal = new Journal();
-      this.buttons = new Button(this);
+      this.buttons = new Button(); //generic
+      this.energy = new Energy();
     } //end Constructor
 
 
@@ -290,7 +292,7 @@ if (this.stemCount === 6) {
       this.fruit = fruit;
       this.user=user;
       this.pattern=pattern;
-      console.log(this.pattern);
+      // console.log(this.pattern);
       this.color=color;
       
       if(autonomous_manual==="on"){
@@ -317,9 +319,6 @@ if (this.stemCount === 6) {
 
     }
 
-    printEnergyLevels(){
-      document.getElementById('waterHeartLevelBox').innerHTML = "" ;
-    }
 
     bloom(){
       
@@ -393,12 +392,19 @@ if (this.stemCount === 6) {
 
     setOptionButtons(){
       //this function set up generic water/nurture buttons when a user is logged in.
-      console.log("set option buttons");
+      // console.log("set option buttons"); OK
       document.getElementById("flowerStatistic-buttons").style = "display : block";
     }
 
     assignFlowerStatistics(currentFlower){
       console.log("assigning flower stats");
+      // ?? are the levels appearing here
+    }
+
+    printPositions(){
+      document.getElementById('xPosBox').innerHTML = this.posX;
+      console.log(this.posX);
+      document.getElementById('yPosBox').innerHTML = this.posY;
     }
 
   } //end Flower.js

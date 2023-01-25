@@ -86,6 +86,16 @@ $(document).ready(function(){
     flowerMenuSelect.addEventListener("change", function(){
         selectedFlower = flowerMenuSelect.value;
         document.getElementById("demo").innerHTML = selectedFlower ;
+        if (flowerMenuSelect.value === "none"){
+            console.log("no flower");
+            flowerMenuSelect = -1;
+        } else {
+        //displays the energy levels of the selected flowers
+        flowerArray[selectedFlower].assignFlowerStatistics(selectedFlower);
+        flowerArray[selectedFlower].printPositions(selectedFlower);
+        flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
+        }
+
     });
 
            //MAP SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
@@ -304,7 +314,7 @@ console.log(localStorage.getItem("password"));
 
 
         talkButton.addEventListener("click", function(){
-            journal.openJournal();
+            flowerArray[selectedFlower].journal.openJournal();
             //activate flowerArray : blossom();
         });
 
@@ -329,27 +339,32 @@ console.log(localStorage.getItem("password"));
 
 
         waterButton.addEventListener("click", function(){
-        flowerArray[flowerArray.length-1].waterDailyLevel++;
-        if (flowerArray[flowerArray.length-1].waterDailyLevel ===3){
+            //increments the waterDaily level count
+        flowerArray[selectedFlower].energy.waterDailyLevel++;
+        if (flowerArray[selectedFlower].energy.waterDailyLevel ===3){
             document.getElementById("flowerThoughts-container").innerHTML= "Enough water for today, thank u!!"
         }
-        if (flowerArray[flowerArray.length-1].waterDailyLevel ===7){
+        //thoughts associated with the water level
+        if (flowerArray[selectedFlower].energy.waterDailyLevel ===7){
             document.getElementById("flowerThoughts-container").innerHTML= "Omg i'm gonna drown please stop"
         }
 
-        //
-        for (let j=0;j<flowerArray.length;j++){
-            for (let i=0; i<flowerArray[j].waterDailyLevel;i++){
+        //prints the waterDaily level
+            for (let i=0; i<flowerArray[selectedFlower].energy.waterDailyLevel;i++){
+                //resets it?
                 document.getElementById('waterHeartLevelBox').innerHTML ="";
-                document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[j].waterLevelArray[i];
+                //goes thru the water level icon visuals
+                document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[selectedFlower].energy.waterLevelArray[i];
+                //!! switch to call from energy class
 
             }
-        }
 
         });
 
         loveButton.addEventListener("click", function(){
             flowerArray[flowerArray.length-1].loveDailyLevel++;
+                            //!! switch to call from energy class
+
             loveSound.play();
                 setTimeout(() => {
                     document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
@@ -501,6 +516,8 @@ console.log(localStorage.getItem("password"));
     function printIcon(){
         for (let i = 0; i < 1; i++) {
             document.getElementById('waterHeartLevelBox').innerHTML += flowerArray[i].waterLevelArray[i];
+                            //!! switch to call from energy class
+
         }
         // for (let i = 0; i < flowerArray[flowerArray.length-1].loveDailyLevel; i++) {
         //     document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
@@ -508,7 +525,6 @@ console.log(localStorage.getItem("password"));
     }
 
     function appendFlowerSelect(){
-        console.log("we here");
         for (let i =0;i< flowerArray.length; i++){
             if (flowerArray[i].user === currentUser ){
             let option = document.createElement("option");

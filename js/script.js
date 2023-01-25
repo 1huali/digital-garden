@@ -197,6 +197,7 @@ console.log(localStorage.getItem("password"));
                     mainMap.on('dblclick', onMapDblClick);
                     console.log("nice2c u again");
                     logUserProfile();
+                    flowerArray[flowerArray.length-1].setOptionButtons();
                 } else {
                     userLoggedIn = false;
                     console.log("try again");
@@ -247,7 +248,6 @@ console.log(localStorage.getItem("password"));
         for (let i=0;i < flowerArray.length; i++){
 
         if (flowerArray[i].flowerGenerated === true){
-            // energyStatistics();
         // printIcon();
         flowerArray[i].generate();
         flowerArray[i].turtle();
@@ -314,7 +314,8 @@ console.log(localStorage.getItem("password"));
             userSeedCount.innerHTML= flowerArray.length;
        //displays the grand total flower array length :
            //!!to-do)
-           flowerArray[flowerArray.length-1].setOptionButtons();
+           //TO DELE : 
+        //    flowerArray[flowerArray.length-1].setOptionButtons();
 
 
                 // for (let i=0; i < flowerArray.length; i++){
@@ -507,11 +508,11 @@ console.log(localStorage.getItem("password"));
     }
 
     function appendFlowerSelect(){
-        console.log(currentUser);
+        console.log("we here");
         for (let i =0;i< flowerArray.length; i++){
             if (flowerArray[i].user === currentUser ){
             let option = document.createElement("option");
-            option.text =   flowerArray[flowerArray.length-1].flowerId;
+            option.text =   flowerArray[i].flowerId;
             option.value = i;
             flowerMenuSelect.add(option);
         }

@@ -392,7 +392,13 @@ if (this.stemCount === 6) {
     }
 
     setOptionButtons(){
+      //this function set up generic water/nurture buttons when a user is logged in.
+      console.log("set option buttons");
       document.getElementById("flowerStatistic-buttons").style = "display : block";
+    }
+
+    assignFlowerStatistics(currentFlower){
+      console.log("assigning flower stats");
     }
 
   } //end Flower.js

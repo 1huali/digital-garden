@@ -95,12 +95,12 @@
   <select id="flowerList-select">
     <option value="none">none</option>
   </select> <br>
-  current flower : <span id="demo"></span>
+  current flower : <span id="demo">none</span>
 
 <div id="flowerStatistic-buttons">
-<div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div> 
-<input id="waterButton" class="buttons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> ?♥ ♥ ♥ ♥ ♥  </span><br>
-<input id="loveButton" class="buttons" type="button" value="Love"> Thoughts: <span id="flowerThoughts-container">  </span><br>
+<!-- <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div>  -->
+<input id="waterButton" class="buttons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> n/a  </span><br>
+<input id="loveButton" class="buttons" type="button" value="Love"> Thoughts: <span id="flowerThoughts-container"> n/a </span><br>
 <input id="talkButton" class="buttons" type="button" value="Talk"><br>
 </div>
 </section> 

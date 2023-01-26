@@ -127,8 +127,5 @@ hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span><br>
       <br>
       <!-- <input id="closeDialogButton" type="button" value="Done"> -->
 </section>
-
-  <article style="display:none" > HELLO TEST HOVER </article>
-
   </body>
 </html>

@@ -24,7 +24,7 @@ class Flower {
       this.possibleEvolutionGeneration; //json file
       // this.flower = "꧁❀꧂";
       this.growState = this.seed;
-      this.state = ["seed", "sprout", "bud", "bloom", "flower"];
+      this.state = ["seed", "sprout", "bud", "flower"];
       //change chi
       this.stateIndex = 0;
 //black ellipses at tip
@@ -39,6 +39,7 @@ class Flower {
       //  //the flower DIV based on the leaflet librairy to create a div element
       //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
+      this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
       //attributing an ID to those DIVs
       this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.creationTimeStamp.getTime());
       // console.log(this.creationTimeStamp.getTime());
@@ -95,6 +96,9 @@ class Flower {
 
       this.flowerEl.style.left = `${this.posX-50}px`;
       this.flowerEl.style.top = `${this.posY-50}px`; 
+
+      this.flowerHoverEl.style.left = `${this.posX-50}px`;
+      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
       //end Data from fill form
       this.user=user;
 
@@ -214,12 +218,11 @@ if(this.growthCompleted===false){
     displayFlower(){
         //  console.log(this.currentText);
 
-        // console.log(this.posX);
-        // console.log(this.posY);
         //position of the center of the flower canvas :
         this.flowerEl.style.left = `${this.posX-50}px`;
         this.flowerEl.style.top = `${this.posY-50}px`; 
-
+        this.flowerHoverEl.style.left = `${this.posX-50}px`;
+        this.flowerHoverEl.style.top = `${this.posY-150}px`; 
         //fractal tree
         if (this.pattern==="fractals" && this.growthCompleted ===false){
         for (let i = 0; i < this.flower.length; i++) {
@@ -317,8 +320,10 @@ if (this.stemCount === 6) {
     
       this.age();
 
-    }
+      //hover display:
+      this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
 
+    }
 
     bloom(){
       
@@ -396,12 +401,13 @@ if (this.stemCount === 6) {
       document.getElementById("flowerStatistic-buttons").style = "display : block";
     }
 
-
     printPositions(){
       document.getElementById('xPosBox').innerHTML = this.posX;
       console.log(this.posX);
       document.getElementById('yPosBox').innerHTML = this.posY;
     }
+
+
 
   } //end Flower.js
   

@@ -76,8 +76,7 @@ $(document).ready(function(){
     let userValue = "";
     let userSeedCount = document.getElementById("userFlowerIndex"); 
     let globalSeedCount = document.getElementById("totalFlowerIndex"); 
-    globalSeedCount.innerHTML= flowerArray.length;
-    console.log(flowerArray.length);
+
 
     
     let generateButton= document.getElementById('generateButton');
@@ -147,7 +146,7 @@ L.tileLayer.kitten().addTo(mainMap);
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
                     // console.log(parsedJSON[i].xPosition)
                     // console.log(parsedJSON[i].yPosition)
-//retrieving data, outputting from the database :  
+            //retrieving data, outputting from the database :  
                     flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
                     parseInt(parsedJSON[i].yPosition),
                       null,
@@ -164,6 +163,9 @@ L.tileLayer.kitten().addTo(mainMap);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
                   }
+            //Retrieve total number of flowers on the field :
+                    globalSeedCount.innerHTML = flowerArray.length;
+
            //LOGIN SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
     //local storge set-up
@@ -181,7 +183,7 @@ L.tileLayer.kitten().addTo(mainMap);
     //   valToStore = password;
     currentUserBox.innerHTML = userValue;
     currentUserIdBox.innerHTML = userValue;
-    // console.log("ask for password")
+    // console.log("ask for password");
     document.getElementById("password-container").style = "display : block";
     identifyButton.style = "display : none";
     loginButton.style = "display : block";

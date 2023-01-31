@@ -5,14 +5,14 @@ class Flower {
   // In the inputForm class, the pattern condition would assign which class to refer too (and we could erase the "if pattern === blabla" from both classes).
   // 
 
-      constructor(posX, posY, marker,map,arrayNumber,sound,length,user) {
+      constructor(posX, posY, marker,map,flowerDBid,sound,length,user) {
 
       this.creationTimeStamp= new Date();
       this.timeStamp=0;
       this.currentAge;
       this.currentState;
 
-      this.arrayNumber= arrayNumber;
+      this.flowerDBid= flowerDBid;
 
       // this.name = "";
       this.posX = posX;
@@ -41,7 +41,7 @@ class Flower {
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
       //attributing an ID to those DIVs
-      this.flowerEl.setAttribute("id","flower"+this.arrayNumber+"_"+this.creationTimeStamp.getTime());
+      this.flowerEl.setAttribute("id","flower"+this.flowerDBid+"_"+this.creationTimeStamp.getTime());
       // console.log(this.creationTimeStamp.getTime());
       //the id element :
       this.flowerId= this.flowerEl.id;
@@ -100,6 +100,7 @@ class Flower {
       this.flowerHoverEl.style.left = `${this.posX-50}px`;
       this.flowerHoverEl.style.top = `${this.posY-150}px`; 
       //end Data from fill form
+
       this.user=user;
 
       this.fruitArray= [];
@@ -128,10 +129,16 @@ class Flower {
       this.color="";
 
       //each flower object has its own journal and energy class
-      this.journal = new Journal();
+      this.journal = new Journal(this.flowerDBid, this.user);
       this.buttons = new Button(); //generic
       this.energy = new Energy();
-    } //end Constructor
+
+//at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
+      this.journal.sendThoughtButton.addEventListener("click", function(){
+        self.journal.journalDBInsert(self.growthPercentage());
+      });
+
+     } //end Constructor
 
 
     turtle () {
@@ -319,6 +326,7 @@ if (this.stemCount === 6) {
       }
     
       this.age();
+      console.log(this.growthPercentage());
 
       //hover display:
       this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
@@ -395,6 +403,27 @@ if (this.stemCount === 6) {
 
     }
 
+
+          growthPercentage(){
+          //converts age/growthLenght into a %
+
+            //calculation of the age of the tree. With the age variable, we can give it an evolution tracking time stamp to assign its visual representation.
+            let date = new Date();
+            let currentAge = date.getTime() - this.timeStamp; //age in minutes
+      
+          //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
+      
+           let growthPercent= currentAge/this.growthLength; //growth length in minutes
+      
+           if (growthPercent >= 1){
+            growthPercent = 1;
+           }
+
+           growthPercent*=100;
+           return growthPercent;
+    
+          }
+
     setOptionButtons(){
       //this function set up generic water/nurture buttons when a user is logged in.
       // console.log("set option buttons"); OK
@@ -406,6 +435,9 @@ if (this.stemCount === 6) {
       console.log(this.posX);
       document.getElementById('yPosBox').innerHTML = this.posY;
     }
+
+
+   
 
 
 

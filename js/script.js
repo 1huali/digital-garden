@@ -138,7 +138,7 @@ L.tileLayer.kitten().addTo(mainMap);
                   cache: false,
                   timeout: 600000,
                   success: function (response) {
-                  console.log(response);
+                //   console.log(response);
                   //use the JSON .parse function to convert the JSON string into a Javascript object
                   let parsedJSON = JSON.parse(response);
 

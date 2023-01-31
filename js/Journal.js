@@ -1,10 +1,15 @@
 //next : now we have a journal class object but its not linked to the flower constructor. We'd need to set up the table to hold the table data and  add a function to the flower.
 class Journal {
 
-    constructor (){
+    constructor (flowerDBid, user){
         this.thoughtCount=0;
         this.thoughts=[];
         this.closingSound = document.getElementById("chimeSound");
+
+        this.flowerId = flowerDBid;
+        this.completed = false;
+        this.user = user;
+        this.growthStage;
 
         //talkbox dialog: 
 //when user press "talk" button
@@ -33,19 +38,10 @@ class Journal {
     this.sendThoughtButton = document.getElementById("sendThoughtButton");
 
     let self=this;
-    self.sendThoughtButton.addEventListener("click", function(){
+
+    // self.sendThoughtButton.addEventListener("click", function(){
         //?? IS THIS WHERE THE AJAX FORM FORM FOR JOURNAL FORM IS CALLED
-          //do I create an html <form id="message"> and ajax it here?
-
-  self.thoughtDate = thoughtDateData();
-  console.log("saved to archive");
-  self.thoughtCount += 1;
-  self.thought = document.getElementById("journalTextContainer").value;
-  self.thoughts.push(self.thought);
-          //thoughts are saved in an array and displayed with their date :
-  self.singleLineElement = $("<article>").addClass("single-archive-line").html(self.thought + ": on " + self.thoughtDate ).appendTo("#archive-container");
-
-});
+      
 
     } //end construtor
 
@@ -53,8 +49,34 @@ class Journal {
         $("#talkBoxDialog").dialog('open');
     }
 
+    journalDBInsert(growthPercentage){
+      this.thoughtDate = thoughtDateData();
+      console.log("saved to archive");
+      this.thoughtCount += 1;
+      this.thought = document.getElementById("journalTextContainer").value;
+      this.thoughts.push(this.thought);
+              //thoughts are saved in an array and displayed with their date :
+      this.singleLineElement = $("<article>").addClass("single-archive-line").html(this.thought + ": on " + this.thoughtDate ).appendTo("#archive-container");
     
-
+      //AJAX :
+      let data = new FormData();
+    
+      //fill in proper variables the values that have been traversed
+    data.append('flower_identification', this.flowerId);
+    data.append('completed_state', this.flowerId);
+    data.append("msg", this.newFlower.posX);
+    data.append("msg_date", this.newFlower.posY);
+    data.append("user", this.newFlower.growthCompleted);
+    data.append("growthStage", this.newFlower.posX);
+    
+    
+    /*console.log to inspect the data */
+                 for (let pair of data.entries()) {
+                   console.log(pair[0]+ ', ' + pair[1]);
+               }
+    
+    // });
+    }
 
 }//end of class
 

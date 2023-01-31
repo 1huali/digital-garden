@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     let flowerArray=[];
     
-    let selectedFlower;
+    let selectedFlower=null;
     let flowerMenuSelect = document.getElementById("flowerList-select"); 
 
         // localStorage.clear();
@@ -319,7 +319,13 @@ console.log(localStorage.getItem("password"));
 
 
         talkButton.addEventListener("click", function(){
+            if (selectedFlower === null){
+                setTimeout(() => {
+                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
+                  }, "100");
+                 } else {
             flowerArray[selectedFlower].journal.openJournal();
+            }
             //activate flowerArray : blossom();
         });
 
@@ -334,6 +340,12 @@ console.log(localStorage.getItem("password"));
 
 
         waterButton.addEventListener("click", function(){
+
+            if (selectedFlower === null){
+                setTimeout(() => {
+                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
+                  }, "100");
+                 } else {
             //increments the waterDaily level count
         flowerArray[selectedFlower].energy.waterDailyLevel++;
         if (flowerArray[selectedFlower].energy.waterDailyLevel ===3){
@@ -353,10 +365,15 @@ console.log(localStorage.getItem("password"));
                 //!! switch to call from energy class
 
             }
-
+        }
         });
 
         loveButton.addEventListener("click", function(){
+            if (selectedFlower === null){
+                setTimeout(() => {
+                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
+                  }, "100");
+                 } else {
             flowerArray[flowerArray.length-1].loveDailyLevel++;
                             //!! switch to call from energy class
 
@@ -364,6 +381,7 @@ console.log(localStorage.getItem("password"));
                 setTimeout(() => {
                     document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
                   }, "100");
+                }
         });
 
 

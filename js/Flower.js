@@ -138,7 +138,9 @@ class Flower {
      activateJournal(){
       console.log("activate")
       this.dialogActivate=true;
-      this.journal = new Journal(this.flowerDBid, this.user);
+      // this.journal = new Journal(this.flowerDBid, this.user);
+      this.journal = new Journal(this.flowerId, this.user);
+
       let self=this;
 
       //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
@@ -460,7 +462,7 @@ if (this.stemCount === 6) {
 
     printPositions(){
       document.getElementById('xPosBox').innerHTML = this.posX;
-      console.log(this.posX);
+      // console.log(this.posX);
       document.getElementById('yPosBox').innerHTML = this.posY;
     }
 

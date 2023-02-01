@@ -59,19 +59,21 @@ class Journal {
               //thoughts are saved in an array and displayed with their date :
       this.singleLineElement = $("<article>").addClass("single-archive-line").html(this.thought + ": on " + this.thoughtDate ).appendTo("#archive-container");
       this.growthStage= growthPercentage;
-      console.log(this.growthStage);
-    
+
+      this.completedState=false;
+      if (this.growthStage=== 100){
+        this.completedState=true;
+      };
 
       //AJAX :
       let data = new FormData();
     
-      //TO-DO fill in proper variables the values that have been traversed
-    data.append('flower_identification', this.flowerId);
-    data.append('completed_state', this.flowerId);
+    data.append('flower_identification', this.flowerId); 
+    data.append('completed_state', this.completedState);
     data.append("msg", this.thought);
     data.append("msg_date", this.thoughtDate);
     data.append("user", this.user);
-    data.append("growthStage", this.growthCompleted);
+    data.append("growthStage", this.growthStage); //en %
     
     
     /*console.log to inspect the data */

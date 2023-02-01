@@ -354,7 +354,7 @@ console.log(localStorage.getItem("password"));
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
-                    console.log(selectedFlower);
+                    // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();

@@ -12,6 +12,31 @@ function setup() {
 
 $(document).ready(function(){
 
+    //when user press "talk" button
+ $( "#talkBoxDialog" ).dialog({
+    position: { my: "left top", at: "right bottom", of: window },
+    classes: {
+        "ui-dialog": "talkBox"
+    },
+    buttons: [
+        {
+          text: "Close",
+          click: function() {
+            $( this ).dialog( "close" );
+            //create its own function, and it will be part of the Flower class so we will call the flower
+            // flowerArray.bloom();
+            // flowerArray[flowerArray.length-1].blossom=true;
+
+            // this.closingSound.play();
+          }
+        }
+      ]
+  });
+
+//closes the talkbox dialog after creating it
+  $("#talkBoxDialog").dialog('close');
+
+
     // let journal= new Journal();
     let inputForm = new InputForm();
 
@@ -83,6 +108,11 @@ $(document).ready(function(){
 
 
     flowerMenuSelect.addEventListener("change", function(){
+
+        if (selectedFlower !== null){
+        flowerArray[selectedFlower].deactivateJournal();
+        }
+
         selectedFlower = flowerMenuSelect.value;
         document.getElementById("demo").innerHTML = selectedFlower ;
         if (flowerMenuSelect.value === "none"){
@@ -324,7 +354,12 @@ console.log(localStorage.getItem("password"));
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
-            flowerArray[selectedFlower].journal.openJournal();
+                    console.log(selectedFlower);
+            // flowerArray[selectedFlower].journal.openJournal();
+            if (flowerArray[selectedFlower].dialogActivate === false){
+            flowerArray[selectedFlower].activateJournal();
+            //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
+        }
             }
             //activate flowerArray : blossom();
         });

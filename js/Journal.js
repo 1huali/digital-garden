@@ -12,30 +12,31 @@ class Journal {
         this.growthStage;
 
         //talkbox dialog: 
-//when user press "talk" button
- $( "#talkBoxDialog" ).dialog({
-    position: { my: "left top", at: "right bottom", of: window },
-    classes: {
-        "ui-dialog": "talkBox"
-    },
-    buttons: [
-        {
-          text: "Close",
-          click: function() {
-            $( this ).dialog( "close" );
-            //create its own function, and it will be part of the Flower class so we will call the flower
-            // flowerArray.bloom();
-            // flowerArray[flowerArray.length-1].blossom=true;
+// //when user press "talk" button
+//  $( "#talkBoxDialog" ).dialog({
+//     position: { my: "left top", at: "right bottom", of: window },
+//     classes: {
+//         "ui-dialog": "talkBox"
+//     },
+//     buttons: [
+//         {
+//           text: "Close",
+//           click: function() {
+//             $( this ).dialog( "close" );
+//             //create its own function, and it will be part of the Flower class so we will call the flower
+//             // flowerArray.bloom();
+//             // flowerArray[flowerArray.length-1].blossom=true;
 
-            this.closingSound.play();
-          }
-        }
-      ]
-  });
+//             this.closingSound.play();
+//           }
+//         }
+//       ]
+//   });
 
-//closes the talkbox dialog after creating it
-  $("#talkBoxDialog").dialog('close');
+// //closes the talkbox dialog after creating it
+//   $("#talkBoxDialog").dialog('close');
     this.sendThoughtButton = document.getElementById("sendThoughtButton");
+    console.log(this.sendThoughtButton);
 
     let self=this;
 
@@ -57,23 +58,28 @@ class Journal {
       this.thoughts.push(this.thought);
               //thoughts are saved in an array and displayed with their date :
       this.singleLineElement = $("<article>").addClass("single-archive-line").html(this.thought + ": on " + this.thoughtDate ).appendTo("#archive-container");
+      this.growthStage= growthPercentage;
+      console.log(this.growthStage);
     
+
       //AJAX :
       let data = new FormData();
     
-      //fill in proper variables the values that have been traversed
+      //TO-DO fill in proper variables the values that have been traversed
     data.append('flower_identification', this.flowerId);
     data.append('completed_state', this.flowerId);
-    data.append("msg", this.newFlower.posX);
-    data.append("msg_date", this.newFlower.posY);
-    data.append("user", this.newFlower.growthCompleted);
-    data.append("growthStage", this.newFlower.posX);
+    data.append("msg", this.thought);
+    data.append("msg_date", this.thoughtDate);
+    data.append("user", this.user);
+    data.append("growthStage", this.growthCompleted);
     
     
     /*console.log to inspect the data */
                  for (let pair of data.entries()) {
                    console.log(pair[0]+ ', ' + pair[1]);
                }
+
+
     
     // });
     }

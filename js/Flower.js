@@ -6,6 +6,7 @@ class Flower {
   // 
 
       constructor(posX, posY, marker,map,flowerDBid,sound,length,user) {
+        this.dialogActivate = false;
 
       this.creationTimeStamp= new Date();
       this.timeStamp=0;
@@ -129,17 +130,44 @@ class Flower {
       this.color="";
 
       //each flower object has its own journal and energy class
-      this.journal = new Journal(this.flowerDBid, this.user);
       this.buttons = new Button(); //generic
       this.energy = new Energy();
 
-//at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
-      this.journal.sendThoughtButton.addEventListener("click", function(){
-        self.journal.journalDBInsert(self.growthPercentage());
-      });
-
      } //end Constructor
 
+     activateJournal(){
+      console.log("activate")
+      this.dialogActivate=true;
+      this.journal = new Journal(this.flowerDBid, this.user);
+      let self=this;
+
+      //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
+      this.journal.sendThoughtButton.addEventListener("click", function(){self.clickHandler()});
+
+      this.journal.openJournal();
+
+      
+     }
+
+     clickHandler(){
+    this.journal.journalDBInsert(this.growthPercentage());
+}
+
+     
+
+     deactivateJournal(){
+      this.dialogActivate=false;
+
+      let self = this;
+      console.log("deactivate")
+      let old_element = document.getElementById("sendThoughtButton");
+      let new_element = old_element.cloneNode(true);
+      old_element.parentNode.replaceChild(new_element, old_element);
+
+
+      $("#talkBoxDialog").dialog('close');
+      this.journal = null;
+     }
 
     turtle () {
        console.log("turtle rule applying....");

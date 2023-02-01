@@ -41,6 +41,7 @@ $(document).ready(function(){
     let inputForm = new InputForm();
 
     let flowerArray=[];
+    let thoughtArrayDB=[];
     
     let selectedFlower=null;
     let flowerMenuSelect = document.getElementById("flowerList-select"); 
@@ -159,11 +160,11 @@ L.tileLayer.kitten = function() {
 
 L.tileLayer.kitten().addTo(mainMap);
 
-           //AJAX SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+           //AJAX post SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
     $.ajax({
                   type: "POST",
                   enctype: 'text/plain',
-                  url: "php/retrieveData.php",
+                  url: "php/retrieveData_flowerObject.php",
                   processData: false,//prevents from converting into a query string
                   contentType: false,
                   cache: false,
@@ -177,7 +178,7 @@ L.tileLayer.kitten().addTo(mainMap);
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
                     // console.log(parsedJSON[i].xPosition)
                     // console.log(parsedJSON[i].yPosition)
-            //retrieving data, outputting from the database :  
+            //retrieving data, outputting from the database to pass in a class:  
                     flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
                     parseInt(parsedJSON[i].yPosition),
                       null,
@@ -194,6 +195,42 @@ L.tileLayer.kitten().addTo(mainMap);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
                   }
+
+                  $.ajax({
+                    type: "POST",
+                    enctype: 'text/plain',
+                    url: "php/retrieveData_journal.php",
+                    processData: false,//prevents from converting into a query string
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function (response) {
+                    // console.log(response);
+                    //use the JSON .parse function to convert the JSON string into a Javascript object
+                    let parsedJSONjournal = JSON.parse(response);
+  
+                    for(let i = 0; i<parsedJSONjournal.length; i++){
+                      //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
+//retrieving data, outputting from the database to create obj:  
+ 
+                        thoughtArrayDB.push({
+                            msg: parsedJSONjournal[i].msg,
+                            flowerId: parsedJSONjournal[i].fID,
+                            msgDate: parsedJSONjournal[i].msgDate
+                        });
+                    }
+                            for (let j=0; j < flowerArray.length; j++){
+                                for (let k=0;k<thoughtArrayDB.length; k++){
+                                    //going thru the thoughtsObj array from the DB, filter those who matches a flower# and store them in their  array in the journal class:  
+                                    if (thoughtArrayDB[k].flowerId === flowerArray[j].flowerDBid){
+                                        flowerArray[j].journal.talkHistoryArrayDB.push(thoughtArrayDB[k]);
+                                    }
+                                }
+                            }
+//debugging purposes
+                        // for (let m=0; m< flowerArray.length; m++){
+                        //     flowerArray[m].journal.thoughtsHistory();
+                        // }
             //Retrieve total number of flowers on the field :
                     globalSeedCount.innerHTML = flowerArray.length;
 
@@ -355,10 +392,13 @@ console.log(localStorage.getItem("password"));
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
-                    console.log(selectedFlower);
+                    // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();
+            console.log(flowerArray[selectedFlower].flowerDBid);
+            flowerArray[selectedFlower].journal.talkHistory();
+
             //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
         }
             }
@@ -586,10 +626,19 @@ console.log(localStorage.getItem("password"));
         }
     }
 
-},
-
+        }, //end success post journal
 error:function(){
 console.log("error occurred");
 }
-});
+}); // end ajax post journal
+        },//end success flowerObj journal
+                  error:function(){
+                    console.log("error occurred");
+                    } 
+}); // end ajax flowerObj journal
+
+
+
+
+
         }); //end of windowOnLoad / document.ready

@@ -10,6 +10,8 @@ class Journal {
         this.completed = false;
         this.user = user;
         this.growthStage;
+        this.talkHistoryArrayDB=[];
+
 
         //talkbox dialog: 
 // //when user press "talk" button
@@ -42,7 +44,6 @@ class Journal {
 
     // self.sendThoughtButton.addEventListener("click", function(){
         //?? IS THIS WHERE THE AJAX FORM FORM FOR JOURNAL FORM IS CALLED
-      
 
     } //end construtor
 
@@ -51,11 +52,13 @@ class Journal {
     }
 
     journalDBInsert(growthPercentage){
+//thoughts generated in real-time here:
       this.thoughtDate = thoughtDateData();
       console.log("saved to archive");
       this.thoughtCount += 1;
       this.thought = document.getElementById("journalTextContainer").value;
       this.thoughts.push(this.thought);
+      console.log(this.thoughts)
               //thoughts are saved in an array and displayed with their date :
       this.singleLineElement = $("<article>").addClass("single-archive-line").html(this.thought + ": on " + this.thoughtDate ).appendTo("#archive-container");
       this.growthStage= growthPercentage;
@@ -108,7 +111,22 @@ $.ajax({
         }
     });
     } //end journalDBInsert() function
-}//end of class
+
+    assignMsgValues(msg,msgDate){
+        this.thought=msg;
+        this.thoughtDate=msgDate;
+        console.log(msg,msgDate);
+    }
+
+    talkHistory(){
+        console.log(this.talkHistoryArrayDB);
+        for (let i=0; i< this.talkHistoryArrayDB.length; i++){
+        //accessing variables for each object
+        $("<article>").addClass("single-archive-line").html(this.user + " thought " + this.talkHistoryArrayDB[i].msg + ": on " + this.talkHistoryArrayDB[i].msgDate).appendTo("#archive-container");
+    }
+}
+
+}//end of journal class
 
 function thoughtDateData(){
     //add hours if less than 24 hours?

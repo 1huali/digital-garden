@@ -133,13 +133,16 @@ class Flower {
       this.buttons = new Button(); //generic
       this.energy = new Energy();
 
+      this.journal = new Journal(this.flowerDBid, this.user);
+
      } //end Constructor
 
      activateJournal(){
       console.log("activate")
       this.dialogActivate=true;
-      this.journal = new Journal(this.flowerDBid, this.user);
-      // this.journal = new Journal(this.flowerId, this.user);
+      this.journal.sendThoughtButton = document.getElementById("sendThoughtButton");
+     
+      // this.journal = new Journal(this.flowerId, this.user); // I prefer the whole ID but anuyway
 
       let self=this;
 
@@ -168,11 +171,10 @@ class Flower {
 
 
       $("#talkBoxDialog").dialog('close');
-      this.journal = null;
+     // this.journal = null;
      }
 
     turtle () {
-       console.log("turtle rule applying....");
 
       this.p5Context.resetMatrix();
       //this.p5Context.background(0);
@@ -356,7 +358,7 @@ if (this.stemCount === 6) {
       }
     
       this.age();
-      console.log(this.growthPercentage());
+      // console.log(this.growthPercentage());
 
       //hover display:
       this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';

@@ -118,6 +118,7 @@ $(document).ready(function(){
         if (flowerMenuSelect.value === "none"){
             console.log("no flower");
             flowerMenuSelect = -1;
+            selectedFlower = null;
         } else {
         //displays the energy levels of the selected flowers
         flowerArray[selectedFlower].printPositions(selectedFlower);
@@ -354,7 +355,7 @@ console.log(localStorage.getItem("password"));
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
-                    // console.log(selectedFlower);
+                    console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();

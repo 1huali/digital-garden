@@ -4,7 +4,7 @@ require('openDB.php');
 //temporary view of result, for debugging
 try {
   //will display all :
-    $sql_select='SELECT * FROM flowerObjects';
+    $sql_select='SELECT * FROM flowerJournal_TWO';
 
 
     // the result set

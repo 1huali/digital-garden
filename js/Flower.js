@@ -138,8 +138,8 @@ class Flower {
      activateJournal(){
       console.log("activate")
       this.dialogActivate=true;
-      // this.journal = new Journal(this.flowerDBid, this.user);
-      this.journal = new Journal(this.flowerId, this.user);
+      this.journal = new Journal(this.flowerDBid, this.user);
+      // this.journal = new Journal(this.flowerId, this.user);
 
       let self=this;
 

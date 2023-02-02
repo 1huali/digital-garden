@@ -266,6 +266,9 @@ if(this.growthCompleted===false){
           if (this.stateIndex === this.state.length-1){
             // console.log("!!send notif/email to user");
             document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
+            setTimeout(() => {
+              document.getElementById("message").innerHTML = "";
+            }, "500");
             this.growthCompleted = true;
             this.blossom= true;
           }

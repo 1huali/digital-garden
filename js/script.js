@@ -65,13 +65,6 @@ $(document).ready(function(){
 
 //setup function kinda
     let section = $('section');
-    
-    //message bar :
-//     if (userLoggedIn === false){
-// setTimeout(() => {
-//     document.getElementById("message").innerHTML= "Wander in peace or register"
-//   }, "7000")
-// };
 
     // let currentFlowerContainer = document.getElementById("currentFlowerContainer");
     let currentFlower=[];
@@ -179,9 +172,33 @@ L.tileLayer.kitten().addTo(mainMap);
 
                   for(let i = 0; i<parsedJSON.length; i++){
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
-                    // console.log(parsedJSON[i].xPosition)
-                    // console.log(parsedJSON[i].yPosition)
-            //retrieving data, outputting from the database to pass in a class:  
+                    console.log(parsedJSON[i].pattern)
+                    //retrieving data, outputting from the database to pass in a class:  
+                    //?? SETTING A framework to derive to the proper child class
+            if (parsedJSON[i].pattern==="fractals"){
+                console.log("its a fractals!")
+                //seems like i'm gonna have to create 2 arrays of flowers, and activate each array at every function
+                // fractalArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
+                // parseInt(parsedJSON[i].yPosition),
+                //   null,
+                //   mainMap,
+                //   parsedJSON[i].flowerID,
+                //   null,
+                //   parseFloat(parsedJSON[i].growthLength),
+                //   parsedJSON[i].user
+                // ));
+            } else if (parsedJSON[i].pattern==="lsystemAxiomF"){
+                console.log("its an l-system!");
+                // lsystemFArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
+                // parseInt(parsedJSON[i].yPosition),
+                //   null,
+                //   mainMap,
+                //   parsedJSON[i].flowerID,
+                //   null,
+                //   parseFloat(parsedJSON[i].growthLength),
+                //   parsedJSON[i].user
+                // ));
+            }
                     flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
                     parseInt(parsedJSON[i].yPosition),
                       null,
@@ -247,7 +264,7 @@ L.tileLayer.kitten().addTo(mainMap);
     userValue = username;
     currentUser = username;
     appendFlowerSelect();
-    assignUsernameTemporary();
+    // assignUsernameTemporary();
 
     // check if this key-val alreday exists
      if (localStorage[userKey]) {

@@ -57,16 +57,16 @@ class InputForm {
  data.append("growthCompleted", self.newFlower.growthCompleted);
 
  //traversing fill form data to constructor : 
- self.newFlower.assignFormValues(data.get("a_timestamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
- // console.log(data.get("manual_growth"));
+ self.newFlower.assignFormValues(data.get("a_timeStamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
+//  console.log(data.get("a_pattern"));
 
  // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                
- /*console.log to inspect the data */
-               for (let pair of data.entries()) {
-                 console.log(pair[0]+ ', ' + pair[1]);
-             }
-
+//  //console.log to inspect the data :
+//                for (let pair of data.entries()) {
+//                  console.log(pair[0]+ ', ' + pair[1]);
+//              }
+// //
 /*https://api.jquery.com/jQuery.ajax/*/
 $.ajax({
 type: "POST",
@@ -95,8 +95,6 @@ document.getElementById("insertFlower").reset();
 self.newFlower.flowerGenerated = true;
 $("#seedIdPopUpForm-container").dialog('close');
 
-self.newFlower.printEnergyLevels();
-//create flower with its own energy bar
 },
 error:function(){
 console.log("error occurred");

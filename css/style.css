@@ -123,10 +123,9 @@ h1{
   }
 
   .seedFillForm-dialog{
-    right: 20px;
-    bottom: 20px;
-    /* background-color: rgb(49, 90, 90); */
-    /* visibility: none; */
+    height: max-content;
+    width: max-content;
+
   }
 
 /* BUTTONS : */

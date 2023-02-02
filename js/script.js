@@ -278,7 +278,7 @@ console.log(localStorage.getItem("password"));
                     mainMap.on('dblclick', onMapDblClick);
                     console.log("nice2c u again");
                     logUserProfile();
-                    flowerArray[flowerArray.length-1].setOptionButtons();
+                    flowerArray[flowerArray.length-1].buttons.setOptionButtons();
                 } else {
                     userLoggedIn = false;
                     console.log("try again");

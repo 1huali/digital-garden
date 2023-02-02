@@ -12,10 +12,11 @@ class Button {
 
     } //end construtor
 
-
-    // assignFlowerInstance(){
-    //     $("#talkBoxDialog").dialog('open');
-    // }
+    setOptionButtons(){
+      //this function set up generic water/nurture buttons when a user is logged in.
+      // console.log("set option buttons"); OK
+      document.getElementById("flowerStatistic-buttons").style = "display : block";
+    }
 
 
 }//end of class

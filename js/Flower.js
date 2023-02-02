@@ -456,11 +456,11 @@ if (this.stemCount === 6) {
     
           }
 
-    setOptionButtons(){
-      //this function set up generic water/nurture buttons when a user is logged in.
-      // console.log("set option buttons"); OK
-      document.getElementById("flowerStatistic-buttons").style = "display : block";
-    }
+    // setOptionButtons(){
+    //   //this function set up generic water/nurture buttons when a user is logged in.
+    //   // console.log("set option buttons"); OK
+    //   document.getElementById("flowerStatistic-buttons").style = "display : block";
+    // }
 
     printPositions(){
       document.getElementById('xPosBox').innerHTML = this.posX;

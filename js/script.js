@@ -1,7 +1,7 @@
 /**
 Digital Garden
 Wawa Li
-Prototype 2
+Prototype 3
 24 novembre 2022
 */
 
@@ -73,7 +73,7 @@ $(document).ready(function(){
 //   }, "7000")
 // };
 
-    let currentFlowerContainer = document.getElementById("currentFlowerContainer");
+    // let currentFlowerContainer = document.getElementById("currentFlowerContainer");
     let currentFlower=[];
     let flowerArrayIndex=0;
     let idDataContainer = document.getElementById('idData');
@@ -108,21 +108,24 @@ $(document).ready(function(){
 
 
     flowerMenuSelect.addEventListener("change", function(){
+        console.log(flowerMenuSelect.value);
 
         if (selectedFlower !== null){
         flowerArray[selectedFlower].deactivateJournal();
         }
 
-        selectedFlower = flowerMenuSelect.value;
-        document.getElementById("demo").innerHTML = selectedFlower ;
+ 
         if (flowerMenuSelect.value === "none"){
             console.log("no flower");
-            flowerMenuSelect = -1;
+            flowerMenuSelect.value = "";
             selectedFlower = null;
         } else {
+            selectedFlower = flowerMenuSelect.value;
+            console.log(selectedFlower);
+            document.getElementById("demo").innerHTML = selectedFlower ;
         //displays the energy levels of the selected flowers
         flowerArray[flowerArray.length-1].buttons.setOptionButtons();
-        flowerArray[selectedFlower].printPositions(selectedFlower);
+        // flowerArray[selectedFlower].printPositions(selectedFlower);
         flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
         }
 
@@ -522,7 +525,7 @@ console.log(localStorage.getItem("password"));
 
                 // idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
 
-                currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
+                // currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {
                 document.getElementById("message").innerHTML = "Limit exceeded, try again in 24 hours."
 

@@ -87,9 +87,9 @@ h1{
 
   #archive-container{
     display: block;
-    background-color: deeppink;
-    width: 375px;
-    height: 200px;
+    background-color: rgba(255, 255, 255);
+    width: max-content;
+    height: max-content;
     color: #000000;
   }
 
@@ -114,10 +114,9 @@ h1{
 
 /* DIALOG BOXES : */
   .talkBox{
-    /* display: none; */
-    background-color: aqua;
-    /* opacity: 0; */
-    /* visibility: none; */
+    background-color: rgba(255, 255, 255);
+    width: max-content;
+    height: max-content;
   }
   #talkBoxDialog{
     display: none;
@@ -165,7 +164,9 @@ display: block;
 }
 
 .single-archive-line{
-  background:#d9bfd6;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: max-content;
+  height: max-content;
   margin-left:5%;
   padding:1%;
   margin-bottom:2%;
@@ -196,16 +197,23 @@ display: block;
 
 .flowerHoverEl{
   color: #000000;
-  width: 500px;
-  height: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: max-content;
+  height: max-content;
   position:absolute;
   z-index: 100;
   display: none;
-  /* background: deeppink; */
+  padding: auto;
 }
 
 .flowerEl:hover + .flowerHoverEl {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: max-content;
+  height: max-content;
   display: block;
+  padding: 0.2px;
+  /* z-index: 1; */
+
   /* background-color: red; */
 
 

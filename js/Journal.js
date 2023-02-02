@@ -38,7 +38,6 @@ class Journal {
 // //closes the talkbox dialog after creating it
 //   $("#talkBoxDialog").dialog('close');
     this.sendThoughtButton = document.getElementById("sendThoughtButton");
-    console.log(this.sendThoughtButton);
 
     let self=this;
 

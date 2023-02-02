@@ -36,7 +36,6 @@ $(document).ready(function(){
 //closes the talkbox dialog after creating it
   $("#talkBoxDialog").dialog('close');
 
-
     // let journal= new Journal();
     let inputForm = new InputForm();
 
@@ -122,6 +121,7 @@ $(document).ready(function(){
             selectedFlower = null;
         } else {
         //displays the energy levels of the selected flowers
+        flowerArray[flowerArray.length-1].buttons.setOptionButtons();
         flowerArray[selectedFlower].printPositions(selectedFlower);
         flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
         }
@@ -278,7 +278,7 @@ console.log(localStorage.getItem("password"));
                     mainMap.on('dblclick', onMapDblClick);
                     console.log("nice2c u again");
                     logUserProfile();
-                    flowerArray[flowerArray.length-1].buttons.setOptionButtons();
+                    // flowerArray[flowerArray.length-1].buttons.setOptionButtons();
                 } else {
                     userLoggedIn = false;
                     console.log("try again");
@@ -338,6 +338,8 @@ console.log(localStorage.getItem("password"));
 
     }
       }
+
+      
     // end L-SYSTEM
     // requestAnimationFrame(loop);
 
@@ -382,7 +384,6 @@ console.log(localStorage.getItem("password"));
 
 //?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
-            // showJournal(data);
             showFlowerData(data);
 
 
@@ -398,19 +399,16 @@ console.log(localStorage.getItem("password"));
             flowerArray[selectedFlower].activateJournal();
             console.log(flowerArray[selectedFlower].flowerDBid);
             flowerArray[selectedFlower].journal.talkHistory();
-
-            //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
         }
             }
             //activate flowerArray : blossom();
         });
 
-        //submit at seed fill form
         submitButton.addEventListener("click", function(){
+                    //submit at seed fill form
             //displays the users total flower array length :
             userSeedCount.innerHTML= flowerArray.length;
-       //displays the grand total flower array length :
-           //!!to-do)
+
 
         });
 
@@ -445,6 +443,7 @@ console.log(localStorage.getItem("password"));
         });
 
         loveButton.addEventListener("click", function(){
+            //messages and trigger when the loveButton is pressed :
             if (selectedFlower === null){
                 setTimeout(() => {
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."

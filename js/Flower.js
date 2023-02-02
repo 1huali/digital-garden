@@ -1,3 +1,4 @@
+let opened= false;
 
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
@@ -41,6 +42,26 @@ class Flower {
       //the leaflet DIV element
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
+      this.flowerEl.addEventListener("click", function(){
+
+          let flowerHoverElClass = document.querySelectorAll(".flowerHoverEl");
+          for (let i=0; i < flowerHoverElClass.length; i++){
+            if (flowerHoverElClass[i].style.display === "block"); {
+              flowerHoverElClass[i].style.display = "none";
+              opened=false;
+            }
+            self.flowerHoverEl.style= "display: block;"
+            opened=true;
+
+            if (opened === true){
+              setTimeout(() => {
+                self.flowerHoverEl.style.display= "none"
+                opened=false;
+              }, "5000");
+        }
+          }
+      });
+
       //attributing an ID to those DIVs
       this.flowerEl.setAttribute("id","flower"+this.flowerDBid+"_"+this.creationTimeStamp.getTime());
       // console.log(this.creationTimeStamp.getTime());
@@ -269,7 +290,7 @@ if(this.growthCompleted===false){
         }
       } else {
         //debugging:
-        console.log("growth completed");
+        // console.log("growth completed");
       }
 
 
@@ -456,13 +477,9 @@ if (this.stemCount === 6) {
     
           }
 
-    // setOptionButtons(){
-    //   //this function set up generic water/nurture buttons when a user is logged in.
-    //   // console.log("set option buttons"); OK
-    //   document.getElementById("flowerStatistic-buttons").style = "display : block";
-    // }
-
     printPositions(){
+
+      //positions printed in the data 
       document.getElementById('xPosBox').innerHTML = this.posX;
       // console.log(this.posX);
       document.getElementById('yPosBox').innerHTML = this.posY;

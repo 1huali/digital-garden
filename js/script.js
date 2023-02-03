@@ -47,7 +47,8 @@ $(document).ready(function(){
 
         // localStorage.clear();
     //??why message doesnt display?
-    document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
+    // document.getElementById("message").innerHTML = "Welcome to the digital garden. Sit and reflect as you need."
+    document.getElementById("message").innerHTML = "yeeeee."
 
     let modeButton = document.getElementById('modeButton');
     // let playMode = ["mainMode", "processMode"];
@@ -172,42 +173,29 @@ L.tileLayer.kitten().addTo(mainMap);
 
                   for(let i = 0; i<parsedJSON.length; i++){
                     //take order from the constructor, but names from the table (look at "INSERT INTO" variables name)
-                    console.log(parsedJSON[i].pattern)
+                    // console.log(parsedJSON[i].pattern)
                     //retrieving data, outputting from the database to pass in a class:  
-                    //?? SETTING A framework to derive to the proper child class
             if (parsedJSON[i].pattern==="fractals"){
-                console.log("its a fractals!")
-                //seems like i'm gonna have to create 2 arrays of flowers, and activate each array at every function
-                // fractalArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
-                // parseInt(parsedJSON[i].yPosition),
-                //   null,
-                //   mainMap,
-                //   parsedJSON[i].flowerID,
-                //   null,
-                //   parseFloat(parsedJSON[i].growthLength),
-                //   parsedJSON[i].user
-                // ));
+                flowerArray.push(new Fractals(parseInt(parsedJSON[i].xPosition),
+                parseInt(parsedJSON[i].yPosition),
+                  null,
+                  mainMap,
+                  parsedJSON[i].flowerID,
+                  null,
+                  parseFloat(parsedJSON[i].growthLength),
+                  parsedJSON[i].user
+                ));
             } else if (parsedJSON[i].pattern==="lsystemAxiomF"){
-                console.log("its an l-system!");
-                // lsystemFArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
-                // parseInt(parsedJSON[i].yPosition),
-                //   null,
-                //   mainMap,
-                //   parsedJSON[i].flowerID,
-                //   null,
-                //   parseFloat(parsedJSON[i].growthLength),
-                //   parsedJSON[i].user
-                // ));
+                flowerArray.push(new AxiomF(parseInt(parsedJSON[i].xPosition),
+                parseInt(parsedJSON[i].yPosition),
+                  null,
+                  mainMap,
+                  parsedJSON[i].flowerID,
+                  null,
+                  parseFloat(parsedJSON[i].growthLength),
+                  parsedJSON[i].user
+                ));
             }
-                    flowerArray.push(new Flower(parseInt(parsedJSON[i].xPosition),
-                    parseInt(parsedJSON[i].yPosition),
-                      null,
-                      mainMap,
-                      parsedJSON[i].flowerID,
-                      null,
-                      parseFloat(parsedJSON[i].growthLength),
-                      parsedJSON[i].user
-                    ));
 
                     //for the flowers display since the condition for display is true for flowerGenerated
                     flowerArray[flowerArray.length-1].flowerGenerated = true;

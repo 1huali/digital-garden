@@ -1,13 +1,11 @@
-let opened= false;
-
-class Flower {
-  //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
-  // rework of the Flower class as the main, then into 2 superclass : L-System and Fractal. 
+class AxiomF extends Flower {
   // In the inputForm class, the pattern condition would assign which class to refer too (and we could erase the "if pattern === blabla" from both classes).
   // 
 
       constructor(posX, posY, marker,map,flowerDBid,sound,length,user) {
-        this.dialogActivate = false;
+        super(posX, posY, marker,map,flowerDBid,sound,length,user);
+
+      this.dialogActivate = false;
 
       this.creationTimeStamp= new Date();
       this.timeStamp=0;
@@ -42,6 +40,17 @@ class Flower {
       this.waterDailyLevel=0;
       this.waterLevelArray=["░","▒","▓","█","█"];
 
+           //L-SYSTEM FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+
+      this.angle= radians(25);
+      this.axiom = "F";
+      this.sentence = this.axiom;
+      this.len = 20;
+      this.rules = [];
+      this.rules[0] = {
+        a: "F",
+        b: "FF+[+F-F-F]-[-F+F+F]"
+      }
 
            //LEAFLET/DIV ELEMENT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
@@ -106,11 +115,6 @@ class Flower {
 
     this.p5Context = new p5(this.s1);
 
-      this.flowerEl.style.left = `${this.posX-50}px`;
-      this.flowerEl.style.top = `${this.posY-50}px`; 
-
-      this.flowerHoverEl.style.left = `${this.posX-50}px`;
-      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
 
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
@@ -121,136 +125,110 @@ class Flower {
 
      } //end Constructor
 
-            //FUNCTIONS ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+           //FUNCTIONS ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
-     activateJournal(){
-      console.log("activate")
-      this.dialogActivate=true;
-      this.journal.sendThoughtButton = document.getElementById("sendThoughtButton");
-      let self=this;
-
-      //at click, it calls growthPercentage. But putting the funtion in the Flower.js, we can traverse the retunred value dynamically 
-      this.journal.sendThoughtButton.addEventListener("click", function(){self.clickHandler()});
-      this.journal.openJournal();
-     }
-
-     clickHandler(){
-    this.journal.journalDBInsert(this.growthPercentage());
-    }
-
-    deactivateJournal(){
-    this.dialogActivate=false;
-
-    let self = this;
-    console.log("deactivate")
-    let old_element = document.getElementById("sendThoughtButton");
-    let new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element);
-
-    $("#talkBoxDialog").dialog('close');
-    }
-
-
-    grow() {
-      let self=this;
-      if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
-        this.isGrowing =true;
-
-        //Regulates the growing changes: 
-        //with timeout divided by number of states
-        setTimeout(function(){
-          //??undefined function
-          self.changeState()}, this.growthLength/this.state.length);
-
-        if (this.manualMode===true){
-          console.log("!!stages happening by clicks and nurturing");
-        } 
-      }
-    }
 
     changeState (){
+      this.turtle();
+
+//change the growing state of the flower
+    this.stateIndex++;
+
+      //Logs the text to see the state// for debugging :
+          this.currentText= this.state[this.stateIndex];
+          console.log(this.currentText) ;
+          this.isGrowing =false;
+
+//Whole growing array completed, the flower cycle is completed: 
+          if (this.stateIndex === this.state.length-1){
+            // console.log("!!send notif/email to user");
+            document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
+            setTimeout(() => {
+              document.getElementById("message").innerHTML = "";
+            }, "5000");
+            this.growthCompleted = true;
+            this.blossom= true;
+          }
 
     }
     
-    displayFlower(){
-        //position of the center of the flower canvas :
-        this.flowerEl.style.left = `${this.posX-50}px`;
-        this.flowerEl.style.top = `${this.posY-50}px`; 
-        this.flowerHoverEl.style.left = `${this.posX-50}px`;
-        this.flowerHoverEl.style.top = `${this.posY-150}px`; 
+    turtle () {
+      // console.log("turtle rule applying....");
+      this.p5Context.resetMatrix();
+      //this.p5Context.background(0);
+       this.p5Context.translate( this.p5Context.width / 2,  this.p5Context.height);
+       this.p5Context.stroke(0, 255);
+      for (let i = 0; i < this.sentence.length; i++) {
+        let current = this.sentence.charAt(i);
+        // console.log(current);
+  
+        if (current == "F") {
+           this.p5Context.line(0, 0, 0, -this.len);
+           this.p5Context.translate(0, -this.len);
+        } else if (current == "+") {
+           this.p5Context.rotate(this.angle);
+        } else if (current == "-") {
+           this.p5Context.rotate(-this.angle)
+        } else if (current == "[") {
+           this.p5Context.push();
+        } else if (current == "]") {
+           this.p5Context.pop();
+        }
+      }
     }
 
     generate (){
-
-    }
-
-    assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color){
-
-      //traversing flower data values to flower constructor values :
-      this.timeStamp=timeStamp;
-      this.growthLength = length;
-      this.fruit = fruit;
-      this.user=user;
-      this.pattern=pattern;
-      this.color=color;
-      
-      if(autonomous_manual==="on"){
-        this.manualMode = true;
-      }
-      else{
-        this.manualMode = false;
-      }
-      //set 
-      if(show_hide==="Yes"){
-        this.hideUsername = true;
-      }
-      else{
-        this.hideUsername = false;
+        // console.log(this.stateIndex);
+        this.len *= 0.5;
+        let nextSentence = "";
+        for (let i = 0; i < this.sentence.length; i++) {
+          let current = this.sentence.charAt(i);
+          let found = false;
+          for (let j = 0; j < this.rules.length; j++) {
+            if (current == this.rules[j].a) {
+              found = true;
+              nextSentence += this.rules[j].b;
+              break;
+            }
+          }
+          if (!found) {
+            nextSentence += current;
+          }
+        }
+        this.sentence = nextSentence; 
       }
 
-      if (pattern=== "lsystemAxiomF"){
-        this.pattern = "lsystemAxiomF";
-      } else if (pattern=== "fractal"){
-        this.pattern= "fractal";
-      }
-    
-      this.age();
-
-      //hover display:
-      this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
-    }
 
     age(){
 
-    }
-
-    growthPercentage(){
-    //converts age/growthLenght into a %
-
-      //calculation of the age of the tree. With the age variable, we can give it an evolution tracking time stamp to assign its visual representation.
+      //age of the tree. With the age variable, we can give it an evolution tracking time stamp to assign its visual representation.
       let date = new Date();
-      let currentAge = date.getTime() - this.timeStamp; //age in minutes
+      this.currentAge = date.getTime() - this.timeStamp;
 
+     let ageIntervalPerState;//25
+    //  this currentState=0;
     //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
+     ageIntervalPerState = (this.growthLength)/this.state.length;// 100/4
 
-      let growthPercent= currentAge/this.growthLength; //growth length in minutes
+     this.currentState= this.currentAge/ageIntervalPerState;
+     this.stateIndex =   this.currentState;
 
-      if (growthPercent >= 1){
-      growthPercent = 1;
-      }
+     if (this.currentState >= this.state.length){
+      this.currentState = this.state.length-1;
+      this.stateIndex =   this.currentState;
 
-      growthPercent*=100;
-      return growthPercent;
-
+     }
+      //change the growing state of the flower
+      //if the growth isn't completed, the changingState() will activate the generate();.
+    for (let j=0; j< this.currentState;j++){   
+      this.generate();
     }
 
-    printPositions(){
-
-      //positions printed in the data 
-      document.getElementById('xPosBox').innerHTML = this.posX;
-      // console.log(this.posX);
-      document.getElementById('yPosBox').innerHTML = this.posY;
+      //The L-System requires the extra turtle(); step so it has to be activated here too :
+            if (this.pattern === "lsystemAxiomF"){
+              this.turtle();
+            }
     }
 
-  } //end Flower.js
+  } //end L-System_flower.js
   

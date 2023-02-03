@@ -2,6 +2,8 @@
 
 class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
+  //Flower as main class. (archived feb 2nd 2023)
+
 
       constructor(posX, posY, marker,map,arrayNumber,sound,length,user,energyStatistics) {
 

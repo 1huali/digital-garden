@@ -1,5 +1,3 @@
-let opened= false;
-
 class Fractals extends Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
   // In the inputForm class, the pattern condition would assign which class to refer too (and we could erase the "if pattern === blabla" from both classes).
@@ -33,7 +31,9 @@ class Fractals extends Flower {
       this.possibleEvolutionGeneration; //json file
       // this.flower = "꧁❀꧂";
       this.growState = this.seed;
-      this.state = ["seed", "sprout", "bud", "flower"];
+      this.state = ["seed", "sprout", "leaf", "spikes", "bud", "bloom", "petals", "flower"];
+      //  this.state = ["seed", "bloom", "petals", "flower"];
+
       this.stateIndex = 0;
       this.isGrowing = false;
       this.growthCompleted = false;
@@ -42,20 +42,6 @@ class Fractals extends Flower {
       this.waterDailyLevel=0;
       this.waterLevelArray=["░","▒","▓","█","█"];
 
-           //FRACTALS FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
-           
-        this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
-        this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
-        this.root = new Branch(this.a, this.b, this.p5Context);
-        this.flower = [];
-
-        this.flower[0]=this.root;
-
-        this.stems = [];
-        this.stemCount=0;
-
-        this.blossom= true;
-        //ascii symbol at tip
 
            //LEAFLET/DIV ELEMENT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
@@ -98,16 +84,21 @@ class Fractals extends Flower {
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
     let self=this;
     this.s1 = function( sketch ) {
+   
       //console.log(sketch);
       sketch.setup = function() {
         let canvas1 = sketch.createCanvas(100, 100);
         canvas1.parent(self.flowerId);
+
       }
       //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
       sketch.draw = function (){
-        // console.log("get into sketchDraw")
         if (self.flowerGenerated === true){
-          // sketch.background(255);
+          
+          
+         // sketch.background(255);
+       
+        
 
           //grow calls changeState(), who calls generate()
         self.displayFlower();
@@ -120,12 +111,21 @@ class Fractals extends Flower {
 
     this.p5Context = new p5(this.s1);
 
-      this.flowerEl.style.left = `${this.posX-50}px`;
-      this.flowerEl.style.top = `${this.posY-50}px`; 
 
-      this.flowerHoverEl.style.left = `${this.posX-50}px`;
-      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
-
+                 //FRACTALS FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+           
+                 this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
+                 this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
+                 this.root = new Branch(this.a, this.b, this.p5Context);
+                 this.flower = [];
+         
+                 this.flower[0]=this.root;
+         
+                 this.stems = [];
+                 this.stemCount=0;
+         
+                 this.blossom= true;
+                 //ascii symbol at tip
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class
@@ -136,9 +136,33 @@ class Fractals extends Flower {
      } //end Constructor
 
            //FUNCTIONS ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+//at the creation fo a flower : grow() --> generate() --> displayFlower()
 
+    grow() {
+      let self=this;
+      if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
+        this.isGrowing =true;
+        // console.log("is growing");
+
+        //Regulates the growing changes: 
+        //with timeout divided by number of states
+        setTimeout(function(){
+          //??undefined function
+          self.changeState()}, this.growthLength/this.state.length);
+
+        if (this.manualMode===true){
+          console.log("!!stages happening by clicks and nurturing");
+        } 
+      }
+    }
 
     changeState (){
+      // console.log("change state")
+
+      if(this.growthCompleted===false){
+        this.generate();
+      }
+    
 //change the growing state of the flower
     this.stateIndex++;
 
@@ -148,7 +172,7 @@ class Fractals extends Flower {
           this.isGrowing =false;
 
 //Whole growing array completed, the flower cycle is completed: 
-          if (this.stateIndex === this.state.length-1){
+          if (this.stateIndex >= this.state.length-1){
             // console.log("!!send notif/email to user");
             document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
             setTimeout(() => {
@@ -159,6 +183,32 @@ class Fractals extends Flower {
           }
 
     }
+
+    displayFlower(){
+      //  console.log("here"+this.growthCompleted);
+
+      //position of the center of the flower canvas :
+      this.flowerEl.style.left = `${this.posX-50}px`;
+      this.flowerEl.style.top = `${this.posY-50}px`; 
+      this.flowerHoverEl.style.left = `${this.posX-50}px`;
+      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
+      //fractal tree
+      if (this.growthCompleted ===false){
+      for (let i = 0; i < this.flower.length; i++) {
+      this.flower[i].show();
+      }
+    } else {
+      //debugging:
+      // console.log("growth completed");
+    }
+
+    //ends the drawing when the growth is completed (so that it doesn't oveerwrites itself)
+    if(this.currentState >=this.state.length){
+      this.growthCompleted=true;
+    }
+
+  }
+
     
 
     generate (){
@@ -167,18 +217,25 @@ class Fractals extends Flower {
           this.flower.push(this.flower[i].stemA());
           this.flower.push(this.flower[i].stemB());
         }
-        // this.stem.finished = true;
+       // this.flower.finished = true;
+       // console.log(this.flower[i].finished);
       }
+ 
+//not the right place to turn the variable to true because this is not the last stage of the growth:
+      // if(this.stateIndex === this.state.length-1){
+      //   this.growthCompleted=true;
+
+      // }
       this.stemCount++;
       
-      if (this.stemCount === 6) {
-        for (var i = 0; i < this.flower.length; i++) {
-          if (!this.flower[i].finished) {
-            let stem = this.flower[i].end.copy();
-            this.stems.push(stem);
-          }
-        }
-      }
+      // if (this.stemCount === 6) {
+      //   for (var i = 0; i < this.flower.length; i++) {
+      //     if (!this.flower[i].finished) {
+      //       let stem = this.flower[i].end.copy();
+      //       this.stems.push(stem);
+      //     }
+      //   }
+      // }
 }
 
 bloom(){
@@ -215,15 +272,19 @@ bloom(){
      this.stateIndex =   this.currentState;
 
      if (this.currentState >= this.state.length){
-      this.currentState = this.state.length-1;
+      this.currentState = this.state.length;
       this.stateIndex =   this.currentState;
-
      }
       //change the growing state of the flower
       //if the growth isn't completed, the changingState() will activate the generate();.
     for (let j=0; j< this.currentState;j++){   
       this.generate();
+      console.log(j);
     }
+   
+
+
+ 
     }
 
   } //end Fractals_flower.js

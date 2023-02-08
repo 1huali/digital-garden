@@ -1,4 +1,4 @@
-//next : now we have a journal class object but its not linked to the flower constructor. We'd need to set up the table to hold the table data and  add a function to the flower.
+//next :change the class name to buttonList
 class Button {
 
     constructor (flowerInstance){
@@ -16,6 +16,18 @@ class Button {
       //this function set up generic water/nurture buttons when a user is logged in.
       // console.log("set option buttons"); OK
       document.getElementById("flowerStatistic-buttons").style = "display : block";
+    }
+
+    pressLoveButton(){
+
+    //   this.loveButton.addEventListener("click", function (){
+    //     this.clicSound.play();
+    //     setTimeout(() => {
+    //       document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
+    //     }, "100");
+  
+
+    //   });
     }
 
 

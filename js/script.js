@@ -115,8 +115,17 @@ $(document).ready(function(){
             selectedFlower = null;
         } else {
             selectedFlower = flowerMenuSelect.value;
-            console.log(selectedFlower);
+            //display on the user board which flower is selected :
             document.getElementById("demo").innerHTML = selectedFlower ;
+            //how to set untrue
+            for (let i=0; i< flowerArray.length; i++){
+                //reset all to false first, then set the exception:
+                flowerArray[i].selected=false;
+        }
+        flowerArray[selectedFlower].selected=true;
+        for (let i=0; i< flowerArray.length; i++){
+            flowerArray[i].highlightFlower();
+        }
         //displays the energy levels of the selected flowers
         flowerArray[flowerArray.length-1].buttons.setOptionButtons();
         // flowerArray[selectedFlower].printPositions(selectedFlower);
@@ -451,6 +460,7 @@ console.log(localStorage.getItem("password"));
         });
 
         loveButton.addEventListener("click", function(){
+            // flowerArray.buttons.pressLoveButton();
             //messages and trigger when the loveButton is pressed :
             if (selectedFlower === null){
                 setTimeout(() => {
@@ -465,6 +475,9 @@ console.log(localStorage.getItem("password"));
                     document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
                   }, "100");
                 }
+
+                flowerArray[selectedFlower].blossom=true;
+                
         });
 
 

@@ -18,6 +18,8 @@ class Flower {
       this.user=user;
       this.pattern="";
       this.color="";
+      this.fruit;
+
 
       this.flowerDBid= flowerDBid;
 
@@ -36,6 +38,8 @@ class Flower {
       this.isGrowing = false;
       this.growthCompleted = false;
       this.fruitArray= [];
+      this.blossom=false;
+      this.selected=false;
 
       this.waterDailyLevel=0;
       this.waterLevelArray=["░","▒","▓","█","█"];
@@ -48,6 +52,7 @@ class Flower {
       //  //the flower DIV based on the leaflet librairy to create a div element
 
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
+
       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
       this.flowerEl.addEventListener("click", function(){
 
@@ -148,6 +153,13 @@ class Flower {
     $("#talkBoxDialog").dialog('close');
     }
 
+    highlightFlower(){
+      if (this.selected === true){
+        this.flowerEl.style.background= "rgba(255, 207, 228, 0.4)";
+      } else {
+        this.flowerEl.style.background= "rgba(255, 255, 255, 0)";
+      }
+    }
 
     grow() {
       let self=this;
@@ -216,6 +228,10 @@ class Flower {
 
       //hover display:
       this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
+    }
+
+    bloom(){
+      
     }
 
     age(){

@@ -25,14 +25,12 @@ class Fractals extends Flower {
       this.posY = posY;
       this.marker= marker;
       this.map= map;
-
       //about the flower growth :
       this.currentText= "seed";
       this.possibleEvolutionGeneration; //json file
       // this.flower = "꧁❀꧂";
       this.growState = this.seed;
       this.state = ["seed", "sprout", "leaf", "spikes", "bud", "bloom", "petals", "flower"];
-      //  this.state = ["seed", "bloom", "petals", "flower"];
 
       this.stateIndex = 0;
       this.isGrowing = false;
@@ -94,16 +92,16 @@ class Fractals extends Flower {
       //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
       sketch.draw = function (){
         if (self.flowerGenerated === true){
-          
-          
+
          // sketch.background(255);
-       
-        
 
           //grow calls changeState(), who calls generate()
         self.displayFlower();
         self.grow();
-       // self.bloom(); //only at fractals
+        if (self.blossom===true){
+          self.bloom();
+          self.blossom = false;
+        }
         }
       }
 
@@ -123,9 +121,7 @@ class Fractals extends Flower {
          
                  this.stems = [];
                  this.stemCount=0;
-         
-                 this.blossom= true;
-                 //ascii symbol at tip
+                          //ascii symbol at tip
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class
@@ -217,7 +213,7 @@ class Fractals extends Flower {
           this.flower.push(this.flower[i].stemA());
           this.flower.push(this.flower[i].stemB());
         }
-       // this.flower.finished = true;
+       this.flower.finished = true;
        // console.log(this.flower[i].finished);
       }
  
@@ -228,32 +224,35 @@ class Fractals extends Flower {
       // }
       this.stemCount++;
       
-      // if (this.stemCount === 6) {
-      //   for (var i = 0; i < this.flower.length; i++) {
-      //     if (!this.flower[i].finished) {
-      //       let stem = this.flower[i].end.copy();
-      //       this.stems.push(stem);
-      //     }
-      //   }
-      // }
+      if (this.stemCount === this.state.length) {
+        for (let i = 0; i < this.flower.length; i++) {
+          if (!this.flower[i].finished) {
+            let stem = this.flower[i].end.copy();
+            this.stems.push(stem);
+          }
+        }
+      }
 }
 
 bloom(){
-      
-  if (this.blossom=== true){
-    for (let i = 0; i < this.stems.length; i++) {
+let self=this;
+  // if (this.blossom=== true){
+    console.log(this.stems.length);
+    for (let i = 0; i < this.stems.length; i+=950) {
       fill(255, 0, 100, 100);
       noStroke();
       // this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
-      this.p5Context.textSize(8);
+      this.p5Context.textSize(16);
       this.p5Context.text(this.fruit,this.stems[i].x, this.stems[i].y);
       // this.stems[i].y += random(0, 2);
+      // console.log(this.stems[i].length);
     }
-  }
+   
+  // }
       //blooms retract after 5 mins :
-      setTimeout(function(){
-        this.blossom= false;
-      }, 300000);
+      // setTimeout(function(){
+      //   self.blossom= false;
+      // }, 300000);
     
   }
 
@@ -279,7 +278,6 @@ bloom(){
       //if the growth isn't completed, the changingState() will activate the generate();.
     for (let j=0; j< this.currentState;j++){   
       this.generate();
-      console.log(j);
     }
    
 

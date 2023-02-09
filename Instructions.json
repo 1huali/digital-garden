@@ -4,8 +4,7 @@
     "Y_Location" : "y coords",
     "Zoom" : "zoom lvl",
     "Flower" : {
-        "Instructions" : "Identify to plant seed",
-        "Drag" : "To explore the land"
+        "Online" : "null"
     }
     },
     "Main_Mode": {

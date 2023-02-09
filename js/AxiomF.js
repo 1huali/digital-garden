@@ -42,7 +42,7 @@ class AxiomF extends Flower {
 
            //L-SYSTEM FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
-      this.angle= radians(25);
+   
       this.axiom = "F";
       this.sentence = this.axiom;
       let multiplicateur =2.5;
@@ -113,6 +113,8 @@ class AxiomF extends Flower {
       }
       }
     this.p5Context = new p5(this.s1);
+
+    this.angle= this.p5Context.radians(25);
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class

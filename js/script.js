@@ -6,9 +6,6 @@ Prototype 3
 */
 
 "use strict";
-function setup() {
-    console.log("p5 setup");
-  }
 
 $(document).ready(function(){
 
@@ -172,7 +169,7 @@ L.tileLayer.kitten().addTo(mainMap);
                   cache: false,
                   timeout: 600000,
                   success: function (response) {
-                //   console.log(response);
+                  console.log(response);
                   //use the JSON .parse function to convert the JSON string into a Javascript object
                   let parsedJSON = JSON.parse(response);
 
@@ -257,7 +254,7 @@ L.tileLayer.kitten().addTo(mainMap);
     userValue = username;
     currentUser = username;
     appendFlowerSelect();
-    // assignUsernameTemporary();
+    assignUsernameTemporary();
 
     // check if this key-val alreday exists
      if (localStorage[userKey]) {
@@ -332,7 +329,7 @@ console.log(localStorage.getItem("password"));
     function assignUsernameTemporary(){
         //temporary function where the connected user is filled in the fill form, although it has to be changed for something more solid
         document.getElementById("usernameInputField").value = currentUser;
-        if (userLoggedIn=false){
+        if (userLoggedIn===false){
             //eventually when ppl that are not logged in can also plant seeds, this option will work
         document.getElementById("usernameInputField").value = "passerby";
         }
@@ -354,7 +351,6 @@ console.log(localStorage.getItem("password"));
 
       
     // end L-SYSTEM
-    // requestAnimationFrame(loop);
 
 //end SETUPS  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
@@ -415,21 +411,12 @@ console.log(localStorage.getItem("password"));
               });
            //console.log($( ".ui-dialog.identificationBox")[0].style);
         // $( ".ui-dialog.identificationBox")[0].style.width ="500px";
-      // $( ".ui-dialog.identificationBox")[0].style.height ="500px";
-
-    
-            //   let dialogPosX;
-            //   let dialogPosY;
-
-            //   if (window.screen.width < 500){
-
-            //   }
 //END FILL FORM
 
 
 //?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
-            // showFlowerData(data);
+            showFlowerData(data);
 
 
         talkButton.addEventListener("click", function(){
@@ -446,7 +433,6 @@ console.log(localStorage.getItem("password"));
             flowerArray[selectedFlower].journal.talkHistory();
         }
             }
-            //activate flowerArray : blossom();
         });
 
         submitButton.addEventListener("click", function(){
@@ -546,11 +532,11 @@ console.log(localStorage.getItem("password"));
 
         //??do we still need?
 //imprime les infos en bas à gauche ??peut-êre que je vais devoir le delete
-            // function showJournal(data){
-            //     let flowerDataContainer = $("#flowerData-container");
-            //     $(flowerDataContainer).empty();
-            //   displaySingleInstruction(data,flowerDataContainer);
-            // };
+            function showJournal(data){
+                let flowerDataContainer = $("#flowerData-container");
+                $(flowerDataContainer).empty();
+              displaySingleInstruction(data,flowerDataContainer);
+            };
 
             //Display a marker on map at user's double-click
             function onMapDblClick(e){
@@ -569,7 +555,7 @@ console.log(localStorage.getItem("password"));
                     flowerArray.push(newFlower);
                     userSeedCount.innerHTML= flowerArray.length;
 
-                // idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
+                idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
 
                 // currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {
@@ -581,10 +567,6 @@ console.log(localStorage.getItem("password"));
                 }, "86400000")
 
             }
-                    //create an array for dropdown menu to add dynamically a flower to the list 
-                // let x= flowerArray[flowerArray.length-1].flowerId;
-                // currentFlower.push(x);
-                // console.log(currentFlower);
         }
 
             //bottom-left container, #playModeDataContainer;
@@ -632,23 +614,18 @@ console.log(localStorage.getItem("password"));
         
             } //END DISPLAY
 
-    //     function showFlowerData(data){
-    //         let flowerDataContainer = $("#flowerData-container");
-    //         let genData = data.User_Data;
+        function showFlowerData(data){
+            let flowerDataContainer = $("#flowerData-container");
+            let genData = data.User_Data;
 
-    //     $.each(genData.Flower, function( flowerKey, flowerValue ) {
-    //         let dataHTMLElement = $("<p>").addClass("mode-prop");
+        $.each(genData.Flower, function( flowerKey, flowerValue ) {
+            let dataHTMLElement = $("<p>").addClass("mode-prop");
 
-    //     dataHTMLElement.html(`${flowerKey} : ${flowerValue}`);
-    //     $(dataHTMLElement).appendTo(flowerDataContainer);
-    // });
+        dataHTMLElement.html(`${flowerKey} : ${flowerValue}`);
+        $(dataHTMLElement).appendTo(flowerDataContainer);
+    });
 
-    // }
-
-    // ??set up for fractal tree (temporary)
-    // object.addEventListener("click", function (){
-    //     console.log("click for fractal generation");
-    // });
+    }
 
 
     function printIcon(){
@@ -657,9 +634,6 @@ console.log(localStorage.getItem("password"));
                             //!! switch to call from energy class
 
         }
-        // for (let i = 0; i < flowerArray[flowerArray.length-1].loveDailyLevel; i++) {
-        //     document.getElementById('vitaminsHeartLevelBox').innerHTML += vitaminsHeartLevelBoxArray[i];
-        // }
     }
 
     function appendFlowerSelect(){
@@ -684,9 +658,4 @@ console.log("error occurred");
                     console.log("error occurred");
                     } 
 }); // end ajax flowerObj journal
-
-
-
-
-
         }); //end of windowOnLoad / document.ready

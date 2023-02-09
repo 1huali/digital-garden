@@ -58,7 +58,6 @@
         <p><label>Hide User </label>
         <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
        <label for="hideUser"> Yes</label>
-       blablbal
        <p><label>Growth period </label>
        <input type="number" id="length1" name="a_length" min="1"> min
        <p><label>Manual growth </label>
@@ -78,7 +77,7 @@
     <option value="other">Other</option>
     <!-- if other : allow typing -->
   </select></p>
-       <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ff0000"></p>
+       <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ffbfe0"></p>
        <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"></p>
        <input id="submitButton" type="submit" value="Submit">
       </fieldset>

@@ -24,7 +24,7 @@ class Branch {
     
       stemA() {
         let dir = p5.Vector.sub(this.end, this.begin);
-        dir.rotate(PI / 6);
+        dir.rotate(this.p5Context.PI / 6);
         dir.mult(0.67); //to shrink the newcoming branches
         let newEnd = p5.Vector.add(this.end, dir);
         let b = new Branch(this.end, newEnd,this.p5Context);
@@ -33,7 +33,7 @@ class Branch {
     
       stemB() {
         let dir = p5.Vector.sub(this.end, this.begin);
-        dir.rotate(-PI / 4);
+        dir.rotate(-this.p5Context.PI / 4);
         dir.mult(0.67);
         let newEnd = p5.Vector.add(this.end, dir);
         let b = new Branch(this.end, newEnd,this.p5Context);

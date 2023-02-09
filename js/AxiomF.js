@@ -45,7 +45,8 @@ class AxiomF extends Flower {
       this.angle= radians(25);
       this.axiom = "F";
       this.sentence = this.axiom;
-      this.len = 20;
+      let multiplicateur =2.5;
+      this.len = 20*multiplicateur;
       this.rules = [];
       this.rules[0] = {
         a: "F",
@@ -95,7 +96,7 @@ class AxiomF extends Flower {
     this.s1 = function( sketch ) {
       //console.log(sketch);
       sketch.setup = function() {
-        let canvas1 = sketch.createCanvas(100, 100);
+        let canvas1 = sketch.createCanvas(100*multiplicateur, 100*multiplicateur);
         canvas1.parent(self.flowerId);
       }
       //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :

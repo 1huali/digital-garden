@@ -136,7 +136,7 @@ $(document).ready(function(){
 
            //MAP SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
        // We create a leaflet map, and in setView, we determine coordinates and zoom level
-       let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 5);
+       let mainMap = L.map('mainMap').setView([45.50884, -73.58781], 19);
        let coordinateMarker = L.marker();
        $(".leaflet-control-zoom").css("visibility", "hidden");
        mainMap.touchZoom.disable();
@@ -145,7 +145,7 @@ $(document).ready(function(){
 
        //source : https://mathi330.github.io/cart351/Demo/demo.html
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 3, // you cannot zoom in more than 9, if set to 10, the map turns gray
+        maxZoom: 9, // you cannot zoom in more than 9, if set to 10, the map turns gray
         // doubleClickZoom: false, // this is just so when I double click on the map it doesn't zoom in
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="blank_">OpenStreetMap</a>' // link to where we got the data for the map
     }).addTo(mainMap); // add tile layer to map
@@ -373,13 +373,41 @@ console.log(localStorage.getItem("password"));
                 $("#identificationBoxDialog").dialog('open');
               }, "1800")
 
-              $( "#identificationBoxDialog" ).dialog({
+              if (window.screen.width < 500){
+                $( "#identificationBoxDialog" ).dialog({
 
-                position: { my: "right top", at: "right top", of: window },
-                classes: {
-                    "ui-dialog": "identificationBox"
-                }
-              });
+                    width:1000,
+                    height:500,
+
+                    position: ({
+                        my: "center + 20 center + 20",
+                        at: "center + 20 center + 20",
+                        of: window
+                      }),
+                    classes: {
+                        "ui-dialog": "identificationBox"
+                    }
+                  });
+
+               
+
+           
+                
+              }
+              else{
+                $( "#identificationBoxDialog" ).dialog({
+
+                    position: ({
+                        my: "right bottom",
+                        at: "right bottom",
+                        of: window
+                      }),
+                    classes: {
+                        "ui-dialog": "identificationBox"
+                    }
+                  });
+              }
+              
 
             //   $("#identificationBoxDialog").dialog('close');
               $( "#identificationBoxDialog" ).dialog({
@@ -394,8 +422,17 @@ console.log(localStorage.getItem("password"));
                   }
                 ]
               });
+           //console.log($( ".ui-dialog.identificationBox")[0].style);
+        // $( ".ui-dialog.identificationBox")[0].style.width ="500px";
+      // $( ".ui-dialog.identificationBox")[0].style.height ="500px";
 
     
+            //   let dialogPosX;
+            //   let dialogPosY;
+
+            //   if (window.screen.width < 500){
+
+            //   }
 //END FILL FORM
 
 
@@ -477,7 +514,7 @@ console.log(localStorage.getItem("password"));
                 }
 
                 flowerArray[selectedFlower].blossom=true;
-                
+
         });
 
 

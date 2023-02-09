@@ -78,6 +78,10 @@ class Fractals extends Flower {
       this.sound= sound;
 
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+//to modify the size of the flowers, one needs to apply the multiplicator at stemLength and canvas size, and manually modify the fruit at blossom and width/height size of .flowerEL in css to be the same as p5 canva size. 
+// No need to touch the functions in Branch.js cos it concerns the generation and look.
+let multiplicateur=2;
+
 
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
     let self=this;
@@ -85,7 +89,7 @@ class Fractals extends Flower {
    
       //console.log(sketch);
       sketch.setup = function() {
-        let canvas1 = sketch.createCanvas(100, 100);
+        let canvas1 = sketch.createCanvas(100*multiplicateur,100*multiplicateur);
         canvas1.parent(self.flowerId);
 
       }
@@ -93,7 +97,7 @@ class Fractals extends Flower {
       sketch.draw = function (){
         if (self.flowerGenerated === true){
 
-         // sketch.background(255);
+         //sketch.background(255,0,0);
 
           //grow calls changeState(), who calls generate()
         self.displayFlower();
@@ -111,9 +115,9 @@ class Fractals extends Flower {
 
 
                  //FRACTALS FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
-           
+
                  this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);
-                 this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25);
+                 this.b = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height - 25*multiplicateur);
                  this.root = new Branch(this.a, this.b, this.p5Context);
                  this.flower = [];
          
@@ -242,10 +246,9 @@ let self=this;
       fill(255, 0, 100, 100);
       noStroke();
       // this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
-      this.p5Context.textSize(16);
+      this.p5Context.textSize(24);
       this.p5Context.text(this.fruit,this.stems[i].x, this.stems[i].y);
       // this.stems[i].y += random(0, 2);
-      // console.log(this.stems[i].length);
     }
    
   // }

@@ -23,10 +23,6 @@ $(document).ready(function(){
           text: "Close",
           click: function() {
             $( this ).dialog( "close" );
-            //create its own function, and it will be part of the Flower class so we will call the flower
-            // flowerArray.bloom();
-            // flowerArray[flowerArray.length-1].blossom=true;
-
             // this.closingSound.play();
           }
         }
@@ -369,32 +365,27 @@ console.log(localStorage.getItem("password"));
               //id dialog box : 
               //??doesn't create at timeout, but used to work
               setTimeout(() => {
-                console.log("about to open ID dialogBox")
                 $("#identificationBoxDialog").dialog('open');
-              }, "1800")
+              }, "3000")
 
-              if (window.screen.width < 500){
+                //mobile screen settings (identification/login box):
+                if (window.screen.width < 500){
                 $( "#identificationBoxDialog" ).dialog({
 
                     width:1000,
                     height:500,
 
                     position: ({
-                        my: "center + 20 center + 20",
-                        at: "center + 20 center + 20",
+                        my: "center bottom",
+                        at: "center bottom",
                         of: window
                       }),
                     classes: {
                         "ui-dialog": "identificationBox"
                     }
                   });
-
-               
-
-           
-                
-              }
-              else{
+              } else{
+                //desktop screen settings (identification/login box):
                 $( "#identificationBoxDialog" ).dialog({
 
                     position: ({
@@ -438,7 +429,7 @@ console.log(localStorage.getItem("password"));
 
 //?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
-            showFlowerData(data);
+            // showFlowerData(data);
 
 
         talkButton.addEventListener("click", function(){
@@ -555,11 +546,11 @@ console.log(localStorage.getItem("password"));
 
         //??do we still need?
 //imprime les infos en bas à gauche ??peut-êre que je vais devoir le delete
-            function showJournal(data){
-                let flowerDataContainer = $("#flowerData-container");
-                $(flowerDataContainer).empty();
-              displaySingleInstruction(data,flowerDataContainer);
-            };
+            // function showJournal(data){
+            //     let flowerDataContainer = $("#flowerData-container");
+            //     $(flowerDataContainer).empty();
+            //   displaySingleInstruction(data,flowerDataContainer);
+            // };
 
             //Display a marker on map at user's double-click
             function onMapDblClick(e){
@@ -641,18 +632,18 @@ console.log(localStorage.getItem("password"));
         
             } //END DISPLAY
 
-        function showFlowerData(data){
-            let flowerDataContainer = $("#flowerData-container");
-            let genData = data.User_Data;
+    //     function showFlowerData(data){
+    //         let flowerDataContainer = $("#flowerData-container");
+    //         let genData = data.User_Data;
 
-        $.each(genData.Flower, function( flowerKey, flowerValue ) {
-            let dataHTMLElement = $("<p>").addClass("mode-prop");
+    //     $.each(genData.Flower, function( flowerKey, flowerValue ) {
+    //         let dataHTMLElement = $("<p>").addClass("mode-prop");
 
-        dataHTMLElement.html(`${flowerKey} : ${flowerValue}`);
-        $(dataHTMLElement).appendTo(flowerDataContainer);
-    });
+    //     dataHTMLElement.html(`${flowerKey} : ${flowerValue}`);
+    //     $(dataHTMLElement).appendTo(flowerDataContainer);
+    // });
 
-    }
+    // }
 
     // ??set up for fractal tree (temporary)
     // object.addEventListener("click", function (){

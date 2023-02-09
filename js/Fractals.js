@@ -108,12 +108,8 @@ let multiplicateur=2;
         }
         }
       }
-
       }
-
     this.p5Context = new p5(this.s1);
-
-
                  //FRACTALS FEATURES ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
                  this.a = this.p5Context.createVector(this.p5Context.width / 2, this.p5Context.height);

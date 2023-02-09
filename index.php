@@ -38,9 +38,12 @@
 
   <section id="gardenInfoHeader">
 <h1 id="title">THE DIGITAL GARDEN</h1>
-<div id="about-container">This is a space to plant and seed personal objectives. <br> Login or identify to plant or access your flowers. </div>
+<div id="about-container">
+<article>This is a space to plant and seed personal objectives.</article>
+<article> Login or identify to plant or access your flowers. </article> 
+</div>
 <div id="messageContainer">
-<div id="messageBar"> Message : <marquee scrollamount="2" direction="left" width="130px"><i><span id="message">aaaaaa</span></i></marquee> </div>
+<div id="messageBar"> Message : <marquee scrollamount="2" direction="left" width="200px"><i><span id="message">aaaaaa</span></i></marquee> </div>
 </div>
  seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
@@ -57,7 +60,7 @@
        <label for="hideUser"> Yes</label>
        blablbal
        <p><label>Growth period </label>
-       <input type="number" id="length1" name="a_length" min="0.5"> min
+       <input type="number" id="length1" name="a_length" min="1"> min
        <p><label>Manual growth </label>
         <input type="checkbox" id="manualOption" name="manual_growth" value="Yes">
        <label for="manual_growth">Activate </label>
@@ -93,19 +96,21 @@
  </section> -->
 
   <section id="flowerData-container"> 
-  <h2>CURRENT SESSION</h2>hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span><br>
+  <h2>CURRENT SESSION</h2>
+ <article> hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span></article>
+ <article>
 <label for="flowerDropDownList">Seeds : </label>
-  <select id="flowerList-select">
+<select id="flowerList-select">
     <option value="none">none</option>
-  </select> <br>
+  </select></article>
   current flower : <span id="demo">none</span>
 
 <div id="flowerStatistic-buttons">
 <!-- <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div>  -->
-<input id="waterButton" class="buttons" type="button" value="Water">   Water: <span id="waterHeartLevelBox"> n/a  </span><br>
-<input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span><br> 
-<input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span><br> 
-Thoughts: <span id="flowerThoughts-container"> </span><br>
+<article> <input id="waterButton" class="buttons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
+<article> <input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
+<article> <input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
+<article> Thoughts: <span id="flowerThoughts-container"> </span></article>
 </div>
 </section> 
 
@@ -115,18 +120,19 @@ Thoughts: <span id="flowerThoughts-container"> </span><br>
     </div>    
     <div id="journal-container">
       <input id="journalTextContainer" type="text" placeholder="What is on your mind?">
-      <input id="sendThoughtButton" class="buttons" type="button" value="Send"> <br>
+      <article> <input id="sendThoughtButton" class="buttons" type="button" value="Send"> </article>
     </div>
 </section>
 
 <section id="identificationBoxDialog" title="User Identification">
-hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span><br>
+<article>hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span></article>
 <div id="login-container">login: <input id="login" type="text"></div><input id="identifyButton" class="buttons" type="button" value="Identify">
 
+<article>
 <div id="password-container">password:<input id="password" type="text"></div>
       <input id="loginButton" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
-      <br>
+      </article>
       <!-- <input id="closeDialogButton" type="button" value="Done"> -->
 </section>
   </body>

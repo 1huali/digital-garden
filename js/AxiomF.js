@@ -111,12 +111,8 @@ class AxiomF extends Flower {
        // self.bloom(); //only at fractals
         }
       }
-
       }
-
     this.p5Context = new p5(this.s1);
-
-
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class

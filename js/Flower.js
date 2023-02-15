@@ -4,7 +4,7 @@ class Flower {
   //https://thecodingtrain.com/tracks/algorithmic-botany/16-l-system-fractal-trees
   // Flower as parent class, then into 2 childs : L-System and Fractal. (current)
 
-      constructor(posX, posY, marker,map,flowerDBid,sound,length,user) {
+      constructor(lat, lng, marker,map,flowerDBid,sound,length,user) {
         this.dialogActivate = false;
 
       this.creationTimeStamp= new Date();
@@ -23,10 +23,15 @@ class Flower {
 
       this.flowerDBid= flowerDBid;
 
-      this.posX = posX;
-      this.posY = posY;
+      // this.posX = posX;
+      // this.posY = posY;
+
       this.marker= marker;
       this.map= map;
+      this.n_latLng = new L.latLng(lat,lng);
+      this.point = this.map.latLngToLayerPoint(this.n_latLng);
+      this.posX = this.point.x;
+      this.posY = this.point.y;
 
             //about the flower growth :
       this.currentText= "seed";

@@ -23,7 +23,7 @@ class InputForm {
 
     }//end constructor
 
-    openInputForm(newFlower){
+    openInputForm(newFlower,  appendConsoleMsg){
         let self=this;
         $("#seedIdPopUpForm-container").dialog('open');
         this.newFlower = newFlower;
@@ -33,6 +33,8 @@ class InputForm {
     //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
    event.preventDefault();
  console.log("insert triggered");
+ appendConsoleMsg("> Success : new seed created.")
+
 
  //retrieve the infos into objet key/value pairs
   let form = $('#insertFlower')[0];

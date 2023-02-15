@@ -79,7 +79,7 @@ $(document).ready(function(){
     let visitorListArray= [];
     let username;
     let password;
-    let currentUserBox = document.getElementById("currentUser");
+    let loginCurrentUserDisplay = document.getElementById("idDialogBox-currentUser");
     let currentUserIdBox = document.getElementById("currentUserId"); //same than userId but in titleBar
     let loginButton = document.getElementById("loginButton");
     let setPasswordButton = document.getElementById("setPasswordButton");
@@ -88,14 +88,26 @@ $(document).ready(function(){
     let userValue = "";
     let userSeedCount = document.getElementById("userFlowerIndex"); 
     let globalSeedCount = document.getElementById("totalFlowerIndex"); 
-
+    let consoleDialogBox = document.getElementById("consoleBoxDialog");
 
     
     let generateButton= document.getElementById('generateButton');
 
+    function appendConsoleMsg(msg){
+        let consoleContainer = $("#console-container");
+        let dataHTMLElement = $("<p>").addClass("mode-prop");
+        dataHTMLElement.html(msg);
+        // $(consoleContainer).empty();
+        $(dataHTMLElement).appendTo(consoleContainer);
+    }
+
+    function panViewToCurrentFlower(selection){
+        mainMap.panTo(flowerArray[selection].n_latLng);
+
+    }
 
     flowerMenuSelect.addEventListener("change", function(){
-        console.log(flowerMenuSelect.value);
+        panViewToCurrentFlower(flowerMenuSelect.value);
 
         if (selectedFlower !== null){
         flowerArray[selectedFlower].deactivateJournal();
@@ -108,6 +120,7 @@ $(document).ready(function(){
             selectedFlower = null;
         } else {
             selectedFlower = flowerMenuSelect.value;
+
             //display on the user board which flower is selected :
             document.getElementById("demo").innerHTML = selectedFlower ;
             //how to set untrue
@@ -245,21 +258,35 @@ L.tileLayer.kitten().addTo(mainMap);
                     globalSeedCount.innerHTML = flowerArray.length;
 
            //LOGIN SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+        //current user identification : 
+        identifyButton.addEventListener('click', function (){
+            // let visitor = prompt("Hello! Who r u?", "secret passerby");
+            let visitor = document.getElementById("login").value;
+            visitorListArray.push(visitor);
+            saveUserLogin(visitor)
 
-    //local storge set-up
+            // if (visitor != null) {
+            //     document.getElementById("message").innerHTML =
+            //     "Hello " + visitor + " !! Thank U for passing by";
+            //   }
+
+        });
+
+    //local storage set-up
     function saveUserLogin (username){
     // Create a local storage item (key value pair)
     //The localStorage property is read-only.
     //username : password and input fields
     userValue = username;
     currentUser = username;
-    appendFlowerSelect();
-    assignUsernameTemporary();
 
     // check if this key-val alreday exists
-     if (localStorage[userKey]) {
+    if (localStorage[userKey] === userValue) {
     //   valToStore = password;
-    currentUserBox.innerHTML = userValue;
+    appendConsoleMsg("> Welcome back, " + userValue);
+    appendConsoleMsg("> Password required");
+
+    // loginCurrentUserDisplay.innerHTML = userValue;
     currentUserIdBox.innerHTML = userValue;
     // console.log("ask for password");
     document.getElementById("password-container").style = "display : block";
@@ -268,14 +295,15 @@ L.tileLayer.kitten().addTo(mainMap);
 
     } else {
         //WRITE to local storage
-    console.log("new user added:"+userValue);
-    currentUserBox.innerHTML = userValue;
+    appendConsoleMsg("> New user added:"+userValue);
+    loginCurrentUserDisplay.innerHTML = userValue;
     identifyButton.style = "display : none";
     document.getElementById("password-container").style = "display : block";
     setPasswordButton.style = "display : block";
     localStorage.setItem(userKey,userValue);
     }
 
+    appendFlowerSelect();
     //!! close dialog
     };
 
@@ -286,13 +314,18 @@ console.log(localStorage.getItem("password"));
                 if (password === localStorage.getItem("password")){
                     userLoggedIn = true;
                     mainMap.on('dblclick', onMapDblClick);
-                    console.log("nice2c u again");
+                    appendConsoleMsg("> Nice2c u again");
+                    appendConsoleMsg("logged in = "+userLoggedIn);
                     logUserProfile();
+                    autofillUser();
+
                     // flowerArray[flowerArray.length-1].buttons.setOptionButtons();
                 } else {
                     userLoggedIn = false;
-                    console.log("try again");
+                    appendConsoleMsg("logged in = "+userLoggedIn);
+                    appendConsoleMsg("> Incorrect. please try again");
                 }
+
     };
 
     let passwordKey= "password";
@@ -302,6 +335,10 @@ console.log(localStorage.getItem("password"));
 
         passwordValue = password;
         localStorage.setItem(passwordKey,passwordValue);
+        appendConsoleMsg("> Password saved.");
+        $("#identificationBoxDialog").dialog('close');
+        userLoggedIn = true;
+        autofillUser();
         //add to local storage
     };
 
@@ -313,6 +350,7 @@ console.log(localStorage.getItem("password"));
     setPasswordButton.addEventListener("click", function(){
         let userInputPassword = document.getElementById("password").value;
         console.log("password inputed: "+userInputPassword);
+        appendConsoleMsg("> Password saved.")
         addPassword(userInputPassword);
     });
 
@@ -320,18 +358,21 @@ console.log(localStorage.getItem("password"));
     function logUserProfile(){
         // console.log(userLoggedIn);
         $("#identificationBoxDialog").dialog('close');
-        console.log("You are logged as: "+localStorage.getItem("username"));
-        console.log("and your pw is: "+localStorage.getItem("password"));
+        appendConsoleMsg("> Currently logged as: "+localStorage.getItem("username"));
+        appendConsoleMsg("> Your pw is: "+localStorage.getItem("password"));
+
     }
 
     //end local storage setup
 
-    function assignUsernameTemporary(){
-        //temporary function where the connected user is filled in the fill form, although it has to be changed for something more solid
-        document.getElementById("usernameInputField").value = currentUser;
-        if (userLoggedIn===false){
+    function autofillUser(){
+        //temporary function where the connected user is filled in the fill form (although it has to be changed for something more solid)
+        if (userLoggedIn === false){
             //eventually when ppl that are not logged in can also plant seeds, this option will work
-        document.getElementById("usernameInputField").value = "passerby";
+        document.getElementById("usernameInputField").value = "unidentified";
+        } else {
+            document.getElementById("usernameInputField").value = currentUser;
+
         }
     }
            //OBJECT SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
@@ -413,6 +454,14 @@ console.log(localStorage.getItem("password"));
         // $( ".ui-dialog.identificationBox")[0].style.width ="500px";
 //END FILL FORM
 
+                $( "#consoleBoxDialog" ).dialog({
+                    dialogClass: "identificationBox",
+                    position: ({
+                        my: "right top",
+                        at: "right top",
+                        of: window
+                      }),
+                });
 
 //?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
@@ -421,15 +470,18 @@ console.log(localStorage.getItem("password"));
 
         talkButton.addEventListener("click", function(){
             if (selectedFlower === null){
+                appendConsoleMsg("Select a flower from the list.")
                 setTimeout(() => {
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
                     // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
+            appendConsoleMsg(flowerArray[selectedFlower]+" journal accessed.")
+
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();
-            console.log(flowerArray[selectedFlower].flowerDBid);
+            // console.log(flowerArray[selectedFlower].flowerDBid);
             flowerArray[selectedFlower].journal.talkHistory();
         }
             }
@@ -440,25 +492,30 @@ console.log(localStorage.getItem("password"));
             //displays the users total flower array length :
             userSeedCount.innerHTML= flowerArray.length;
 
-
         });
 
 
         waterButton.addEventListener("click", function(){
 
             if (selectedFlower === null){
+                appendConsoleMsg("> Please select a flower.");
+
                 setTimeout(() => {
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
             //increments the waterDaily level count
         flowerArray[selectedFlower].energy.waterDailyLevel++;
-        if (flowerArray[selectedFlower].energy.waterDailyLevel ===3){
-            document.getElementById("flowerThoughts-container").innerHTML= "Enough water for today, thank u!!"
+        appendConsoleMsg("> Water +1");
+
+        if (flowerArray[selectedFlower].energy.waterDailyLevel ===4){
+            appendConsoleMsg("> Flower : Enough water for today, thank u!!")
+            // document.getElementById("flowerThoughts-container").innerHTML= "Enough water for today, thank u!!"
         }
         //thoughts associated with the water level
         if (flowerArray[selectedFlower].energy.waterDailyLevel ===7){
-            document.getElementById("flowerThoughts-container").innerHTML= "Omg i'm gonna drown please stop"
+            appendConsoleMsg("> Flower : Omg i'm gonna drown please stop")
+            // document.getElementById("flowerThoughts-container").innerHTML= "Omg i'm gonna drown please stop"
         }
 
         //prints the waterDaily level
@@ -478,6 +535,7 @@ console.log(localStorage.getItem("password"));
             //messages and trigger when the loveButton is pressed :
             if (selectedFlower === null){
                 setTimeout(() => {
+                    appendConsoleMsg("> Please select a flower.")
                     document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
                   }, "100");
                  } else {
@@ -486,7 +544,8 @@ console.log(localStorage.getItem("password"));
 
             loveSound.play();
                 setTimeout(() => {
-                    document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
+                    appendConsoleMsg("> Flower : I love U too!!")
+                    // document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
                   }, "100");
                 }
 
@@ -494,19 +553,6 @@ console.log(localStorage.getItem("password"));
 
         });
 
-
-        //current user identification : 
-        identifyButton.addEventListener('click', function (){
-            // let visitor = prompt("Hello! Who r u?", "secret passerby");
-            let visitor = document.getElementById("login").value;
-            visitorListArray.push(visitor);
-            saveUserLogin(visitor)
-
-            // if (visitor != null) {
-            //     document.getElementById("message").innerHTML =
-            //     "Hello " + visitor + " !! Thank U for passing by";
-            //   }
-        });
 
         // generateButton.addEventListener("click", function(){
 
@@ -530,8 +576,10 @@ console.log(localStorage.getItem("password"));
         // let image = L.imageOverlay(imageUrl, bounds).addTo(mainMap);
         // mainMap.fitBounds(bounds);
 
+
         //??do we still need?
-//imprime les infos en bas à gauche ??peut-êre que je vais devoir le delete
+//imprime les infos en bas à gauche ??peut-êre que je vais devoir le delet
+
             function showJournal(data){
                 let flowerDataContainer = $("#flowerData-container");
                 $(flowerDataContainer).empty();
@@ -550,8 +598,8 @@ console.log(localStorage.getItem("password"));
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
                     //creating an individual flower object, passing its data thru newFlower and pushing it to the flower array :
-                    let newFlower = new Flower(e.containerPoint.x, e.containerPoint.y,coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
-                    inputForm.openInputForm(newFlower);
+                    let newFlower = new Flower(e.latlng.lat, e.latlng.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+                    inputForm.openInputForm(newFlower, appendConsoleMsg);
                     flowerArray.push(newFlower);
                     userSeedCount.innerHTML= flowerArray.length;
 
@@ -559,15 +607,16 @@ console.log(localStorage.getItem("password"));
 
                 // currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {
-                document.getElementById("message").innerHTML = "Limit exceeded, try again in 24 hours."
+                appendConsoleMsg("Limit exceeded, try again in 24 hours.")
+                // document.getElementById("message").innerHTML = "Limit exceeded, try again in 24 hours."
 
                 //User can plant in 24 hours :
                 setTimeout(() => {
                     counter=0;
                 }, "86400000")
-
             }
         }
+
 
             //bottom-left container, #playModeDataContainer;
             function displaySingleInstruction(data,parentContainer){
@@ -607,11 +656,8 @@ console.log(localStorage.getItem("password"));
                         });
                         }
                 // });
-        
                 if (userLoggedIn === true){
-
                 }
-        
             } //END DISPLAY
 
         function showFlowerData(data){

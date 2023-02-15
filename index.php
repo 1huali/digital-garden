@@ -96,7 +96,7 @@
 
   <section id="flowerData-container"> 
   <h2>CURRENT SESSION</h2>
- <article> hello <span id="currentUserId">&#60;<i>no user identified</i>&#62;</span></article>
+ <article> User : <span id="currentUserId">&#60;<i>null</i>&#62;</span></article>
  <article>
 <label for="flowerDropDownList">Seeds : </label>
 <select id="flowerList-select">
@@ -124,8 +124,11 @@
 </section>
 
 <section id="identificationBoxDialog" title="User Identification">
-<article>hello <span id="currentUser">&#60;<i>no user identified</i>&#62;</span></article>
-<div id="login-container">login: <input id="login" type="text"></div><input id="identifyButton" class="buttons" type="button" value="Identify">
+<!-- <article>Message: <span id="idDialogBox-currentUser">&#60;<i>you</i>&#62;!</span></article> -->
+<article>Hi! Please enter your user name.
+</article>
+<div id="login-container">username: <input id="login" type="text"></div>
+<input id="identifyButton" class="buttons" type="button" value="Identify">
 
 <article>
 <div id="password-container">password:<input id="password" type="text"></div>
@@ -134,5 +137,12 @@
       </article>
       <!-- <input id="closeDialogButton" type="button" value="Done"> -->
 </section>
+
+<section id="consoleBoxDialog" title="User Console">
+    <div id="console-container">
+      <article>&#62; Console ready. </article>
+    </div>   
+</section>
+
   </body>
 </html>

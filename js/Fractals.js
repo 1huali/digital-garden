@@ -239,7 +239,7 @@ let self=this;
   // if (this.blossom=== true){
     console.log(this.stems.length);
     for (let i = 0; i < this.stems.length; i+=Math.floor(Math.random() * 1200) + 850) {
-      fill(255, 0, 100, 100);
+      // fill(255, 0, 100, 100);
       noStroke();
       // this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
       this.p5Context.textSize(24);

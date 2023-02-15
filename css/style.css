@@ -132,6 +132,10 @@ h1{
 
   }
 
+  #consoleBoxDialog{
+  height: 100px;
+  }
+
 /* BUTTONS : */
 
 .buttons{

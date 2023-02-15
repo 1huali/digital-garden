@@ -7,6 +7,7 @@ class Button {
       this.loveButton = document.getElementById("loveButton");
       this.talkButton = document.getElementById('talkButton');
       this.clicSound = document.getElementById("chimeSound");
+      this.hiButton = document.getElementById("hiButton");
 
       this.flowerInstance = flowerInstance;
 
@@ -28,6 +29,14 @@ class Button {
   
 
     //   });
+    }
+
+    pressHiButton(){
+
+      this.hiButton.addEventListener("click", function(){
+      console.log("hi!!");
+      appendConsoleMsg("You said hi to someone");
+    });
     }
 
 

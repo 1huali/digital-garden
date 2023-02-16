@@ -25,7 +25,8 @@
     <script src="js/AxiomF.js"></script> 
     <script src="js/Journal.js" ></script>
     <script src="js/Energy.js" ></script>
-    <script src="js/Button.js" ></script>
+    <script src="js/ButtonList.js" ></script>
+    <script src="js/DraggableBox.js" ></script>
     <script src="js/InputForm.js"></script>
     <script src="js/libraries/jquery-ui.js"></script> 
     <script src="https://kit.fontawesome.com/82ea518a78.js" crossorigin="anonymous"></script>
@@ -114,18 +115,31 @@
 </section> 
 
 <!-- DIALOG BOX -->
- <section id="talkBoxDialog" title="Genetic Memory">
+
+<div id="talkBoxDiv" class="mydiv">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div class="mydivheader">Genetic Memory</div>
+
+ <!-- <section id="talkBoxDialog" title="Genetic Memory"> -->
     <div id="archive-container">
     </div>    
     <div id="journal-container">
       <input id="journalTextContainer" type="text" placeholder="What is on your mind?">
       <article> <input id="sendThoughtButton" class="buttons" type="button" value="Send"> </article>
     </div>
-</section>
+<!-- </section> -->
+      <input id="closeDialogButton" type="button" value="Close">
+<!-- </section> -->
+</div> 
 
-<section id="identificationBoxDialog" title="User Identification">
+
+<div id="identificationBoxDialog" class="mydiv">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div class="mydivheader">User Login</div>
+
+<!-- <section id="identificationBoxDialog" title="User Identification"> -->
 <!-- <article>Message: <span id="idDialogBox-currentUser">&#60;<i>you</i>&#62;!</span></article> -->
-<article>Hi! Please enter your user name.
+<article>Login to access personal data.
 </article>
 <div id="login-container">username: <input id="login" type="text"></div>
 <input id="identifyButton" class="buttons" type="button" value="Identify">
@@ -134,15 +148,21 @@
 <div id="password-container">password:<input id="password" type="text"></div>
       <input id="loginButton" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
-      </article>
-      <!-- <input id="closeDialogButton" type="button" value="Done"> -->
-</section>
+</article>
+<!-- </section> -->
+  </div> 
 
-<section id="consoleBoxDialog" title="User Console">
+
+  <div id="consoleBoxDialogDiv" class="mydiv">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div class="mydivheader">User Login</div>
+<!-- <section id="consoleBoxDialog" title="User Console"> -->
     <div id="console-container">
       <article>&#62; Console ready. </article>
     </div>   
-</section>
+<!-- </section> -->
+</div> 
+
 
   </body>
 </html>

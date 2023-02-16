@@ -11,6 +11,7 @@ class Journal {
         this.user = user;
         this.growthStage;
         this.talkHistoryArrayDB=[];
+        this.closeButton = document.getElementById("closeDialogButton");
 
 
         //talkbox dialog: 
@@ -47,7 +48,12 @@ class Journal {
     } //end construtor
 
     openJournal(){
-        $("#talkBoxDialog").dialog('open');
+        // $("#talkBoxDialog").dialog('open');
+        document.getElementById("talkBoxDiv").style = "display: block;"
+    }
+
+    closeJournal(){
+        document.getElementById("talkBoxDiv").style = "display: none;"
     }
 
     journalDBInsert(growthPercentage){

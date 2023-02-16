@@ -125,7 +125,7 @@ let multiplicateur=2;
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class
-      this.buttons = new Button(); //generic
+      this.buttons = new ButtonList(); //generic
       this.energy = new Energy();
       this.journal = new Journal(this.flowerDBid, this.user);
 

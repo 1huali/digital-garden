@@ -181,7 +181,7 @@ display: block;
 
 .mode-prop{
   width:90%;
-  background:rgb(255, 255, 255);
+  /* background:rgb(255, 255, 255); */
 }
 
 .flowerEl{
@@ -305,4 +305,44 @@ display: block;
       width: auto;
       text-align: center;
     }
+  }
+
+/* DIV DIALOG BOXES : */
+  .mydiv {
+    position: absolute;
+    z-index: 9;
+    background-color: #f1f1f1;
+    border: 1px solid #d3d3d3;
+    padding: 3px;
+    width: 300px;
+    height: 180px;
+  }
+  
+  .mydivheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;    background-color:darkgray;
+    color: #fff;
+    text-align: center;
+  }
+  .dialogButton{
+    padding: 3px;
+  }
+
+  #identificationBoxDialog{
+    display: block;
+    right: 20px;
+    bottom:20px;
+  }
+
+  #consoleBoxDialogDiv{
+    display: block;
+    right: 20px;
+    top:20px;
+  }
+
+  #talkBoxDiv{
+    display: none;
+    right: 20px;
+    bottom:20px;
   }

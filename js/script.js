@@ -9,25 +9,27 @@ Prototype 3
 
 $(document).ready(function(){
 
+    let talkBoxDiv = document.getElementById("talkBoxDiv");
+
     //when user press "talk" button
- $( "#talkBoxDialog" ).dialog({
-    position: { my: "left top", at: "right bottom", of: window },
-    classes: {
-        "ui-dialog": "talkBox"
-    },
-    buttons: [
-        {
-          text: "Close",
-          click: function() {
-            $( this ).dialog( "close" );
-            // this.closingSound.play();
-          }
-        }
-      ]
-  });
+//  $( "#talkBoxDialog" ).dialog({
+//     position: { my: "left top", at: "right bottom", of: window },
+//     classes: {
+//         "ui-dialog": "talkBox"
+//     },
+//     buttons: [
+//         {
+//           text: "Close",
+//           click: function() {
+//             $( this ).dialog( "close" );
+//             // this.closingSound.play();
+//           }
+//         }
+//       ]
+//   });
 
 //closes the talkbox dialog after creating it
-  $("#talkBoxDialog").dialog('close');
+//   $("#talkBoxDialog").dialog('close');
 
     // let journal= new Journal();
     let inputForm = new InputForm();
@@ -92,6 +94,11 @@ $(document).ready(function(){
 
     
     let generateButton= document.getElementById('generateButton');
+    let closeButton = document.getElementById("closeDialogButton");
+
+    closeButton.addEventListener("click", function (){
+        flowerArray[selectedFlower].journal.closeJournal();
+    })
 
     function appendConsoleMsg(msg){
         let consoleContainer = $("#console-container");
@@ -336,7 +343,8 @@ console.log(localStorage.getItem("password"));
         passwordValue = password;
         localStorage.setItem(passwordKey,passwordValue);
         appendConsoleMsg("> Password saved.");
-        $("#identificationBoxDialog").dialog('close');
+        // $("#identificationBoxDialog").dialog('close');
+        document.getElementById("identificationBoxDialog").style= "display:none";
         userLoggedIn = true;
         autofillUser();
         //add to local storage
@@ -357,7 +365,8 @@ console.log(localStorage.getItem("password"));
     //The user if set, and the ID dialog box closes :
     function logUserProfile(){
         // console.log(userLoggedIn);
-        $("#identificationBoxDialog").dialog('close');
+        document.getElementById("identificationBoxDialog").style= "display:none";
+        // $("#identificationBoxDialog").dialog('close');
         appendConsoleMsg("> Currently logged as: "+localStorage.getItem("username"));
         appendConsoleMsg("> Your pw is: "+localStorage.getItem("password"));
 
@@ -400,68 +409,71 @@ console.log(localStorage.getItem("password"));
 
 //login box
               //id dialog box : 
-              //??doesn't create at timeout, but used to work
-              setTimeout(() => {
-                $("#identificationBoxDialog").dialog('open');
-              }, "3000")
+            //   setTimeout(() => {
+            //     $("#identificationBoxDialog").dialog('open');
+            //   }, "3000")
 
-                //mobile screen settings (identification/login box):
-                if (window.screen.width < 500){
-                $( "#identificationBoxDialog" ).dialog({
+            //     //mobile screen settings (identification/login box):
+            //     if (window.screen.width < 500){
+            //     $( "#identificationBoxDialog" ).dialog({
 
-                    width:1000,
-                    height:500,
+            //         width:1000,
+            //         height:500,
 
-                    position: ({
-                        my: "center bottom",
-                        at: "center bottom",
-                        of: window
-                      }),
-                    classes: {
-                        "ui-dialog": "identificationBox"
-                    }
-                  });
-              } else{
-                //desktop screen settings (identification/login box):
-                $( "#identificationBoxDialog" ).dialog({
+            //         position: ({
+            //             my: "center bottom",
+            //             at: "center bottom",
+            //             of: window
+            //           }),
+            //         classes: {
+            //             "ui-dialog": "identificationBox"
+            //         }
+            //       });
+            //   } else{
+            //     //desktop screen settings (identification/login box):
+            //     $( "#identificationBoxDialog" ).dialog({
 
-                    position: ({
-                        my: "right bottom",
-                        at: "right bottom",
-                        of: window
-                      }),
-                    classes: {
-                        "ui-dialog": "identificationBox"
-                    }
-                  });
-              }
+            //         position: ({
+            //             my: "right bottom",
+            //             at: "right bottom",
+            //             of: window
+            //           }),
+            //         classes: {
+            //             "ui-dialog": "identificationBox"
+            //         }
+            //       });
+            //   }
               
 
             //   $("#identificationBoxDialog").dialog('close');
-              $( "#identificationBoxDialog" ).dialog({
+            //   $( "#identificationBoxDialog" ).dialog({
 
-                dialogClass: "identificationBox",
-                buttons: [
-                  {
-                    text: "Close",
-                    click: function() {
-                      $( this ).dialog( "close" );
-                    }
-                  }
-                ]
-              });
+            //     dialogClass: "identificationBox",
+            //     buttons: [
+            //       {
+            //         text: "Close",
+            //         click: function() {
+            //           $( this ).dialog( "close" );
+            //         }
+            //       }
+            //     ]
+            //   });
            //console.log($( ".ui-dialog.identificationBox")[0].style);
         // $( ".ui-dialog.identificationBox")[0].style.width ="500px";
 //END FILL FORM
 
-                $( "#consoleBoxDialog" ).dialog({
-                    dialogClass: "identificationBox",
-                    position: ({
-                        my: "right top",
-                        at: "right top",
-                        of: window
-                      }),
-                });
+let consoleBoxDialogDiv = document.getElementById("consoleBoxDialogDiv");
+consoleBoxDialogDiv.style = "display:block";
+
+                // $( "#consoleBoxDialog" ).dialog({
+                //     dialogClass: "identificationBox",
+                //     position: ({
+                //         my: "right top",
+                //         at: "right top",
+                //         of: window
+                //       }),
+                // });
+
 
 //?? do we still need this box
     $.getJSON('Instructions.json',function(data) {
@@ -477,7 +489,7 @@ console.log(localStorage.getItem("password"));
                  } else {
                     // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
-            appendConsoleMsg(flowerArray[selectedFlower]+" journal accessed.")
+            appendConsoleMsg(flowerArray[selectedFlower].flowerId+" journal accessed.")
 
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();

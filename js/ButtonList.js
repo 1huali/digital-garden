@@ -1,5 +1,4 @@
-//next :change the class name to buttonList
-class Button {
+class ButtonList {
 
     constructor (flowerInstance){
 

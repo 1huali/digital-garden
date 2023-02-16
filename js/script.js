@@ -81,7 +81,6 @@ $(document).ready(function(){
     let visitorListArray= [];
     let username;
     let password;
-    let loginCurrentUserDisplay = document.getElementById("idDialogBox-currentUser");
     let currentUserIdBox = document.getElementById("currentUserId"); //same than userId but in titleBar
     let loginButton = document.getElementById("loginButton");
     let setPasswordButton = document.getElementById("setPasswordButton");
@@ -90,15 +89,12 @@ $(document).ready(function(){
     let userValue = "";
     let userSeedCount = document.getElementById("userFlowerIndex"); 
     let globalSeedCount = document.getElementById("totalFlowerIndex"); 
-    let consoleDialogBox = document.getElementById("consoleBoxDialog");
+    // let consoleDialogBox = document.getElementById("consoleBoxDialog");
 
     
     let generateButton= document.getElementById('generateButton');
-    let closeButton = document.getElementById("closeDialogButton");
+    let closeTalkBoxButton = document.getElementById("closeDialogButton");
 
-    closeButton.addEventListener("click", function (){
-        flowerArray[selectedFlower].journal.closeJournal();
-    })
 
     function appendConsoleMsg(msg){
         let consoleContainer = $("#console-container");
@@ -141,6 +137,8 @@ $(document).ready(function(){
         }
         //displays the energy levels of the selected flowers
         flowerArray[flowerArray.length-1].buttons.setOptionButtons();
+        //??not disappearing
+        document.getElementsByClassName("x").style= "display : none";
         // flowerArray[selectedFlower].printPositions(selectedFlower);
         flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
         }
@@ -489,7 +487,7 @@ consoleBoxDialogDiv.style = "display:block";
                  } else {
                     // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
-            appendConsoleMsg(flowerArray[selectedFlower].flowerId+" journal accessed.")
+            appendConsoleMsg("> "+flowerArray[selectedFlower].flowerId+" journal opened.")
 
             if (flowerArray[selectedFlower].dialogActivate === false){
             flowerArray[selectedFlower].activateJournal();
@@ -565,6 +563,10 @@ consoleBoxDialogDiv.style = "display:block";
 
         });
 
+
+        closeTalkBoxButton.addEventListener("click", function (){
+            flowerArray[selectedFlower].journal.closeJournal();
+        })
 
         // generateButton.addEventListener("click", function(){
 
@@ -694,6 +696,7 @@ consoleBoxDialogDiv.style = "display:block";
         }
     }
 
+    //appends all the ID of the user's flowers in the flower selection menu:
     function appendFlowerSelect(){
         for (let i =0;i< flowerArray.length; i++){
             if (flowerArray[i].user === currentUser ){

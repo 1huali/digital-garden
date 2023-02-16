@@ -142,6 +142,7 @@ h1{
   /* display: flex; */
   width: 60px;
   text-align: center;
+  /* align-items: center baseline; */
 }
 
   #loginButton{
@@ -345,4 +346,8 @@ display: block;
     display: none;
     right: 20px;
     bottom:20px;
+  }
+
+  .x{
+    display: block;
   }

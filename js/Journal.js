@@ -11,10 +11,9 @@ class Journal {
         this.user = user;
         this.growthStage;
         this.talkHistoryArrayDB=[];
-        this.closeButton = document.getElementById("closeDialogButton");
 
 
-        //talkbox dialog: 
+        //jQuery talkbox dialog: 
 // //when user press "talk" button
 //  $( "#talkBoxDialog" ).dialog({
 //     position: { my: "left top", at: "right bottom", of: window },
@@ -54,6 +53,8 @@ class Journal {
 
     closeJournal(){
         document.getElementById("talkBoxDiv").style = "display: none;"
+        this.closingSound.play();
+
     }
 
     journalDBInsert(growthPercentage){

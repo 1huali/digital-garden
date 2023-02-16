@@ -1,4 +1,3 @@
-//next :change the class name to buttonList
 class DraggableBox {
     constructor (){
       this.pos1 = 0;
@@ -7,7 +6,6 @@ class DraggableBox {
       this.pos4 = 0;
       // Make the DIV element draggable:
       dragElement(document.getElementsByClassName("mydiv"));
-
     } //end construtor
 
 
@@ -51,5 +49,4 @@ class DraggableBox {
     document.onmousemove = null;
   }
   }//end dragElement();
-
 }//end of class

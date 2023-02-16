@@ -44,7 +44,7 @@
 <article> Login or identify to plant or access your flowers. </article> 
 </div>
 <div id="messageContainer">
-<div id="messageBar"> Message : <marquee scrollamount="2" direction="left" width="200px"><i><span id="message">aaaaaa</span></i></marquee> </div>
+<div id="messageBar"> Online : <marquee scrollamount="2" direction="left" width="200px"><i><span id="message">aaaaaa</span></i></marquee> </div>
 </div>
  seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
@@ -96,8 +96,11 @@
  </section> -->
 
   <section id="flowerData-container"> 
-  <h2>CURRENT SESSION</h2>
+  <h2>USER BOARD</h2>
  <article> User : <span id="currentUserId">&#60;<i>null</i>&#62;</span></article>
+ <article class="x"> _</article>
+ <article class="x"> _</article>
+ <article class="x"> _</article>
  <article>
 <label for="flowerDropDownList">Seeds : </label>
 <select id="flowerList-select">
@@ -106,39 +109,29 @@
   current flower : <span id="demo">none</span>
 
 <div id="flowerStatistic-buttons">
-<!-- <div id="currentFlowerContainer"> <h2> &#60;<i>no flower id</i>&#62;</h2></div>  -->
 <article> <input id="waterButton" class="buttons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
 <article> <input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
 <article> <input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
-<article> Thoughts: <span id="flowerThoughts-container"> </span></article>
+<!-- <article> Thoughts: <span id="flowerThoughts-container"> </span></article> -->
 </div>
 </section> 
 
 <!-- DIALOG BOX -->
 
 <div id="talkBoxDiv" class="mydiv">
-    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
     <div class="mydivheader">Genetic Memory</div>
-
- <!-- <section id="talkBoxDialog" title="Genetic Memory"> -->
     <div id="archive-container">
     </div>    
     <div id="journal-container">
       <input id="journalTextContainer" type="text" placeholder="What is on your mind?">
       <article> <input id="sendThoughtButton" class="buttons" type="button" value="Send"> </article>
     </div>
-<!-- </section> -->
-      <input id="closeDialogButton" type="button" value="Close">
-<!-- </section> -->
+      <input id="closeDialogButton" class="buttons" type="button" value="Close">
 </div> 
 
 
 <div id="identificationBoxDialog" class="mydiv">
-    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
     <div class="mydivheader">User Login</div>
-
-<!-- <section id="identificationBoxDialog" title="User Identification"> -->
-<!-- <article>Message: <span id="idDialogBox-currentUser">&#60;<i>you</i>&#62;!</span></article> -->
 <article>Login to access personal data.
 </article>
 <div id="login-container">username: <input id="login" type="text"></div>
@@ -149,18 +142,14 @@
       <input id="loginButton" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
 </article>
-<!-- </section> -->
   </div> 
 
 
   <div id="consoleBoxDialogDiv" class="mydiv">
-    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
     <div class="mydivheader">User Login</div>
-<!-- <section id="consoleBoxDialog" title="User Console"> -->
     <div id="console-container">
       <article>&#62; Console ready. </article>
     </div>   
-<!-- </section> -->
 </div> 
 
 

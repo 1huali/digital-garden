@@ -40,8 +40,8 @@
   <section id="gardenInfoHeader">
 <h1 id="title">THE DIGITAL GARDEN</h1>
 <div id="about-container">
-<article>This is a space to plant and seed personal objectives.</article>
-<article> Login or identify to plant or access your flowers. </article> 
+<!-- <article>This is a space to plant and seed personal objectives.</article>
+<article> Login or identify to plant or access your flowers. </article>  -->
 </div>
 <div id="messageContainer">
 <div id="messageBar"> Online : <marquee scrollamount="2" direction="left" width="200px"><i><span id="message">aaaaaa</span></i></marquee> </div>
@@ -146,9 +146,13 @@
 
 
   <div id="consoleBoxDialogDiv" class="mydiv">
-    <div class="mydivheader">User Login</div>
+    <div class="mydivheader">User Console</div>
     <div id="console-container">
-      <article>&#62; Console ready. </article>
+    <article id="consoleHeader">&#62; Console ready. </article>
+    <article>Welcome to the digital garden!</article>
+    <article>This is a space to plant and seed personal objectives.</article>
+    <article>&#62; Drag to explore the space.</article>
+    <article>&#62; Login to plant or access your flowers. </article> 
     </div>   
 </div> 
 

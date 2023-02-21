@@ -101,7 +101,7 @@ $(document).ready(function(){
         let dataHTMLElement = $("<p>").addClass("mode-prop");
         dataHTMLElement.html(msg);
         // $(consoleContainer).empty();
-        $(dataHTMLElement).appendTo(consoleContainer);
+        $(dataHTMLElement).prependTo(consoleContainer);
     }
 
     function panViewToCurrentFlower(selection){
@@ -301,7 +301,7 @@ L.tileLayer.kitten().addTo(mainMap);
     } else {
         //WRITE to local storage
     appendConsoleMsg("> New user added:"+userValue);
-    loginCurrentUserDisplay.innerHTML = userValue;
+    currentUserIdBox.innerHTML = userValue;
     identifyButton.style = "display : none";
     document.getElementById("password-container").style = "display : block";
     setPasswordButton.style = "display : block";

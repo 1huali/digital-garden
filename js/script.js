@@ -6,10 +6,10 @@ Prototype 3
 */
 
 "use strict";
+//only one box can be dragegd at the time :
+let boxIsDragging=false;
 
 $(document).ready(function(){
-
-    let talkBoxDiv = document.getElementById("talkBoxDiv");
 
     //when user press "talk" button
 //  $( "#talkBoxDialog" ).dialog({
@@ -94,6 +94,9 @@ $(document).ready(function(){
     
     let generateButton= document.getElementById('generateButton');
     let closeTalkBoxButton = document.getElementById("closeDialogButton");
+    let talkBoxDiv = new DraggableBox(document.getElementById("talkBoxDiv"));
+    let consoleBoxDiv = new DraggableBox(document.getElementById("consoleBoxDialogDiv"));
+    let identificationBoxDialog = new DraggableBox(document.getElementById("identificationBoxDialog"));
 
 
     function appendConsoleMsg(msg){
@@ -137,8 +140,6 @@ $(document).ready(function(){
         }
         //displays the energy levels of the selected flowers
         flowerArray[flowerArray.length-1].buttons.setOptionButtons();
-        //??not disappearing
-        document.getElementsByClassName("x").style= "display : none";
         // flowerArray[selectedFlower].printPositions(selectedFlower);
         flowerArray[selectedFlower].energy.printCurrentEnergyLevel();
         }

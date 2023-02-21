@@ -98,9 +98,14 @@
   <section id="flowerData-container"> 
   <h2>USER BOARD</h2>
  <article> User : <span id="currentUserId">&#60;<i>null</i>&#62;</span></article>
- <article class="x"> _</article>
- <article class="x"> _</article>
- <article class="x"> _</article>
+ <article class="x"> 
+ <div id="flowerStatistic-buttons">
+<article> <input id="waterButton" class="buttons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
+<article> <input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
+<article> <input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
+<!-- <article> Thoughts: <span id="flowerThoughts-container"> </span></article> -->
+</div>
+ </article>
  <article>
 <label for="flowerDropDownList">Seeds : </label>
 <select id="flowerList-select">
@@ -108,18 +113,13 @@
   </select></article>
   current flower : <span id="demo">none</span>
 
-<div id="flowerStatistic-buttons">
-<article> <input id="waterButton" class="buttons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
-<article> <input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
-<article> <input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
-<!-- <article> Thoughts: <span id="flowerThoughts-container"> </span></article> -->
-</div>
+
 </section> 
 
 <!-- DIALOG BOX -->
 
-<div id="talkBoxDiv" class="mydiv">
-    <div class="mydivheader">Genetic Memory</div>
+<div id="talkBoxDiv" ref-class="mydivtalk" class="mydiv">
+    <div class="mydivheader mydivtalkheader">Genetic Memory</div>
     <div id="archive-container">
     </div>    
     <div id="journal-container">
@@ -130,8 +130,8 @@
 </div> 
 
 
-<div id="identificationBoxDialog" class="mydiv">
-    <div class="mydivheader">User Login</div>
+<div id="identificationBoxDialog" ref-class="mydivid" class="mydiv">
+    <div class="mydivheader mydividheader">User Login</div>
 <article>Login to access personal data.
 </article>
 <div id="login-container">username: <input id="login" type="text"></div>
@@ -145,8 +145,8 @@
   </div> 
 
 
-  <div id="consoleBoxDialogDiv" class="mydiv">
-    <div class="mydivheader">User Console</div>
+  <div id="consoleBoxDialogDiv" ref-class="mydivconsole" class="mydiv">
+    <div class="mydivheader mydivconsoleheader">User Console</div>
     <div id="console-container">
     <article id="consoleHeader">&#62; Console ready. </article>
     <article>Welcome to the digital garden!</article>

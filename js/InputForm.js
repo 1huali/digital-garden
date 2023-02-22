@@ -56,12 +56,6 @@ appendConsoleMsg("> Success : new seed created.")
  newFlower.assignFormValues(data.get("a_timeStamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
 //  console.log(data.get("a_pattern"));
 
- if (data.get("a_pattern")==="fractals"){
-    console.log("we got fractals");
- } else if (data.get("a_pattern")==="lsystemAxiomF"){
-    console.log("we got l-sys")
- }
-
  // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                
 //  //console.log to inspect the data :
@@ -104,6 +98,8 @@ console.log("error occurred");
 });
 
 });//submit
+
+console.log(flowerArray)
 
 }
 

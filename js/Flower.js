@@ -135,6 +135,7 @@ class Flower {
           self.changeState()}, this.growthLength/this.state.length);
 
         if (this.manualMode===true){
+          //inactive
           console.log("!!stages happening by clicks and nurturing");
         } 
       }
@@ -221,6 +222,7 @@ class Flower {
       console.log(currentAge);
 
     //print to div :
+    if (this.hideUsername === false){
       this.flowerHoverEl.innerHTML = 
       "name : " + 
       this.flowerId + 
@@ -234,6 +236,19 @@ class Flower {
       "  old" + 
       "<br>" + 
       '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
+    } else if (this.hideUsername === true){
+      this.flowerHoverEl.innerHTML = 
+      "name : " + 
+      this.flowerId + 
+      "<br>" +
+      "reason : " + 
+      this.reason +
+      "<br>" + 
+      currentAge + 
+      "  old" + 
+      "<br>" + 
+      '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
+    }
 
       document.getElementById("hiButton").addEventListener('click', function(){
       console.log("hello!!!!");

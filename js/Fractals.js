@@ -275,11 +275,26 @@ let multiplicateur=2;
 
 bloom(){
 let self=this;
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+let r = hexToRgb(this.color).r; 
+let g = hexToRgb(this.color).g;
+let b = hexToRgb(this.color).b;
+
   // if (this.blossom=== true){
-    console.log(this.stems.length);
+    console.log(this.color);
     for (let i = 0; i < this.stems.length; i+=Math.floor(Math.random() * 1200) + 850) {
       // fill(255, 0, 100, 100);
-      noStroke();
+      this.p5Context.noStroke();
+      this.p5Context.fill(r,g,b);
       // this.p5Context.ellipse(this.stems[i].x, this.stems[i].y, 8, 8);
       this.p5Context.textSize(24);
       this.p5Context.text(this.fruit,this.stems[i].x, this.stems[i].y);

@@ -260,6 +260,7 @@ let self=this;
       //age of the tree. With the age variable, we can give it an evolution tracking time stamp to assign its visual representation.
       let date = new Date();
       this.currentAge = date.getTime() - this.timeStamp;
+      console.log(dhm(this.currentAge));
 
      let ageIntervalPerState;//25
     //  this currentState=0;
@@ -279,7 +280,16 @@ let self=this;
       this.generate();
     }
    
-
+    function dhm (ms) {
+      let days = Math.floor(ms / (24*60*60*1000));
+      let daysms = ms % (24*60*60*1000);
+      let hours = Math.floor(daysms / (60*60*1000));
+      let hoursms = ms % (60*60*1000);
+      let minutes = Math.floor(hoursms / (60*1000));
+      let minutesms = ms % (60*1000);
+      let sec = Math.floor(minutesms / 1000);
+      return days + ":" + hours + ":" + minutes;
+    }
 
  
     }

@@ -86,6 +86,7 @@
        <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ffbfe0"></p>
        <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"></p>
        <input id="submitButton" type="submit" value="Submit">
+       <input type="button" value="Cancel">
       </fieldset>
     </form>
     </div>  
@@ -151,7 +152,6 @@
 </article>
   </div> 
 
-
   <div id="consoleBoxDialogDiv" ref-class="mydivconsole" class="mydiv">
     <div class="mydivheader mydivconsoleheader">User Console</div>
     <div id="console-container">
@@ -162,7 +162,6 @@
     <article>&#62; Login to plant or access your flowers. </article> 
     </div>   
 </div> 
-
 
   </body>
 </html>

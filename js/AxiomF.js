@@ -21,8 +21,6 @@ class AxiomF extends Flower {
 
       this.flowerDBid= flowerDBid;
 
-      this.posX = posX;
-      this.posY = posY;
       this.marker= marker;
       this.map= map;
 
@@ -61,6 +59,22 @@ class AxiomF extends Flower {
 
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
+
+       //to access the map to have the flower div on top of the map
+       this.mapLayerArray= Object.keys(this.map._layers);
+       //  //the flower DIV based on the leaflet librairy to create a div element
+ 
+       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
+       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
+       this.posX = this.posX -(this.map._layers[this.mapLayerArray[1]]._container.getBoundingClientRect().x);
+       this.posY = this.posY -(this.map._layers[this.mapLayerArray[1]]._container.getBoundingClientRect().y);
+ 
+       this.flowerEl.style.left = `${this.posX-50}px`;
+       this.flowerEl.style.top = `${this.posY-50}px`; 
+ 
+       this.flowerHoverEl.style.left = `${this.posX-50}px`;
+       this.flowerHoverEl.style.top = `${this.posY-150}px`; 
+ 
       this.flowerEl.addEventListener("click", function(){
 
           let flowerHoverElClass = document.querySelectorAll(".flowerHoverEl");
@@ -83,11 +97,9 @@ class AxiomF extends Flower {
 
       //attributing an ID to those DIVs
       this.flowerEl.setAttribute("id","flower"+this.flowerDBid+"_"+this.creationTimeStamp.getTime());
-
-      //the id element :
+      // //the id element :
       this.flowerId= this.flowerEl.id;
-      this.flowerGenerated = false;
-      this.sound= sound;
+
 
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
@@ -197,6 +209,41 @@ class AxiomF extends Flower {
         this.sentence = nextSentence; 
       }
 
+      assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color,motivation){
+
+        //traversing flower data values to flower constructor values :
+        this.timeStamp=timeStamp;
+        this.growthLength = length;
+        this.fruit = fruit;
+        this.user=user;
+        this.pattern=pattern;
+        this.color=color;
+        this.reason=motivation;
+  
+        if(autonomous_manual==="on"){
+          this.manualMode = true;
+        }
+        else{
+          this.manualMode = false;
+        }
+        //set 
+        if(show_hide==="Yes"){
+          this.hideUsername = true;
+        }
+        else{
+          this.hideUsername = false;
+        }
+  
+        if (pattern=== "lsystemAxiomF"){
+          this.pattern = "lsystemAxiomF";
+        } else if (pattern=== "fractal"){
+          this.pattern= "fractal";
+        }
+      
+        this.age();
+        // this.hoverInfos();
+  
+      }
 
     age(){
 

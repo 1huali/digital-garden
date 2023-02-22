@@ -20,12 +20,11 @@ class Flower {
       this.color="";
       this.fruit;
       this.reason="";
+      this.sound= sound;
 
-
+      this.flowerGenerated = false;
+      this.flowerEl;
       this.flowerDBid= flowerDBid;
-
-      // this.posX = posX;
-      // this.posY = posY;
 
       this.marker= marker;
       this.map= map;
@@ -50,44 +49,6 @@ class Flower {
       this.waterDailyLevel=0;
       this.waterLevelArray=["░","▒","▓","█","█"];
 
-
-           //LEAFLET/DIV ELEMENT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
-
-      //to access the map to have the flower div on top of the map
-      this.mapLayerArray= Object.keys(this.map._layers);
-      //  //the flower DIV based on the leaflet librairy to create a div element
-
-      this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
-
-      //flower informations at hover :
-      this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
-      this.flowerEl.addEventListener("click", function(){
-
-          let flowerHoverElClass = document.querySelectorAll(".flowerHoverEl");
-          for (let i=0; i < flowerHoverElClass.length; i++){
-            if (flowerHoverElClass[i].style.display === "block"); {
-              flowerHoverElClass[i].style.display = "none";
-              opened=false;
-            }
-            self.flowerHoverEl.style= "display: block;"
-            opened=true;
-
-            if (opened === true){
-              setTimeout(() => {
-                self.flowerHoverEl.style.display= "none"
-                opened=false;
-              }, "5000");
-        }
-          }
-      });
-
-      //attributing an ID to those DIVs
-      this.flowerEl.setAttribute("id","flower"+this.flowerDBid+"_"+this.creationTimeStamp.getTime());
-
-      //the id element :
-      this.flowerId= this.flowerEl.id;
-      this.flowerGenerated = false;
-      this.sound= sound;
 
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
@@ -115,12 +76,6 @@ class Flower {
     //   }
 
     // this.p5Context = new p5(this.s1);
-
-      this.flowerEl.style.left = `${this.posX-50}px`;
-      this.flowerEl.style.top = `${this.posY-50}px`; 
-
-      this.flowerHoverEl.style.left = `${this.posX-50}px`;
-      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
 
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
@@ -190,11 +145,7 @@ class Flower {
     }
     
     displayFlower(){
-        //position of the center of the flower canvas :
-        this.flowerEl.style.left = `${this.posX-50}px`;
-        this.flowerEl.style.top = `${this.posY-50}px`; 
-        this.flowerHoverEl.style.left = `${this.posX-50}px`;
-        this.flowerHoverEl.style.top = `${this.posY-150}px`; 
+
     }
 
     generate (){
@@ -202,38 +153,6 @@ class Flower {
     }
 
     assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color,motivation){
-
-      //traversing flower data values to flower constructor values :
-      this.timeStamp=timeStamp;
-      this.growthLength = length;
-      this.fruit = fruit;
-      this.user=user;
-      this.pattern=pattern;
-      this.color=color;
-      this.reason=motivation;
-
-      if(autonomous_manual==="on"){
-        this.manualMode = true;
-      }
-      else{
-        this.manualMode = false;
-      }
-      //set 
-      if(show_hide==="Yes"){
-        this.hideUsername = true;
-      }
-      else{
-        this.hideUsername = false;
-      }
-
-      if (pattern=== "lsystemAxiomF"){
-        this.pattern = "lsystemAxiomF";
-      } else if (pattern=== "fractal"){
-        this.pattern= "fractal";
-      }
-    
-      this.age();
-      this.hoverInfos();
 
     }
 
@@ -274,6 +193,34 @@ class Flower {
     }
 
     hoverInfos(){
+
+      function dhm (ms) {
+        let days = Math.floor(ms / (24*60*60*1000));
+        let daysms = ms % (24*60*60*1000);
+        let hours = Math.floor(daysms / (60*60*1000));
+        let hoursms = ms % (60*60*1000);
+        let minutes = Math.floor(hoursms / (60*1000));
+        let minutesms = ms % (60*1000);
+        let sec = Math.floor(minutesms / 1000);
+
+        if (days < 0){
+          return hours + " hrs " + minutes + " mins ";
+        } else if (hours < 0){
+          return minutes + " mins " + sec + " sec ";
+        } else if (minutes < 0){
+          return sec + " sec "
+        } else {
+          //not showing properly TO FIX
+        return days + " days " + hours + " hrs " + minutes + " mins ";
+      }
+
+
+      }
+
+      let currentAge= dhm(this.currentAge);
+      console.log(currentAge);
+
+    //print to div :
       this.flowerHoverEl.innerHTML = 
       "name : " + 
       this.flowerId + 
@@ -281,10 +228,10 @@ class Flower {
       "by " + 
       this.user +
       "<br> reason : " + 
-      this.user +
-      "<br> age : " + 
-      this.currentAge + 
-      " time ago" + 
+      this.reason +
+      "<br>" + 
+      currentAge + 
+      "  old" + 
       "<br>" + 
       '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
 

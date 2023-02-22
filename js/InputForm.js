@@ -1,27 +1,34 @@
+
 class InputForm {
     constructor(){
         this.newFlower=null;
+  
 
     }//end constructor
 
-    openInputForm(newFlower,  appendConsoleMsg){
+  
+    openInputForm(newFlower){
         let self=this;
         // $("#seedIdPopUpForm-container").dialog('open');
         document.getElementById("seedBoxDialogDiv").style="display:block";
-        this.newFlower = newFlower;
+       this.newFlower = newFlower;
+    }   
 
- //submission of php flower data thru AJAX :
+
+//sabine added
+onSubmit(locationObj,coordinateMarker ,mainMap ,flowerArray,chimeSound,appendConsoleMsg) {
+ 
+    //submission of php flower data thru AJAX :
  $("#insertFlower").submit(function(event) {
     //stop submit the form, we will post it manually. PREVENT THE DEFAULT behaviour ...
    event.preventDefault();
  console.log("insert triggered");
- appendConsoleMsg("> Success : new seed created.")
+appendConsoleMsg("> Success : new seed created.")
 
 
  //retrieve the infos into objet key/value pairs
   let form = $('#insertFlower')[0];
   let data = new FormData(form);
-
  //  updateSeedCount();
 
 
@@ -35,14 +42,25 @@ class InputForm {
  } 
 
  let date= new Date();
+ let newFlower = new Flower(locationObj.lat, locationObj.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+
+ flowerArray.push(newFlower);
+
  data.append('a_timeStamp', date.getTime());
- data.append("x_pos", self.newFlower.posX);
- data.append("y_pos", self.newFlower.posY);
- data.append("growthCompleted", self.newFlower.growthCompleted);
+ data.append("x_pos", newFlower.n_latLng.lat);
+ data.append("y_pos", newFlower.n_latLng.lng);
+ data.append("growthCompleted", newFlower.growthCompleted);
+ 
 
  //traversing fill form data to constructor : 
- self.newFlower.assignFormValues(data.get("a_timeStamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
+ newFlower.assignFormValues(data.get("a_timeStamp"),data.get("a_length")*60000, data.get("manual_growth"),data.get("hide_user"),data.get("a_fruit"),data.get("a_user"),data.get("a_pattern"), data.get("a_color"));
 //  console.log(data.get("a_pattern"));
+
+ if (data.get("a_pattern")==="fractals"){
+    console.log("we got fractals");
+ } else if (data.get("a_pattern")==="lsystemAxiomF"){
+    console.log("we got l-sys")
+ }
 
  // !! changer pr 86400000 ms (jour), mais live c'est en minute pour test purposes
                
@@ -76,7 +94,7 @@ console.log(response);
 document.getElementById("insertFlower").reset();
 
 //FLOWER CONSTRUCTION
-self.newFlower.flowerGenerated = true;
+newFlower.flowerGenerated = true;
 $("#seedIdPopUpForm-container").dialog('close');
 
 },
@@ -84,7 +102,10 @@ error:function(){
 console.log("error occurred");
 }
 });
-});
-    }
+
+});//submit
+
+}
+
 
 }//end class

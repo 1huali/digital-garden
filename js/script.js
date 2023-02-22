@@ -34,6 +34,7 @@ $(document).ready(function(){
     // let journal= new Journal();
     let inputForm = new InputForm();
 
+
     let flowerArray=[];
     let thoughtArrayDB=[];
     
@@ -68,7 +69,6 @@ $(document).ready(function(){
     let idDataContainer = document.getElementById('idData');
     //get flower.flowerEl name printed in the container
     let idData; 
-
     let myFlowerArray=[];
 
     // let sendThoughtButton = document.getElementById("sendThoughtButton");
@@ -197,8 +197,8 @@ L.tileLayer.kitten().addTo(mainMap);
                     // console.log(parsedJSON[i].pattern)
                     //retrieving data, outputting from the database to pass in a class:  
             if (parsedJSON[i].pattern==="fractals"){
-                flowerArray.push(new Fractals(parseInt(parsedJSON[i].xPosition),
-                parseInt(parsedJSON[i].yPosition),
+                flowerArray.push(new Fractals(parseFloat(parsedJSON[i].xPosition),
+                parseFloat(parsedJSON[i].yPosition),
                   null,
                   mainMap,
                   parsedJSON[i].flowerID,
@@ -207,8 +207,8 @@ L.tileLayer.kitten().addTo(mainMap);
                   parsedJSON[i].user
                 ));
             } else if (parsedJSON[i].pattern==="lsystemAxiomF"){
-                flowerArray.push(new AxiomF(parseInt(parsedJSON[i].xPosition),
-                parseInt(parsedJSON[i].yPosition),
+                flowerArray.push(new AxiomF(parseFloat(parsedJSON[i].xPosition),
+                parseFloat(parsedJSON[i].yPosition),
                   null,
                   mainMap,
                   parsedJSON[i].flowerID,
@@ -612,13 +612,17 @@ consoleBoxDialogDiv.style = "display:block";
                     .setLatLng(e.latlng) // set the coordinates of the marker to the coordinates of the mouse when it was double clicked
                     .addTo(mainMap); // add the marker to the map
                     locationDataContainer.value = e.latlng;
-                    //creating an individual flower object, passing its data thru newFlower and pushing it to the flower array :
-                    let newFlower = new Flower(e.latlng.lat, e.latlng.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
-                    inputForm.openInputForm(newFlower, appendConsoleMsg);
-                    flowerArray.push(newFlower);
-                    userSeedCount.innerHTML= flowerArray.length;
 
-                idDataContainer.value = flowerArray[flowerArray.length-1].flowerId;
+                    inputForm.onSubmit(e.latlng,coordinateMarker ,mainMap ,flowerArray,chimeSound,appendConsoleMsg);
+
+                    //creating an individual flower object, passing its data thru newFlower and pushing it to the flower array :
+                    // let newFlower = new Flower(e.latlng.lat, e.latlng.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+                    inputForm.openInputForm(null);
+                    // flowerArray.push(newFlower);
+                    userSeedCount.innerHTML= flowerArray.length;
+                   let creationTimeStamp= new Date();
+
+                idDataContainer.value = "flower"+ flowerArray.length + "_"+creationTimeStamp.getTime();
 
                 // currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {
@@ -630,6 +634,8 @@ consoleBoxDialogDiv.style = "display:block";
                     counter=0;
                 }, "86400000")
             }
+
+           
         }
 
 

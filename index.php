@@ -50,11 +50,16 @@
 </section>
 
 <!-- Fill form to create a personalized flower -->
-    <section id="seedIdPopUpForm-container" class="seedFillForm-dialog" title="Plant A Seed">
+    <!-- <section id="seedIdPopUpForm-container" class="seedFillForm-dialog" title="Plant A Seed"> -->
+    <div id="seedBoxDialogDiv" ref-class="mydivseed" class="mydiv">
+      <div class="mydivheader mydivseedheader">Plant a Seed</div>
+    <div id="plantSeed-container">
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
         <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
-        <p><label>Motivation </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required></p>
+        <p><label>Reason </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required>
+        <!-- <input type="checkbox" id="noReasonBox" value="Exist"> -->
+      </p>
         <p><label>User </label><input id="usernameInputField" type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Hide User </label>
         <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
@@ -83,7 +88,9 @@
        <input id="submitButton" type="submit" value="Submit">
       </fieldset>
     </form>
-      </section>
+    </div>  
+</div>
+      <!-- </section> -->
 
     <div id="mapBox">
 <div class="map" id="mainMap"></div>

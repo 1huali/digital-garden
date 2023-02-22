@@ -97,7 +97,7 @@ $(document).ready(function(){
     let talkBoxDiv = new DraggableBox(document.getElementById("talkBoxDiv"));
     let consoleBoxDiv = new DraggableBox(document.getElementById("consoleBoxDialogDiv"));
     let identificationBoxDialog = new DraggableBox(document.getElementById("identificationBoxDialog"));
-
+    let seedBoxDiv = new DraggableBox(document.getElementById("seedBoxDialogDiv"))
 
     function appendConsoleMsg(msg){
         let consoleContainer = $("#console-container");
@@ -220,7 +220,7 @@ L.tileLayer.kitten().addTo(mainMap);
 
                     //for the flowers display since the condition for display is true for flowerGenerated
                     flowerArray[flowerArray.length-1].flowerGenerated = true;
-                    flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].creationDate),parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color);
+                    flowerArray[flowerArray.length-1].assignFormValues (parseFloat(parsedJSON[i].creationDate),parseFloat(parsedJSON[i].growthLength),parsedJSON[i].manualGrowth,parsedJSON[i].hideUser,parsedJSON[i].fruit,parsedJSON[i].user,parsedJSON[i].pattern,parsedJSON[i].color,parsedJSON[i].motivation,);
                     // flowerArray[flowerArray.length-1].isGrowing = true;
 
                   }

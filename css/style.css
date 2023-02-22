@@ -13,6 +13,11 @@ padding: 3px;
 
 h1{
   font-size:30px;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+h2{
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+
 }
 
 #about-container{
@@ -49,20 +54,6 @@ h1{
   height: 100vh;
   z-index: 1;
 }
-
-
-  /* #seedIdPopUpForm-container{
-    width: max-content;
-    height: max-content;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    z-index: 10;
-    background-color: rgb(255, 127, 246); */
-    /* display: none; */
-    /* display: block;
-  } */
-
 
   /* CONTAINERS */
 
@@ -124,12 +115,6 @@ h1{
   }
   #talkBoxDialog{
     display: none;
-  }
-
-  .seedFillForm-dialog{
-    height: max-content;
-    width: max-content;
-
   }
 
   #consoleBoxDialog{
@@ -206,12 +191,14 @@ display: block;
 
 .flowerHoverEl{
   color: #000000;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
   background-color: rgba(255, 255, 255, 0.9);
   width: max-content;
   height: max-content;
   position:absolute;
   z-index: 100;
   display: none;
+  box-shadow: 2px 2px 1px 3px rgb(178, 182, 183);
   padding: auto;
 }
 
@@ -220,6 +207,8 @@ display: block;
   width: max-content;
   height: max-content;
   display: block;
+  box-shadow: 10px 10px 5px 12px rgb(178, 182, 183);
+  text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
   padding: 0.2px;
   /* z-index: 1; */
 
@@ -262,12 +251,6 @@ display: block;
       left: 600px;
     }
 
-    .seedFillForm-dialog{
-      /* height: 200px; */
-      width: 600px;
-      top: 450px;
-      left: 600px;
-    } 
 
     #flowerData-container{
       position: absolute;
@@ -323,7 +306,9 @@ display: block;
   .mydivheader {
     padding: 10px;
     cursor: move;
-    z-index: 21;    background-color:darkgray;
+    z-index: 21;    
+    background-color:darkgray;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
     color: #fff;
     text-align: center;
   }
@@ -357,4 +342,12 @@ display: block;
 
   #consoleHeader{
     color: #b1b1b1;
+  }
+
+  #seedBoxDialogDiv{
+    display: none;
+    top: 450px;
+    left: 600px;
+    height: max-content;
+    width: max-content;
   }

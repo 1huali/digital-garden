@@ -2,30 +2,12 @@ class InputForm {
     constructor(){
         this.newFlower=null;
 
-        $( "#seedIdPopUpForm-container" ).dialog({
-            position: { my: "left top", at: "right bottom", of: window },
-            classes: {
-                "ui-dialog": "seedFillForm-dialog"
-            },
-                    buttons: [
-              {
-                text: "Cancel",
-                click: function() {
-                                console.log("!!change for html button");
-                  $( this ).dialog( "close" );
-                }
-              }
-            ]
-          });
-    
-    // closes the talkbox dialog after creating it
-          $("#seedIdPopUpForm-container").dialog('close');
-
     }//end constructor
 
     openInputForm(newFlower,  appendConsoleMsg){
         let self=this;
-        $("#seedIdPopUpForm-container").dialog('open');
+        // $("#seedIdPopUpForm-container").dialog('open');
+        document.getElementById("seedBoxDialogDiv").style="display:block";
         this.newFlower = newFlower;
 
  //submission of php flower data thru AJAX :

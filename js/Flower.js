@@ -19,6 +19,7 @@ class Flower {
       this.pattern="";
       this.color="";
       this.fruit;
+      this.reason="";
 
 
       this.flowerDBid= flowerDBid;
@@ -58,6 +59,7 @@ class Flower {
 
       this.flowerEl = L.DomUtil.create("div","flowerEl",this.map._layers[this.mapLayerArray[1]]._container);
 
+      //flower informations at hover :
       this.flowerHoverEl = L.DomUtil.create("div","flowerHoverEl",this.map._layers[this.mapLayerArray[1]]._container);
       this.flowerEl.addEventListener("click", function(){
 
@@ -199,7 +201,7 @@ class Flower {
 
     }
 
-    assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color){
+    assignFormValues (timeStamp,length,autonomous_manual,show_hide,fruit,user,pattern,color,motivation){
 
       //traversing flower data values to flower constructor values :
       this.timeStamp=timeStamp;
@@ -208,7 +210,8 @@ class Flower {
       this.user=user;
       this.pattern=pattern;
       this.color=color;
-      
+      this.reason=motivation;
+
       if(autonomous_manual==="on"){
         this.manualMode = true;
       }
@@ -230,9 +233,8 @@ class Flower {
       }
     
       this.age();
+      this.hoverInfos();
 
-      //hover display:
-      this.flowerHoverEl.innerHTML = "name : " + this.flowerId + "<br>" + "by " + this.user + "<br> age : " + this.growthLength + "years old" + "<br>" + this.currentAge + "<br>" + '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
     }
 
     bloom(){
@@ -269,6 +271,26 @@ class Flower {
       document.getElementById('xPosBox').innerHTML = this.posX;
       // console.log(this.posX);
       document.getElementById('yPosBox').innerHTML = this.posY;
+    }
+
+    hoverInfos(){
+      this.flowerHoverEl.innerHTML = 
+      "name : " + 
+      this.flowerId + 
+      "<br>" + 
+      "by " + 
+      this.user +
+      "<br> reason : " + 
+      this.user +
+      "<br> age : " + 
+      this.currentAge + 
+      " time ago" + 
+      "<br>" + 
+      '<input id="hiButton" class="buttons" type="button" value="Say Hi!"> <br>';
+
+      document.getElementById("hiButton").addEventListener('click', function(){
+      console.log("hello!!!!");
+    });
     }
 
   } //end Flower.js

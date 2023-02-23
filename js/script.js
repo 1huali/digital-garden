@@ -91,17 +91,30 @@ $(document).ready(function(){
     let globalSeedCount = document.getElementById("totalFlowerIndex"); 
     // let consoleDialogBox = document.getElementById("consoleBoxDialog");
 
-    
     let generateButton= document.getElementById('generateButton');
     let closeTalkBoxButton = document.getElementById("closeDialogButton");
     let talkBoxDiv = new DraggableBox(document.getElementById("talkBoxDiv"));
     let consoleBoxDiv = new DraggableBox(document.getElementById("consoleBoxDialogDiv"));
     let identificationBoxDialog = new DraggableBox(document.getElementById("identificationBoxDialog"));
     let seedBoxDiv = new DraggableBox(document.getElementById("seedBoxDialogDiv"))
-
+// USER CONSOLE SETUP : 
     function appendConsoleMsg(msg){
         let consoleContainer = $("#console-container");
         let dataHTMLElement = $("<p>").addClass("mode-prop");
+        dataHTMLElement.html(msg);
+        // $(consoleContainer).empty();
+        $(dataHTMLElement).prependTo(consoleContainer);
+    }
+    function appendConsoleInstruction(msg){
+        let consoleContainer = $("#console-container");
+        let dataHTMLElement = $("<p>").addClass("instruction-prop");
+        dataHTMLElement.html(msg);
+        // $(consoleContainer).empty();
+        $(dataHTMLElement).prependTo(consoleContainer);
+    }
+    function appendConsoleFlowerMsg(msg){
+        let consoleContainer = $("#console-container");
+        let dataHTMLElement = $("<p>").addClass("flower-prop");
         dataHTMLElement.html(msg);
         // $(consoleContainer).empty();
         $(dataHTMLElement).prependTo(consoleContainer);
@@ -188,7 +201,7 @@ L.tileLayer.kitten().addTo(mainMap);
                   cache: false,
                   timeout: 600000,
                   success: function (response) {
-                  console.log(response);
+                //   console.log(response);
                   //use the JSON .parse function to convert the JSON string into a Javascript object
                   let parsedJSON = JSON.parse(response);
 
@@ -290,7 +303,7 @@ L.tileLayer.kitten().addTo(mainMap);
     if (localStorage[userKey] === userValue) {
     //   valToStore = password;
     appendConsoleMsg("> Welcome back, " + userValue);
-    appendConsoleMsg("> Password required");
+    appendConsoleInstruction("> Password required");
 
     // loginCurrentUserDisplay.innerHTML = userValue;
     currentUserIdBox.innerHTML = userValue;
@@ -321,15 +334,16 @@ console.log(localStorage.getItem("password"));
                     userLoggedIn = true;
                     mainMap.on('dblclick', onMapDblClick);
                     appendConsoleMsg("> Nice2c u again");
-                    appendConsoleMsg("logged in = "+userLoggedIn);
+                    appendConsoleMsg("You are logged in.");
+                    appendConsoleInstruction("> You can : " + "<br> - Double-click to plant seed. <br>- Access you flowers array in the user board.");
                     logUserProfile();
                     autofillUser();
 
                     // flowerArray[flowerArray.length-1].buttons.setOptionButtons();
                 } else {
                     userLoggedIn = false;
-                    appendConsoleMsg("logged in = "+userLoggedIn);
-                    appendConsoleMsg("> Incorrect. please try again");
+                    appendConsoleMsg("Log in failed.");
+                    appendConsoleInstruction("> Incorrect. please try again");
                 }
 
     };
@@ -342,6 +356,7 @@ console.log(localStorage.getItem("password"));
         passwordValue = password;
         localStorage.setItem(passwordKey,passwordValue);
         appendConsoleMsg("> Password saved.");
+
         // $("#identificationBoxDialog").dialog('close');
         document.getElementById("identificationBoxDialog").style= "display:none";
         userLoggedIn = true;
@@ -406,61 +421,6 @@ console.log(localStorage.getItem("password"));
 
            //DIALOG POP-UP BOXES SETTING ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
-//login box
-              //id dialog box : 
-            //   setTimeout(() => {
-            //     $("#identificationBoxDialog").dialog('open');
-            //   }, "3000")
-
-            //     //mobile screen settings (identification/login box):
-            //     if (window.screen.width < 500){
-            //     $( "#identificationBoxDialog" ).dialog({
-
-            //         width:1000,
-            //         height:500,
-
-            //         position: ({
-            //             my: "center bottom",
-            //             at: "center bottom",
-            //             of: window
-            //           }),
-            //         classes: {
-            //             "ui-dialog": "identificationBox"
-            //         }
-            //       });
-            //   } else{
-            //     //desktop screen settings (identification/login box):
-            //     $( "#identificationBoxDialog" ).dialog({
-
-            //         position: ({
-            //             my: "right bottom",
-            //             at: "right bottom",
-            //             of: window
-            //           }),
-            //         classes: {
-            //             "ui-dialog": "identificationBox"
-            //         }
-            //       });
-            //   }
-              
-
-            //   $("#identificationBoxDialog").dialog('close');
-            //   $( "#identificationBoxDialog" ).dialog({
-
-            //     dialogClass: "identificationBox",
-            //     buttons: [
-            //       {
-            //         text: "Close",
-            //         click: function() {
-            //           $( this ).dialog( "close" );
-            //         }
-            //       }
-            //     ]
-            //   });
-           //console.log($( ".ui-dialog.identificationBox")[0].style);
-        // $( ".ui-dialog.identificationBox")[0].style.width ="500px";
-//END FILL FORM
-
 let consoleBoxDialogDiv = document.getElementById("consoleBoxDialogDiv");
 consoleBoxDialogDiv.style = "display:block";
 
@@ -481,10 +441,7 @@ consoleBoxDialogDiv.style = "display:block";
 
         talkButton.addEventListener("click", function(){
             if (selectedFlower === null){
-                appendConsoleMsg("Select a flower from the list.")
-                setTimeout(() => {
-                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
-                  }, "100");
+                appendConsoleInstruction("Select a flower from the list.")
                  } else {
                     // console.log(selectedFlower);
             // flowerArray[selectedFlower].journal.openJournal();
@@ -509,23 +466,19 @@ consoleBoxDialogDiv.style = "display:block";
         waterButton.addEventListener("click", function(){
 
             if (selectedFlower === null){
-                appendConsoleMsg("> Please select a flower.");
-
-                setTimeout(() => {
-                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
-                  }, "100");
+                appendConsoleInstruction("> Please select a flower.");
                  } else {
             //increments the waterDaily level count
         flowerArray[selectedFlower].energy.waterDailyLevel++;
         appendConsoleMsg("> Water +1");
 
         if (flowerArray[selectedFlower].energy.waterDailyLevel ===4){
-            appendConsoleMsg("> Flower : Enough water for today, thank u!!")
+            appendConsoleFlowerMsg("> Flower : Enough water for today, thank u!!")
             // document.getElementById("flowerThoughts-container").innerHTML= "Enough water for today, thank u!!"
         }
         //thoughts associated with the water level
         if (flowerArray[selectedFlower].energy.waterDailyLevel ===7){
-            appendConsoleMsg("> Flower : Omg i'm gonna drown please stop")
+            appendConsoleFlowerMsg("> Flower : Omg i'm gonna drown please stop")
             // document.getElementById("flowerThoughts-container").innerHTML= "Omg i'm gonna drown please stop"
         }
 
@@ -545,17 +498,14 @@ consoleBoxDialogDiv.style = "display:block";
             // flowerArray.buttons.pressLoveButton();
             //messages and trigger when the loveButton is pressed :
             if (selectedFlower === null){
-                setTimeout(() => {
-                    appendConsoleMsg("> Please select a flower.")
-                    document.getElementById("flowerThoughts-container").innerHTML = "Please select a flower."
-                  }, "100");
+                    appendConsoleInstruction("> Please select a flower.");
                  } else {
             flowerArray[flowerArray.length-1].loveDailyLevel++;
                             //!! switch to call from energy class
 
             loveSound.play();
                 setTimeout(() => {
-                    appendConsoleMsg("> Flower : I love U too!!")
+                    appendConsoleFlowerMsg("> Flower : I love U too!!")
                     // document.getElementById("flowerThoughts-container").innerHTML= "I love U too!!"
                   }, "100");
                 }
@@ -569,14 +519,9 @@ consoleBoxDialogDiv.style = "display:block";
             flowerArray[selectedFlower].journal.closeJournal();
         })
 
-        // generateButton.addEventListener("click", function(){
-
-        //     for (let i=0;i<flowerArray.length;i++){
-        //         flowerArray[i].generate();
-        //     }
-        // });
-
-
+        document.getElementById("cancelSeedButton").addEventListener("click", function(){
+            document.getElementById("seedBoxDialogDiv").style="display:none";
+        });
 
         }) //getJson 
 
@@ -626,8 +571,7 @@ consoleBoxDialogDiv.style = "display:block";
 
                 // currentFlowerContainer.innerHTML="<"+idDataContainer.value+"> <br>";
             } else {
-                appendConsoleMsg("Limit exceeded, try again in 24 hours.")
-                // document.getElementById("message").innerHTML = "Limit exceeded, try again in 24 hours."
+                appendConsoleMsg("> Limit exceeded, try again in 24 hours.")
 
                 //User can plant in 24 hours :
                 setTimeout(() => {

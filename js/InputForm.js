@@ -90,6 +90,7 @@ document.getElementById("insertFlower").reset();
 //FLOWER CONSTRUCTION
 newFlower.flowerGenerated = true;
 $("#seedIdPopUpForm-container").dialog('close');
+document.getElementById("seedBoxDialogDiv").style= "display=none";
 
 },
 error:function(){

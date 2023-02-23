@@ -53,30 +53,9 @@ class Flower {
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
+
+          //
     let self=this;
-    // this.s1 = function( sketch ) {
-    //   //console.log(sketch);
-    //   sketch.setup = function() {
-    //     let canvas1 = sketch.createCanvas(100, 100);
-    //     canvas1.parent(self.flowerId);
-    //   }
-    //   //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
-    //   sketch.draw = function (){
-    //     // console.log("get into sketchDraw")
-    //     if (self.flowerGenerated === true){
-    //       // sketch.background(255);
-
-    //       //grow calls changeState(), who calls generate()
-    //     self.displayFlower();
-    //     self.grow();
-    //    // self.bloom(); //only at fractals
-    //     }
-    //   }
-
-    //   }
-
-    // this.p5Context = new p5(this.s1);
-
 
            //FLOWER'S OBJECT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
       //each flower object has its own journal and energy class
@@ -219,7 +198,7 @@ class Flower {
       }
 
       let currentAge= dhm(this.currentAge);
-      console.log(currentAge);
+      // console.log(currentAge);
 
     //print to div :
     if (this.hideUsername === false){
@@ -252,6 +231,7 @@ class Flower {
 
       document.getElementById("hiButton").addEventListener('click', function(){
       console.log("hello!!!!");
+      //should add to the daily visitor list OR print "blabla visited U" in journal
     });
     }
 

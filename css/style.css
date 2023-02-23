@@ -168,9 +168,17 @@ display: block;
 
 .mode-prop{
   width:90%;
+  color: #FF0000;
   /* background:rgb(255, 255, 255); */
 }
-
+.instruction-prop{
+  width:90%;
+  color: #ff00cc;
+}
+.flower-prop{
+  width:90%;
+  color: #00ffff;
+}
 .flowerEl{
   top:0px;
   left: 0px;
@@ -267,6 +275,16 @@ display: block;
         width: auto;
         text-align: center;
       }
+/* ??why is it not working */
+      .mydiv {
+        position: absolute;
+        z-index: 20;
+        background-color: #f1f1f1;
+        border: 1px solid #d3d3d3;
+        padding: 5px;
+        width: 485px;
+        height: 377px;
+      }
 }
 
 @media only screen 
@@ -290,6 +308,32 @@ display: block;
       width: auto;
       text-align: center;
     }
+    /* #identificationBoxDialog{
+      display: block;
+      top: 400px;
+      left:170px;
+    } */
+  
+    /* #consoleBoxDialogDiv{
+      display: block;
+      right: 20px;
+      top:20px;
+      overflow: scroll;
+    } */
+  
+    /* #talkBoxDiv{
+      display: none;
+      right: 20px;
+      bottom:20px;
+    }
+   */
+    /* #seedBoxDialogDiv{
+      display: none;
+      top: 450px;
+      left: 600px;
+      height: max-content;
+      width: max-content;
+    } */
   }
 
 /* DIV DIALOG BOXES : */
@@ -312,6 +356,7 @@ display: block;
     color: #fff;
     text-align: center;
   }
+
   .dialogButton{
     padding: 3px;
   }
@@ -335,6 +380,14 @@ display: block;
     bottom:20px;
   }
 
+  #seedBoxDialogDiv{
+    display: none;
+    top: 450px;
+    left: 600px;
+    height: max-content;
+    width: max-content;
+  }
+
   .x{
     display: block;
     height: 75px;
@@ -344,10 +397,3 @@ display: block;
     color: #b1b1b1;
   }
 
-  #seedBoxDialogDiv{
-    display: none;
-    top: 450px;
-    left: 600px;
-    height: max-content;
-    width: max-content;
-  }

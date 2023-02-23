@@ -69,8 +69,8 @@ class AxiomF extends Flower {
        this.posX = this.posX -(this.map._layers[this.mapLayerArray[1]]._container.getBoundingClientRect().x);
        this.posY = this.posY -(this.map._layers[this.mapLayerArray[1]]._container.getBoundingClientRect().y);
  
-       this.flowerEl.style.left = `${this.posX-50}px`;
-       this.flowerEl.style.top = `${this.posY-50}px`; 
+       this.flowerEl.style.left = `${this.posX}px`;
+       this.flowerEl.style.top = `${this.posY}px`; 
  
        this.flowerHoverEl.style.left = `${this.posX-50}px`;
        this.flowerHoverEl.style.top = `${this.posY-150}px`; 
@@ -120,8 +120,11 @@ class AxiomF extends Flower {
           //grow calls changeState(), who calls generate()
         self.displayFlower();
         self.grow();
-       // self.bloom(); //only at fractals
+        if (self.blossom===true){
+          self.bloom();
+          self.blossom = false;
         }
+      }
       }
       }
     this.p5Context = new p5(this.s1);
@@ -241,7 +244,7 @@ class AxiomF extends Flower {
         }
       
         this.age();
-        // this.hoverInfos();
+        this.hoverInfos();
   
       }
 
@@ -274,6 +277,25 @@ class AxiomF extends Flower {
             if (this.pattern === "lsystemAxiomF"){
               this.turtle();
             }
+    }
+
+    bloom(){
+      function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
+      }
+      
+      let r = hexToRgb(this.color).r; 
+      let g = hexToRgb(this.color).g;
+      let b = hexToRgb(this.color).b;
+      // console.log(this.color);
+      // console.log(r);
+
+      this.p5Context.stroke(r,g,b);
     }
 
   } //end L-System_flower.js

@@ -58,10 +58,10 @@
       <fieldset>
         <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
         <p><label>Reason </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required>
-        <!-- <input type="checkbox" id="noReasonBox" value="Exist"> -->
+        <!-- <label>to exist </label><input type="checkbox" id="noReasonBox" value="Exist"> -->
       </p>
         <p><label>User </label><input id="usernameInputField" type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
-        <p><label>Hide User </label>
+        <p><label>Anonymous user </label>
         <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
        <label for="hideUser"> Yes</label>
        <p><label>Growth period </label>
@@ -86,7 +86,7 @@
        <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ffbfe0"></p>
        <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"></p>
        <input id="submitButton" type="submit" value="Submit">
-       <input type="button" value="Cancel">
+       <input id="cancelSeedButton" type="button" value="Cancel">
       </fieldset>
     </form>
     </div>  

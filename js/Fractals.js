@@ -169,7 +169,7 @@ let multiplicateur=2;
 
       //Logs the text to see the state// for debugging :
           this.currentText= this.state[this.stateIndex];
-          console.log(this.currentText) ;
+          // console.log(this.currentText) ;
           this.isGrowing =false;
 
 //Whole growing array completed, the flower cycle is completed: 

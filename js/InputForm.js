@@ -42,7 +42,17 @@ appendConsoleMsg("> Success : new seed created.")
  } 
 
  let date= new Date();
- let newFlower = new Flower(locationObj.lat, locationObj.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+ let newFlower = null;
+
+//choosese the new flower pattern :
+if (data.get('a_pattern') === "fractals"){
+    newFlower = new Fractals (locationObj.lat, locationObj.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+    console.log("its fractal");
+} else if (data.get('a_pattern') === "lsystemAxiomF"){
+    newFlower = new AxiomF (locationObj.lat, locationObj.lng, coordinateMarker ,mainMap ,flowerArray.length,chimeSound);
+
+    console.log("l-sys");
+};
 
  flowerArray.push(newFlower);
 

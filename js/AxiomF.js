@@ -51,7 +51,7 @@ class AxiomF extends Flower {
         b: "FF+[+F-F-F]-[-F+F+F]"
       }
 
-           //LEAFLET/DIV ELEMENT ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+           //LEAFLET/DIV ELEMENT/Container ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
       //to access the map to have the flower div on top of the map
       this.mapLayerArray= Object.keys(this.map._layers);
@@ -111,23 +111,24 @@ class AxiomF extends Flower {
         let canvas1 = sketch.createCanvas(100*multiplicateur, 100*multiplicateur);
         canvas1.parent(self.flowerId);
       }
-      //loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
+      // loop/draw is in the constructor because the elements are on individual canvases and has their own drawings :
       sketch.draw = function (){
         // console.log("get into sketchDraw")
-        if (self.flowerGenerated === true){
+        // if (self.flowerGenerated === true){
           // sketch.background(255);
 
           //grow calls changeState(), who calls generate()
         self.displayFlower();
         self.grow();
-        if (self.blossom===true){
-          self.bloom();
-          self.blossom = false;
-        }
-      }
+      //   // if (self.blossom===true){
+      //   //   self.bloom();
+      //   //   self.blossom = false;
+      //   // }
+      // }
       }
       }
     this.p5Context = new p5(this.s1);
+    this.turtle();
 
     this.angle= this.p5Context.radians(25);
 
@@ -140,30 +141,68 @@ class AxiomF extends Flower {
      } //end Constructor
 
            //FUNCTIONS ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
+      
+     grow() {
+      // console.log("gets hereeeeeeeee")
+      let self=this;
+      if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
+        this.isGrowing =true;
+        // console.log("is growing");
 
+        //Regulates the growing changes: 
+        //with timeout divided by number of states
+        setTimeout(function(){
+          //??undefined function
+          self.changeState()}, this.growthLength/this.state.length);
+
+
+        if (this.manualMode===true){
+          console.log("!!stages happening by clicks and nurturing");
+        } 
+      }
+    }
 
     changeState (){
+console.log(this.growthCompleted);
+//if the growth isn't completed, the changingState() will activate the generate();.
+if(this.growthCompleted===false){
+  this.generate();
+
+//The L-System requires the extra turtle(); step so it has to be activated here too :
+    if (this.pattern === "lsystemAxiomF"){
       this.turtle();
+    }
+  }
 
-//change the growing state of the flower
-    this.stateIndex++;
+  this.stateIndex++;
 
-      //Logs the text to see the state// for debugging :
-          this.currentText= this.state[this.stateIndex];
-          console.log(this.currentText) ;
-          this.isGrowing =false;
+    //Logs the text to see the state// for debugging :
+        this.currentText= this.state[this.stateIndex];
+        // console.log(this.currentText) ;
+
+        this.isGrowing =false;
 
 //Whole growing array completed, the flower cycle is completed: 
-          if (this.stateIndex === this.state.length-1){
-            // console.log("!!send notif/email to user");
-            document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
-            setTimeout(() => {
-              document.getElementById("message").innerHTML = "";
-            }, "5000");
-            this.growthCompleted = true;
-            this.blossom= true;
-          }
+        if (this.stateIndex === this.state.length-1){
+          // console.log("!!send notif/email to user");
+          document.getElementById("message").innerHTML = "Growing cycle completed! Congrats!";
+          setTimeout(() => {
+            document.getElementById("message").innerHTML = "";
+          }, "500");
+          this.growthCompleted = true;
+          this.blossom= true;
+        }
 
+    }
+
+    displayFlower(){
+      //  console.log(this.currentText);
+
+      //position of the center of the flower canvas :
+      this.flowerEl.style.left = `${this.posX-50}px`;
+      this.flowerEl.style.top = `${this.posY-50}px`; 
+      this.flowerHoverEl.style.left = `${this.posX-50}px`;
+      this.flowerHoverEl.style.top = `${this.posY-150}px`; 
     }
     
     turtle () {
@@ -192,7 +231,7 @@ class AxiomF extends Flower {
     }
 
     generate (){
-        // console.log(this.stateIndex);
+        console.log(this.stateIndex);
         this.len *= 0.5;
         let nextSentence = "";
         for (let i = 0; i < this.sentence.length; i++) {
@@ -258,6 +297,7 @@ class AxiomF extends Flower {
     //  this currentState=0;
     //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
      ageIntervalPerState = (this.growthLength)/this.state.length;// 100/4
+     console.log("growthlength:"+this.growthLength);
 
      this.currentState= this.currentAge/ageIntervalPerState;
      this.stateIndex =   this.currentState;
@@ -296,6 +336,7 @@ class AxiomF extends Flower {
       // console.log(r);
 
       this.p5Context.stroke(r,g,b);
+      //draw again
     }
 
   } //end L-System_flower.js

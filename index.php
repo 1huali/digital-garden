@@ -45,10 +45,9 @@
 </div>
 <div id="messageContainer">
 <div id="messageBar"> Online : <marquee scrollamount="2" direction="left" width="200px"><i><span id="message">aaaaaa</span></i></marquee> </div>
-</div>
  seeds: <span id="userFlowerIndex">0</span>/ <span id="totalFlowerIndex">0</span>
 </section>
-
+</div>
 <!-- Fill form to create a personalized flower -->
     <!-- <section id="seedIdPopUpForm-container" class="seedFillForm-dialog" title="Plant A Seed"> -->
     <div id="seedBoxDialogDiv" ref-class="mydivseed" class="mydiv">
@@ -56,21 +55,21 @@
     <div id="plantSeed-container">
       <form id="insertFlower" action="" enctype ="multipart/form-data">
       <fieldset>
-        <p><label>Identification </label><input id="idData" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
-        <p><label>Reason </label><input type = "text" size="24" maxlength = "60"  name = "a_motivation" required>
+        <p><label>Flower ID </label><input id="idData" class="seedInput" type="text" size="35" maxlength = "40" name = "flower_identification" required> </p>
+        <p><label>Reason </label><input class="seedInput" type = "text" size="24" maxlength = "60"  name = "a_motivation" required>
         <!-- <label>to exist </label><input type="checkbox" id="noReasonBox" value="Exist"> -->
       </p>
-        <p><label>User </label><input id="usernameInputField" type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
+        <p><label>User </label><input class="seedInput" id="usernameInputField" type = "text" size="24" maxlength = "40"  name = "a_user" required></p>
         <p><label>Anonymous user </label>
-        <input type="checkbox" id="hideUserOption" name="hide_user" value="Yes">
+        <input type="checkbox" id="hideUserOption" class="seedInput" name="hide_user" value="Yes">
        <label for="hideUser"> Yes</label>
        <p><label>Growth period </label>
-       <input type="number" id="length1" name="a_length" min="1"> min
+       <input type="number" id="length1" class="seedInput" name="a_length" min="1" value="1"> min
        <p><label>Manual growth </label>
-        <input type="checkbox" id="manualOption" name="manual_growth" value="Yes">
+        <input type="checkbox" id="manualOption" class="seedInput" name="manual_growth" value="Yes">
        <label for="manual_growth">Activate </label>
        <p><label for="pattern">Pattern </label>
-       <select id="pattern" name="a_pattern">
+       <select id="pattern" class="seedInput" name="a_pattern">
        <option value="fractals" name="a_pattern">Fractals</option>
     <option value="lsystemAxiomF" name="a_pattern">Axiom F</option>
     </select></p>
@@ -83,10 +82,10 @@
     <option value="other">Other</option>
     <!-- if other : allow typing -->
   </select></p>
-       <p><label>Color</label><input type="color" id="favcolor" name="a_color" value="#ffbfe0"></p>
-       <p><label>Location:</label><input id="locationData" type = "text" size="30" maxlength = "40"></p>
-       <input id="submitButton" type="submit" value="Submit">
-       <input id="cancelSeedButton" type="button" value="Cancel">
+       <p><label>Color</label><input type="color" class="seedInput" id="favcolor" name="a_color" value="#ffbfe0"></p>
+       <p><label>Location:</label><input id="locationData" class="seedInput" type = "text" size="30" maxlength = "40"></p>
+       <input id="submitButton" class="seedInput" type="submit" value="Submit">
+       <input id="cancelSeedButton" class="seedInput" type="button" value="Cancel">
       </fieldset>
     </form>
     </div>  
@@ -103,25 +102,24 @@
 <div id="lSystem"></div>
  </section> -->
 
-  <section id="flowerData-container"> 
+  <section id="userBoard-container"> 
   <h2>USER BOARD</h2>
  <article> User : <span id="currentUserId">&#60;<i>null</i>&#62;</span></article>
  <article class="x"> 
  <div id="flowerStatistic-buttons">
-<article> <input id="waterButton" class="buttons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
-<article> <input id="loveButton" class="buttons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
-<article> <input id="talkButton" class="buttons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
+<article> <input id="waterButton" class="dataButtons" type="button" value="Water">Water: <span id="waterHeartLevelBox"> n/a  </span></article>
+<article> <input id="loveButton" class="dataButtons" type="button" value="Love"> xPos: <span id="xPosBox"> n/a  </span></article>
+<article> <input id="talkButton" class="dataButtons" type="button" value="Talk"> yPos: <span id="yPosBox"> n/a  </span></article>
 <!-- <article> Thoughts: <span id="flowerThoughts-container"> </span></article> -->
 </div>
  </article>
  <article>
-<label for="flowerDropDownList">Seeds : </label>
+ current flower : <span id="demo">none</span>
+<label id="drpListFlower" for="flowerDropDownList"></label>
 <select id="flowerList-select">
     <option value="none">none</option>
   </select></article>
-  current flower : <span id="demo">none</span>
-
-
+ 
 </section> 
 
 <!-- DIALOG BOX -->
@@ -142,12 +140,12 @@
     <div class="mydivheader mydividheader">User Login</div>
 <article>Login to access personal data.
 </article>
-<div id="login-container">username: <input id="login" type="text"></div>
+<div id="login-container">username: <input id="login" type="text" required></div>
 <input id="identifyButton" class="buttons" type="button" value="Identify">
 
 <article>
-<div id="password-container">password:<input id="password" type="text"></div>
-      <input id="loginButton" type="button" value="Login">
+<div id="password-container">password:<input id="password" type="text" required></div>
+      <input id="loginButton" class="buttons" type="button" value="Login">
       <input id="setPasswordButton" type="button" value="Save">
 </article>
   </div> 

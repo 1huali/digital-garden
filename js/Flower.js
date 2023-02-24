@@ -96,28 +96,14 @@ class Flower {
 
     highlightFlower(){
       if (this.selected === true){
-        this.flowerEl.style.background= "rgba(255, 207, 228, 0.4)";
+        this.flowerEl.firstChild.style.background= "rgba(255, 207, 228, 0.4)";
       } else {
-        this.flowerEl.style.background= "rgba(255, 255, 255, 0)";
+        this.flowerEl.firstChild.style.background= "rgba(255, 255, 255, 0)";
       }
     }
 
     grow() {
-      let self=this;
-      if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
-        this.isGrowing =true;
 
-        //Regulates the growing changes: 
-        //with timeout divided by number of states
-        setTimeout(function(){
-          //??undefined function
-          self.changeState()}, this.growthLength/this.state.length);
-
-        if (this.manualMode===true){
-          //inactive
-          console.log("!!stages happening by clicks and nurturing");
-        } 
-      }
     }
 
     changeState (){

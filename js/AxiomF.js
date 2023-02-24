@@ -19,6 +19,8 @@ class AxiomF extends Flower {
       this.pattern="";
       this.color="";
 
+      this.rgbColor={r:0,g:0,b:0};
+
       this.flowerDBid= flowerDBid;
 
       this.marker= marker;
@@ -44,6 +46,10 @@ class AxiomF extends Flower {
       this.axiom = "F";
       this.sentence = this.axiom;
       let multiplicateur =2.5;
+      if (window.innerWidth <= 376){
+        console.log(window.innerWidth)
+      multiplicateur=4.25;
+      }
       this.len = 20*multiplicateur;
       this.rules = [];
       this.rules[0] = {
@@ -100,7 +106,6 @@ class AxiomF extends Flower {
       // //the id element :
       this.flowerId= this.flowerEl.id;
 
-
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
@@ -144,6 +149,8 @@ class AxiomF extends Flower {
       
      grow() {
       // console.log("gets hereeeeeeeee")
+      // console.log(this.growthCompleted);
+
       let self=this;
       if (self.stateIndex < self.state.length-1 && self.isGrowing===false){
         this.isGrowing =true;
@@ -163,7 +170,6 @@ class AxiomF extends Flower {
     }
 
     changeState (){
-console.log(this.growthCompleted);
 //if the growth isn't completed, the changingState() will activate the generate();.
 if(this.growthCompleted===false){
   this.generate();
@@ -210,7 +216,8 @@ if(this.growthCompleted===false){
       this.p5Context.resetMatrix();
       //this.p5Context.background(0);
        this.p5Context.translate( this.p5Context.width / 2,  this.p5Context.height);
-       this.p5Context.stroke(0, 255);
+       this.p5Context.stroke(this.rgbColor.r, this.rgbColor.g,this.rgbColor.b);
+      //  console.log(this.rgbColor.r);
       for (let i = 0; i < this.sentence.length; i++) {
         let current = this.sentence.charAt(i);
         // console.log(current);
@@ -231,7 +238,6 @@ if(this.growthCompleted===false){
     }
 
     generate (){
-        console.log(this.stateIndex);
         this.len *= 0.5;
         let nextSentence = "";
         for (let i = 0; i < this.sentence.length; i++) {
@@ -284,6 +290,7 @@ if(this.growthCompleted===false){
       
         this.age();
         this.hoverInfos();
+        this.bloom();
   
       }
 
@@ -297,9 +304,8 @@ if(this.growthCompleted===false){
     //  this currentState=0;
     //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
      ageIntervalPerState = (this.growthLength)/this.state.length;// 100/4
-     console.log("growthlength:"+this.growthLength);
 
-     this.currentState= this.currentAge/ageIntervalPerState;
+     this.currentState= Math.floor(this.currentAge/ageIntervalPerState);
      this.stateIndex =   this.currentState;
 
      if (this.currentState >= this.state.length){
@@ -320,7 +326,9 @@ if(this.growthCompleted===false){
     }
 
     bloom(){
+      console.log(this.color);
       function hexToRgb(hex) {
+
         var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
           r: parseInt(result[1], 16),
@@ -329,13 +337,13 @@ if(this.growthCompleted===false){
         } : null;
       }
       
-      let r = hexToRgb(this.color).r; 
-      let g = hexToRgb(this.color).g;
-      let b = hexToRgb(this.color).b;
+      this.rgbColor.r = hexToRgb(this.color).r; 
+      this.rgbColor.g = hexToRgb(this.color).g;
+      this.rgbColor.b = hexToRgb(this.color).b;
       // console.log(this.color);
       // console.log(r);
 
-      this.p5Context.stroke(r,g,b);
+      // return {r:r, g:g, b:b};
       //draw again
     }
 

@@ -85,7 +85,12 @@ class Fractals extends Flower {
            //CANVAS ELEMENT/SETUP ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀ 
 //to modify the size of the flowers, one needs to apply the multiplicator at stemLength and canvas size, and manually modify the fruit at blossom and width/height size of .flowerEL in css to be the same as p5 canva size. 
 // No need to touch the functions in Branch.js cos it concerns the generation and look.
+//?? multiplicateur not working on the mobile version
+console.log(window.innerWidth);
 let multiplicateur=2;
+if (window.innerWidth <= 375){
+multiplicateur=4;
+}
 
 
     //https://editor.p5js.org/caminofarol/sketches/r609C2cs
@@ -320,7 +325,7 @@ let b = hexToRgb(this.color).b;
     //watch out for growth length metrics. here, it's in minutes, converted in miliseconds.
      ageIntervalPerState = (this.growthLength)/this.state.length;// 100/4
 
-     this.currentState= this.currentAge/ageIntervalPerState;
+     this.currentState= Math.floor(this.currentAge/ageIntervalPerState);
      this.stateIndex =   this.currentState;
 
      if (this.currentState >= this.state.length){

@@ -216,7 +216,7 @@ L.tileLayer.kitten().addTo(mainMap);
                   mainMap,
                   parsedJSON[i].flowerID,
                   null,
-                  parseFloat(parsedJSON[i].growthLength),
+                  parseFloat(parsedJSON[i].growthLength)*60000,
                   parsedJSON[i].user
                 ));
             } else if (parsedJSON[i].pattern==="lsystemAxiomF"){
@@ -226,7 +226,7 @@ L.tileLayer.kitten().addTo(mainMap);
                   mainMap,
                   parsedJSON[i].flowerID,
                   null,
-                  parseFloat(parsedJSON[i].growthLength),
+                  parseFloat(parsedJSON[i].growthLength)*60000,
                   parsedJSON[i].user
                 ));
             }
@@ -540,11 +540,11 @@ consoleBoxDialogDiv.style = "display:block";
         //??do we still need?
 //imprime les infos en bas à gauche ??peut-êre que je vais devoir le delet
 
-            function showJournal(data){
-                let flowerDataContainer = $("#flowerData-container");
-                $(flowerDataContainer).empty();
-              displaySingleInstruction(data,flowerDataContainer);
-            };
+            // function showJournal(data){
+            //     let flowerDataContainer = $("#userBoard-container");
+            //     $(flowerDataContainer).empty();
+            //   displaySingleInstruction(data,flowerDataContainer);
+            // };
 
             //Display a marker on map at user's double-click
             function onMapDblClick(e){
@@ -626,7 +626,7 @@ consoleBoxDialogDiv.style = "display:block";
             } //END DISPLAY
 
         function showFlowerData(data){
-            let flowerDataContainer = $("#flowerData-container");
+            let flowerDataContainer = $("#userBoard-container");
             let genData = data.User_Data;
 
         $.each(genData.Flower, function( flowerKey, flowerValue ) {

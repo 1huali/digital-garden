@@ -36,7 +36,9 @@
 
   </head>
   <body>
-
+  <div id="mapBox">
+<div class="map" id="mainMap"></div>
+</div> 
   <section id="gardenInfoHeader">
 <h1 id="title">THE DIGITAL GARDEN</h1>
 <div id="about-container">
@@ -92,9 +94,9 @@
 </div>
       <!-- </section> -->
 
-    <div id="mapBox">
+    <!-- <div id="mapBox">
 <div class="map" id="mainMap"></div>
-</div> 
+</div>  -->
 
 <!-- TEST FOR L-SYSTEM - useless -->
 <!-- <input type="button" id="generateButton" value="Generate"> -->
@@ -146,7 +148,7 @@
 <article>
 <div id="password-container">password:<input id="password" type="text" required></div>
       <input id="loginButton" class="buttons" type="button" value="Login">
-      <input id="setPasswordButton" type="button" value="Save">
+      <input class="buttons" id="setPasswordButton" type="button" value="Save">
 </article>
   </div> 
 
@@ -159,7 +161,6 @@
     <article>&#62; Drag to explore the space.</article>
     <article>&#62; Login to plant or access your flowers. </article> 
     </div>   
-</div> 
-
+</div>
   </body>
 </html>

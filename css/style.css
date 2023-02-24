@@ -262,20 +262,20 @@ display: block;
 
   #identificationBoxDialog{
     display: block;
-    right: 20px;
+    /* right: 20px; */
     bottom:20px;
   }
 
   #consoleBoxDialogDiv{
     display: block;
-    right: 20px;
+    /* right: 20px; */
     top:20px;
     overflow: scroll;
   }
 
   #talkBoxDiv{
     display: none;
-    right: 20px;
+    /* right: 20px; */
     bottom:20px;
   }
 
@@ -294,6 +294,7 @@ display: block;
 
   #consoleHeader{
     color: #b1b1b1;
+
   }
 
   /* MOBILE SETUPS */
@@ -314,23 +315,25 @@ and (-webkit-min-device-pixel-ratio: 2) {
   }
 .mydivheader{
   font-size: 50px;
+  position: sticky;
+  top: 0;
 }
 
   #consoleBoxDialogDiv{
     display: block;
-    top:80vh; 
+    top:70vh; 
     overflow: scroll;
     background-color: 255,255,255,0.5;
     width: 100%;
-    height: 20%;
+    height: 22%;
     padding: 1px;
-    font-size: 55px;
+    font-size: 55px;    
   }
  #identificationBoxDialog{
     display: block;
     background-color: 255,255,255,0.5;
     height: 450px;
-    top: 58vh;
+    top: 48vh;
     /* left:35vw; */
     width: 100%;
   }
@@ -397,8 +400,8 @@ and (-webkit-min-device-pixel-ratio: 2) {
     width: 70%;
   }
   #userBoard-container{
-    top: 50vh;
-    height: 30%;
+    top: 40vh;
+    /* height: 30%; */
   }
 .mode-prop, .instruction-prop, .flower-prop, .single-archive-line{
 font-size: 50px;
@@ -412,8 +415,13 @@ font-size: 50px;
 #console-container article{
 font-size: 55px;
 padding-left:3px ;
-height: 25%;
 }
+
+/* #console-container {
+
+height: 10px ;
+  } */
+
 
 .x{
   display: block;

@@ -46,7 +46,7 @@ class AxiomF extends Flower {
       this.axiom = "F";
       this.sentence = this.axiom;
       let multiplicateur =2.5;
-      if (window.innerWidth <= 376){
+      if (window.screen.width <= 376){
         console.log(window.innerWidth)
       multiplicateur=4.25;
       }

@@ -86,9 +86,9 @@ class Fractals extends Flower {
 //to modify the size of the flowers, one needs to apply the multiplicator at stemLength and canvas size, and manually modify the fruit at blossom and width/height size of .flowerEL in css to be the same as p5 canva size. 
 // No need to touch the functions in Branch.js cos it concerns the generation and look.
 //?? multiplicateur not working on the mobile version
-console.log(window.innerWidth);
+console.log(window.screen.width);
 let multiplicateur=2;
-if (window.innerWidth <= 375){
+if (window.screen.width <= 375){
 multiplicateur=4;
 }
 
